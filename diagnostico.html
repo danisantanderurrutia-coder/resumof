@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico y Cifras del Modelo Forestal | Red por la Superación</title>
+<meta name="description" content="Evidencia científica, datos hídricos y comparador visual del impacto ecológico y social de 50 años de monocultivo forestal en el centro-sur de Chile.">
+
+<!-- Tipografías de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<!-- Favicon Oficial -->
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<!-- Estilos Unificados -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Cabecera Global -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand-logo" aria-label="Inicio">
+      <div class="brand-crest" title="Red por la Superación del Modelo Forestal">
+        <img src="img/logo-resumof.png" alt="Logo Red por la Superación del Modelo Forestal" width="56" height="56" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <span class="brand-title-main">RED POR LA SUPERACIÓN</span>
+          <span class="brand-title-sub">DEL MODELO FORESTAL</span>
+        </div>
+        <span class="brand-tagline">Articulación Socioambiental · Centro-Sur</span>
+      </div>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <div class="nav-links-track">
+        <a href="diagnostico.html" class="nav-link active-page">Diagnóstico</a>
+        <a href="mapa-conflictos.html" class="nav-link">Mapa de Conflictos</a>
+        <a href="incendios.html" class="nav-link">Incendios</a>
+        <a href="la-red.html" class="nav-link">La Red & Propuestas</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="biblioteca.html" class="nav-link">Biblioteca</a>
+      </div>
+    </nav>
+
+    <div class="header-cta-group">
+      <!-- Sintonizador de Radio y Podcast en el Menú -->
+      <div class="header-audio-widget" id="headerAudioWidget" title="Sintonizador de Radio Comunitaria y Podcasts">
+        <div class="audio-widget-select-wrap">
+          <span class="audio-widget-icon">📻</span>
+          <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar radio o podcast">
+            <optgroup label="📻 Radios Comunitarias de Chile">
+              <option value="kurruf" data-type="radio" data-src="https://radio.latina.red/radiokurruf.mp3">Radio Kurruf (Biobío / 107.5 FM)</option>
+              <option value="jgm" data-type="radio" data-src="https://sonic-us.arkeo.cl/8186/stream">Radio JGM (Nacional Comunitaria)</option>
+              <option value="ritoque" data-type="radio" data-src="https://archi-us.digitalproserver.com/ritoquefm_aac">Radio Ritoque (Valparaíso)</option>
+            </optgroup>
+            <optgroup label="🎙️ Podcasts por los Bosques">
+              <option value="pod1" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/santa-juana-renacer-bosque.mp3">Ep. 01: Santa Juana tras el fuego</option>
+              <option value="pod2" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/plantaciones-no-son-bosque.mp3">Ep. 02: Las plantaciones no son bosque</option>
+              <option value="pod3" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/cuenca-contulmo-sequia.mp3">Ep. 03: Contulmo y la sed campesina</option>
+              <option value="pod4" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/mujeres-lafkenche-itrofill.mp3">Ep. 04: Mujeres lafkenche & Itrofill Mogen</option>
+            </optgroup>
+          </select>
+        </div>
+        <button id="headerAudioPlayBtn" class="header-audio-btn" aria-label="Reproducir o pausar" title="Reproducir señal o podcast">
+          <span id="headerAudioPlayIcon">▶</span>
+        </button>
+        <div class="audio-wave-bars" id="headerAudioBars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <a href="index.html#unete" class="btn btn-primary header-cta-btn">
+        <span>Únete a la Red</span>
+        <span class="cta-counter-chip">14.8k</span>
+      </a>
+      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú">
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú Móvil -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-tag">NAVEGACIÓN TERRITORIAL</span>
+      <button class="mobile-drawer-close" id="mobileDrawerClose">✕</button>
+    </div>
+    <div class="mobile-nav-group">
+      <a href="diagnostico.html" class="mobile-nav-link active"><span>📊</span> Diagnóstico</a>
+      <a href="mapa-conflictos.html" class="mobile-nav-link"><span>🗺️</span> Mapa de Conflictos</a>
+      <a href="incendios.html" class="mobile-nav-link"><span>🔥</span> Incendios Forestales</a>
+      <a href="la-red.html" class="mobile-nav-link"><span>✊</span> La Red & 5 Propuestas de Ley</a>
+      <a href="blog.html" class="mobile-nav-link"><span>📰</span> Blog & Noticias</a>
+      <a href="biblioteca.html" class="mobile-nav-link"><span>📚</span> Biblioteca</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Subpage Hero con Banner Unsplash -->
+  <section class="subpage-hero hero-diagnostico">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Inicio</a> <span>/</span> <span>Diagnóstico</span>
+      </div>
+      <span class="mono-badge badge-amber">EVIDENCIA CIENTÍFICA & VIVENCIAL</span>
+      <h1>El Modelo Forestal en Cifras</h1>
+      <p class="lead">
+        El Decreto Ley 701 de 1974 subsidió la sustitución masiva de bosque nativo y tierras agrícolas campesinas por más de 3 millones de hectáreas de monocultivo industrial intensivo.
+      </p>
+    </div>
+  </section>
+
+  <!-- Métricas -->
+  <section class="section" style="background:#FFF;padding-top:40px;">
+    <div class="wrap">
+      <div class="stats-grid-container">
+        <div class="stat-box">
+          <div class="stat-number">3,1M <span>ha</span></div>
+          <div class="stat-desc">de plantaciones industriales de pino radiata y eucalipto concentradas en el centro-sur.</div>
+          <span class="stat-source">Fuente: INFOR / Catastro CONAF</span>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">+480</div>
+          <div class="stat-desc">comunidades y caseríos rurales abastecidos permanentemente por camiones aljibe.</div>
+          <span class="stat-source">Fuente: Dirección General de Aguas (DGA)</span>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">1,85M <span>ha</span></div>
+          <div class="stat-desc">quemadas en megaincendios durante la última década (2017 a 2026).</div>
+          <span class="stat-source">Fuente: Reportes Oficiales CONAF / CR2</span>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">72%</div>
+          <div class="stat-desc">de la superficie plantada en manos de dos consorcios económicos: Arauco y CMPC.</div>
+          <span class="stat-source">Fuente: Investigaciones CIPER / OLCA</span>
+        </div>
+      </div>
+
+      <!-- COMPARADOR SPLIT-SLIDER INTERACTIVO -->
+      <div class="comparator-wrapper" style="margin-top:48px;">
+        <div class="comparator-header">
+          <div class="comparator-title-area">
+            <h3>Comparador Ecológico: Monocultivo Forestal vs. Cuenca Nativa Restaurada</h3>
+            <p>Arrastra el deslizador central para contrastar el paisaje de plantación industrial frente a una cuenca con bosque nativo vivo.</p>
+          </div>
+          <span class="mono-badge badge-green">Deslizador Interactivo</span>
+        </div>
+
+        <div class="split-slider-container" id="splitSliderContainer">
+          <img class="slider-img" src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=80" alt="Monocultivo industrial de pinos">
+          <div class="slider-badge slider-badge-before">
+            <span>⚠️ MONOCULTIVO EXÓTICO (PINO / EUCALIPTO)</span>
+          </div>
+
+          <div class="slider-img-after-wrapper" id="sliderAfterWrapper">
+            <img class="slider-img" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80" alt="Bosque nativo templado diverso con agua limpia">
+            <div class="slider-badge slider-badge-after">
+              <span>🌱 RESTAURACIÓN ECOLÓGICA NATIVA</span>
+            </div>
+          </div>
+
+          <div class="slider-handle" id="sliderHandle">⇄</div>
+        </div>
+
+        <div class="comparator-metrics-panel">
+          <div class="metric-column mono-impact">
+            <h4>Impacto del Monocultivo Industrial</h4>
+            <ul class="metrics-list">
+              <li><span>Consumo hídrico por árbol:</span> <b>150 a 300 Litros/día</b></li>
+              <li><span>Continuidad de combustible:</span> <b>Crítica (alta inflamabilidad)</b></li>
+              <li><span>Erosión de suelo tras tala rasa:</span> <b>Muy Severa (pérdida de humus)</b></li>
+              <li><span>Biodiversidad de fauna nativa:</span> <b>Desierto verde (&lt; 5%)</b></li>
+            </ul>
+          </div>
+
+          <div class="metric-column nativo-impact">
+            <h4>Beneficios de la Cuenca Nativa</h4>
+            <ul class="metrics-list">
+              <li><span>Regulación y retención hídrica:</span> <b>Efecto esponja permanente</b></li>
+              <li><span>Resiliencia a los incendios:</span> <b>Barrera húmeda natural</b></li>
+              <li><span>Captura de carbono de largo plazo:</span> <b>Suelo rico y sotobosque vivo</b></li>
+              <li><span>Soberanía alimentaria y recolección:</span> <b>Hongos, medicina y miel</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Problemas Estructurales -->
+      <div class="problema-cards-grid" style="margin-top:50px;">
+        <div class="problema-card">
+          <div class="problema-num">01</div>
+          <h3>Secamiento Hidrológico de Cuencas</h3>
+          <p>
+            El eucalipto y el pino actúan como bombas de extracción continua de agua subterránea. Al no perder follaje en invierno ni entrar en latencia, agotan las reservas de los valles, secando pozos de comités de agua potable rural en Maule, Ñuble, Biobío y Araucanía.
+          </p>
+        </div>
+
+        <div class="problema-card">
+          <div class="problema-num">02</div>
+          <h3>Destrucción del Suelo y Contaminación</h3>
+          <p>
+            La práctica de la tala rasa despoja laderas de cerros de toda cobertura vegetal. Las primeras lluvias invernales arrastran toneladas de sedimentos y agroquímicos (como glifosato y atrazina usados para matar renuevos) directo a los ríos y desembocaduras.
+          </p>
+        </div>
+
+        <div class="problema-card">
+          <div class="problema-num">03</div>
+          <h3>Expulsión y Despojo Territorial</h3>
+          <p>
+            Sustitución progresiva de tierras agrícolas y bosque originario. Desplazamiento forzado de comunidades campesinas y lof mapuche mediante especulación de tierras y cerco territorial por parte de empresas forestales.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer Limpio y Minimalista -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-clean-wrap">
+      <div class="footer-brand-side">
+        <span class="brand-title">RED POR LA SUPERACIÓN DEL MODELO FORESTAL</span>
+        <p class="footer-tagline">
+          Articulación plurinacional de comunidades y cuencas por la restauración ecológica, la soberanía hídrica y la vida en el centro-sur de Chile.
+        </p>
+      </div>
+      <div class="footer-contact-side">
+        <div class="footer-email-badge">
+          <span>Contacto Territorial:</span>
+          <a href="mailto:superacionmodeloforestal@gmail.com">superacionmodeloforestal@gmail.com</a>
+        </div>
+        <div class="footer-meta-links">
+          <span>© 2026 Red por la Superación del Modelo Forestal · Licencia CC-BY-SA 4.0</span>
+          <a href="admin/index.html" class="footer-admin-link">🔐 Acceso Admin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/bot-juridico.js"></script>
+</body>
+</html>

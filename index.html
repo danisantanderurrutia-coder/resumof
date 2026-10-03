@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red por la Superación del Modelo Forestal | Centro-Sur de Chile</title>
+<meta name="description" content="Articulación socioambiental de los territorios del centro-sur de Chile por la restauración ecológica, la soberanía hídrica y la vida frente al monocultivo forestal.">
+
+<!-- Tipografías de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+<!-- Favicon Oficial -->
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<!-- Estilos Unificados -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ==========================================================================
+     CABECERA & NAVEGACIÓN GLOBAL
+     ========================================================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand-logo" aria-label="Red por la Superación del Modelo Forestal - Inicio">
+      <div class="brand-crest" title="Red por la Superación del Modelo Forestal">
+        <img src="img/logo-resumof.png" alt="Logo Red por la Superación del Modelo Forestal" width="56" height="56" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <span class="brand-title-main">RED POR LA SUPERACIÓN</span>
+          <span class="brand-title-sub">DEL MODELO FORESTAL</span>
+        </div>
+        <span class="brand-tagline">Articulación Socioambiental · Centro-Sur</span>
+      </div>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <div class="nav-links-track">
+        <a href="diagnostico.html" class="nav-link">Diagnóstico</a>
+        <a href="mapa-conflictos.html" class="nav-link">Mapa de Conflictos</a>
+        <a href="incendios.html" class="nav-link">Incendios</a>
+        <a href="la-red.html" class="nav-link">La Red & Propuestas</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="biblioteca.html" class="nav-link">Biblioteca</a>
+      </div>
+    </nav>
+
+    <div class="header-cta-group">
+      <!-- Sintonizador de Radio y Podcast en el Menú -->
+      <div class="header-audio-widget" id="headerAudioWidget" title="Sintonizador de Radio Comunitaria y Podcasts">
+        <div class="audio-widget-select-wrap">
+          <span class="audio-widget-icon">📻</span>
+          <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar radio o podcast">
+            <optgroup label="📻 Radios Comunitarias de Chile">
+              <option value="kurruf" data-type="radio" data-src="https://radio.latina.red/radiokurruf.mp3">Radio Kurruf (Biobío / 107.5 FM)</option>
+              <option value="jgm" data-type="radio" data-src="https://sonic-us.arkeo.cl/8186/stream">Radio JGM (Nacional Comunitaria)</option>
+              <option value="ritoque" data-type="radio" data-src="https://archi-us.digitalproserver.com/ritoquefm_aac">Radio Ritoque (Valparaíso)</option>
+            </optgroup>
+            <optgroup label="🎙️ Podcasts por los Bosques">
+              <option value="pod1" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/santa-juana-renacer-bosque.mp3">Ep. 01: Santa Juana tras el fuego</option>
+              <option value="pod2" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/plantaciones-no-son-bosque.mp3">Ep. 02: Las plantaciones no son bosque</option>
+              <option value="pod3" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/cuenca-contulmo-sequia.mp3">Ep. 03: Contulmo y la sed campesina</option>
+              <option value="pod4" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/mujeres-lafkenche-itrofill.mp3">Ep. 04: Mujeres lafkenche & Itrofill Mogen</option>
+            </optgroup>
+          </select>
+        </div>
+        <button id="headerAudioPlayBtn" class="header-audio-btn" aria-label="Reproducir o pausar" title="Reproducir señal o podcast">
+          <span id="headerAudioPlayIcon">▶</span>
+        </button>
+        <div class="audio-wave-bars" id="headerAudioBars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <a href="#unete" class="btn btn-primary header-cta-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        <span>Únete a la Red</span>
+        <span class="cta-counter-chip">14.8k</span>
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú Móvil Drawer -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-tag">NAVEGACIÓN TERRITORIAL</span>
+      <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Cerrar menú">✕</button>
+    </div>
+
+    <div class="mobile-nav-group">
+      <span class="mobile-group-title">Territorio & Evidencia</span>
+      <a href="diagnostico.html" class="mobile-nav-link"><span>📊</span> Diagnóstico & Cifras del Modelo</a>
+      <a href="mapa-conflictos.html" class="mobile-nav-link"><span>🗺️</span> Mapa de Conflictos Interactivo</a>
+      <a href="incendios.html" class="mobile-nav-link"><span>🔥</span> Incendios Forestales & Prevención</a>
+    </div>
+
+    <div class="mobile-nav-group">
+      <span class="mobile-group-title">Articulación & Debate</span>
+      <a href="la-red.html" class="mobile-nav-link"><span>✊</span> La Red & 5 Propuestas de Ley</a>
+      <a href="blog.html" class="mobile-nav-link"><span>📰</span> Blog, Noticias & Borradores</a>
+      <a href="biblioteca.html" class="mobile-nav-link"><span>📚</span> Biblioteca & Documentos</a>
+    </div>
+
+    <div class="mobile-drawer-footer">
+      <a href="#unete" class="btn btn-primary" style="width:100%;text-align:center;">Firmar Petitorio</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ==========================================================================
+       HERO DE LA LANDING PAGE
+       ========================================================================== -->
+  <section class="hero-section" id="inicio">
+    <div class="wrap">
+      <div class="hero-content">
+        <!-- Bloque Formal de Emblema Oficial -->
+        <div class="hero-seal-container">
+          <div class="hero-formal-seal" title="Emblema Institucional de la Red (150x150)">
+            <img src="img/logo-resumof.png" alt="Emblema Red por la Superación del Modelo Forestal" width="150" height="150">
+          </div>
+          <div class="hero-seal-details">
+            <span class="hero-seal-badge">Emblema Oficial de la Red</span>
+            <span class="hero-seal-name">RED POR LA SUPERACIÓN DEL MODELO FORESTAL</span>
+            <span class="hero-seal-tagline">Articulación Socioambiental de Cuencas y Comunidades · Centro-Sur</span>
+          </div>
+        </div>
+
+        <span class="hero-badge">CONVERGENCIA TERRITORIAL · DEL MAULE A LOS LAGOS</span>
+        <h1>Por la Restauración Ecológica y la Vida en las Cuencas</h1>
+        <p class="hero-lead">
+          Frente a 50 años de monocultivo forestal, megaincendios recurrentes y saqueo del agua: articulamos a comunidades campesinas, lof mapuche y asambleas ciudadanas por una transición ecológica justa.
+        </p>
+        <div class="hero-actions">
+          <a href="mapa-conflictos.html" class="btn btn-primary">
+            <span>🗺️ Explorar Mapa de Conflictos</span>
+          </a>
+          <a href="incendios.html" class="btn btn-outline-light">
+            <span>🔥 Incendios & Cortafuegos</span>
+          </a>
+          <a href="propuestas.html" class="btn btn-outline-light">
+            <span>Propuesta de Ley</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       BARRA DE CIFRAS CLAVE DEL IMPACTO TERRITORIAL
+       ========================================================================== -->
+  <section class="kpi-strip">
+    <div class="wrap">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-number">3.1M ha</span>
+          <span class="kpi-label">Monocultivo de Pino y Eucalipto en Chile</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number">82%</span>
+          <span class="kpi-label">Agua en camiones aljibe va a comunas forestales</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number">40+</span>
+          <span class="kpi-label">Comunidades y Asambleas en Resistencia</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number">14.8k+</span>
+          <span class="kpi-label">Firmas reunidas por la Moratoria Forestal</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VITRINA 1: DIAGNÓSTICO ESTRUCTURAL (RESUMEN)
+       ========================================================================== -->
+  <section class="section" style="background:#FFF;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge">Evidencia Territorial</span>
+          <h2>El Impacto del Modelo en Números</h2>
+        </div>
+        <p class="lead">
+          Cinco décadas de incentivo estatal (Decreto Ley 701) concentraron la propiedad de la tierra en dos grandes consorcios, destruyendo la biodiversidad del bosque nativo.
+        </p>
+      </div>
+
+      <div class="diagnostico-grid">
+        <div class="diag-card">
+          <div class="diag-card-icon">💧</div>
+          <h3>Crisis Hídrica Crónica</h3>
+          <p>El consumo hídrico del eucalipto (hasta 30 litros diarios por árbol adulto) agota vertientes y napas freáticas, obligando al racionamiento masivo en comunidades rurales históricas.</p>
+          <a href="diagnostico.html#agua" class="diag-link">Ver análisis hidrológico →</a>
+        </div>
+
+        <div class="diag-card">
+          <div class="diag-card-icon">🔥</div>
+          <h3>Megaincendios Forestales</h3>
+          <p>La homogeneidad del combustible continuo y la cercanía de las plantaciones a poblados transforman chispas en tormentas de fuego incontrolables de alta velocidad.</p>
+          <a href="incendios.html" class="diag-link">Ver especial de incendios →</a>
+        </div>
+
+        <div class="diag-card">
+          <div class="diag-card-icon">🌾</div>
+          <h3>Despoblamiento Campesino</h3>
+          <p>Sustitución de tierras agrícolas de secano y viñas patrimoniales por rodales industriales. Pérdida de soberanía alimentaria y migración forzada hacia la periferia urbana.</p>
+          <a href="diagnostico.html#territorio" class="diag-link">Ver impacto social →</a>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:36px;">
+        <a href="diagnostico.html" class="btn btn-outline-dark">
+          Explorar Diagnóstico Completo y Comparador Antes/Después →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VITRINA 2: MAPA DE CONFLICTOS INTERACTIVO (CON VISTA SATELITAL)
+       ========================================================================== -->
+  <section class="section" id="mapaSection" style="background:var(--blanco-pergamino);">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge badge-amber">Geografía de Resistencia</span>
+          <h2>Mapa de Conflictos Socioambientales</h2>
+        </div>
+        <p class="lead">
+          Monitoreo participativo desde el Maule hasta Los Lagos. Alterna entre la vista cartográfica y la vista satelital para constatar la escala de las plantaciones.
+        </p>
+      </div>
+
+      <div class="mapa-workspace">
+        <!-- Panel lateral del mapa -->
+        <div class="mapa-control-panel">
+          <!-- Selector Satelital / Cartográfico con Autocarga -->
+          <div style="margin-bottom:12px;">
+            <span style="font-size:0.78rem;font-family:'IBM Plex Mono',monospace;color:var(--gris-ceniza);display:block;margin-bottom:6px;">MODO DE VISUALIZACIÓN:</span>
+            <div class="map-view-switcher">
+              <button type="button" class="map-view-btn active" id="btnViewSat">🛰️ Satelital HD</button>
+              <button type="button" class="map-view-btn" id="btnViewCarto">🗺️ Cartográfico</button>
+              <button type="button" class="map-auto-sat-btn active" id="btnAutoSat" title="Guardar preferencia para que siempre inicie en Satelital">
+                <span>⚡ Autocargar Satelital:</span>
+                <span class="auto-sat-chip" id="autoSatStatus">ACTIVO</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Buscador -->
+          <div class="mapa-search-box">
+            <span class="mapa-search-icon">🔍</span>
+            <input type="text" id="mapSearchInput" placeholder="Filtrar por comuna o conflicto…">
+          </div>
+
+          <!-- Filtros de Categoría -->
+          <div class="map-filter-group">
+            <span class="filter-group-title">CAPAS DE CONFLICTO</span>
+            <div class="map-filter-pills">
+              <button class="map-filter-pill active" data-layer="todos">Todos los casos</button>
+              <button class="map-filter-pill" data-layer="incendios">🔥 Megaincendios</button>
+              <button class="map-filter-pill" data-layer="agua">💧 Crisis Hídrica</button>
+              <button class="map-filter-pill" data-layer="industria">🏭 Celulosa / Riles</button>
+              <button class="map-filter-pill" data-layer="restauracion">🌱 Restauración</button>
+              <button class="map-filter-pill" data-layer="organizaciones">✊ Asambleas</button>
+            </div>
+          </div>
+
+          <div class="map-stats-summary" id="mapStatsSummary">
+            Cargando puntos territoriales verificados…
+          </div>
+
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">
+            <a href="mapa-conflictos.html" class="btn btn-primary" style="text-align:center;font-size:0.88rem;padding:10px 14px;">
+              Ampliar Mapa a Pantalla Completa & Reportar Conflicto →
+            </a>
+          </div>
+        </div>
+
+        <!-- Canvas del Mapa con Leaflet -->
+        <div class="mapa-display-area">
+          <div id="mapa-canvas" style="min-height:500px;border-radius:var(--radio-md);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VITRINA 3: DESTACADO ESPECIAL DE INCENDIOS FORESTALES
+       ========================================================================== -->
+  <section class="section" style="background:linear-gradient(180deg, #1C0F0B 0%, #29120B 100%);color:#F9F7F2;">
+    <div class="wrap">
+      <div class="fire-hero-grid">
+        <div>
+          <span class="fire-badge">🔥 ALERTA DE RIESGO DE INTERFAZ</span>
+          <h2 style="color:#FFF;font-size:clamp(2rem, 3.2vw, 2.8rem);margin:16px 0;">
+            El Fuego No Es Natural:<br>Es Continuidad de Monocultivo
+          </h2>
+          <p style="color:#E0CEC7;font-size:1.05rem;line-height:1.6;margin-bottom:24px;">
+            Las plantaciones continuas de pino y eucalipto secan el suelo, emiten resinas de alta inflamabilidad y transportan pavesas a cientos de metros. Exigimos la aprobación de la ley <strong>"1.000 Metros de Vida"</strong> para retirar monocultivos de los perímetros de todos los pueblos del centro-sur.
+          </p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;">
+            <a href="incendios.html" class="btn btn-primary" style="background:var(--terracota-fuego);">
+              Conocer Propuesta de Cortafuegos y Datos de Incendios →
+            </a>
+            <a href="mapa-conflictos.html" class="btn btn-outline-light">
+              Ver Zonas Afectadas en el Mapa
+            </a>
+          </div>
+        </div>
+
+        <div class="fire-danger-card">
+          <h3 style="color:#F4D389;font-size:1.3rem;margin-bottom:14px;">La Fórmula del Megaincendio</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;font-size:0.95rem;color:#E6DFD5;">
+            <li><strong>🌲 30.000 kg/ha:</strong> Carga de combustible seco en rodales de pino sin manejo frente a 6.000 kg/ha en bosque nativo húmedo.</li>
+            <li><strong>🌪️ Efecto Chimenea:</strong> Pendientes empinadas reforestadas con especies resinosas aceleran la velocidad de propagación hasta 10 km/h.</li>
+            <li><strong>🛡️ Cortafuego Inútil:</strong> Las fajas actuales de 15 metros no detienen pavesas que vuelan a más de 800 metros con vientos de 50 km/h.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VITRINA 4: BLOG Y NOTICIAS TERRITORIALES (CON BORRADORES)
+       ========================================================================== -->
+  <section class="section" style="background:#FFF;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge">Prensa Comunitaria</span>
+          <h2>Actualidad, Crónicas & Borradores</h2>
+        </div>
+        <p class="lead">
+          Declaraciones de la Red, crónicas de resistencia y borradores abiertos a observaciones ciudadanas.
+        </p>
+      </div>
+
+      <!-- Grilla de Noticias destacadas -->
+      <div class="blog-posts-grid" id="blogPostsContainer">
+        <!-- Renderizado dinámicamente por js/blog.js -->
+      </div>
+
+      <div style="text-align:center;margin-top:36px;">
+        <a href="blog.html" class="btn btn-outline-dark">
+          Ver Todas las Noticias, Borradores y Comentarios →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VITRINA: TRANSMISIÓN TERRITORIAL · RADIOS COMUNITARIAS & VOCES DEL BOSQUE
+       ========================================================================== -->
+  <section class="section" style="background:var(--bosque-profundo);color:var(--blanco-hueso);">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge badge-amber">COMUNICACIÓN LIBRE & DEFENSA DE LA VIDA</span>
+          <h2 style="color:var(--blanco-hueso);">Radios Comunitarias de Chile y Podcasts por el Bosque</h2>
+        </div>
+        <p class="lead" style="color:#C6D4CC;">
+          Sintoniza transmisiones territoriales en vivo o escucha la serie documental sonora <em>Voces de la Cuenca</em>. También puedes controlarlo en todo momento desde el reproductor integrado en el menú superior.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+        <!-- Card 1: Radios en Vivo -->
+        <div style="background:rgba(249,247,242,0.04);border:1px solid rgba(221,161,54,0.3);border-radius:var(--radio-md);padding:24px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <span class="mono-badge badge-verde" style="font-size:0.68rem;">🔴 SEÑALES ONLINE EN VIVO</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--ambar-suave);">CHILE</span>
+            </div>
+            <h3 style="font-size:1.25rem;color:var(--blanco-hueso);margin-bottom:8px;">Radio Kurruf, JGM y Ritoque</h3>
+            <p style="font-size:0.85rem;color:#B4C4BC;line-height:1.5;margin-bottom:16px;">
+              Medios libres y comunitarios que transmiten desde los territorios del centro-sur y la costa chilena, visibilizando las luchas contra la escasez hídrica y en defensa del bosque nativo.
+            </p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <button onclick="if(document.getElementById('headerAudioSelect')){document.getElementById('headerAudioSelect').value='kurruf';document.getElementById('headerAudioPlayBtn').click();}" class="btn btn-primary" style="font-size:0.85rem;padding:9px 16px;">
+              ▶ Sintonizar Kurruf (107.5 FM)
+            </button>
+            <a href="biblioteca.html#radio-live" class="btn btn-outline-light" style="font-size:0.82rem;padding:9px 14px;">
+              Centro de Transmisión Completo →
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Serie Podcast -->
+        <div style="background:rgba(249,247,242,0.04);border:1px solid rgba(249,247,242,0.1);border-radius:var(--radio-md);padding:24px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <span class="mono-badge badge-amber" style="font-size:0.68rem;">🎙️ PODCAST OFICIAL RE-SU-MO-F</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#A4B8AD;">5 EPISODIOS</span>
+            </div>
+            <h3 style="font-size:1.25rem;color:var(--blanco-hueso);margin-bottom:8px;">Voces de la Cuenca: Defensa del Bosque</h3>
+            <p style="font-size:0.85rem;color:#B4C4BC;line-height:1.5;margin-bottom:16px;">
+              Relatos testimoniales y peritajes silvícolas con dirigentas campesinas, la Agrupación de Ingenieros Forestales por el Bosque Nativo (AIFBN) y lideresas mapuche.
+            </p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <button onclick="if(document.getElementById('headerAudioSelect')){document.getElementById('headerAudioSelect').value='pod1';document.getElementById('headerAudioPlayBtn').click();}" class="btn btn-primary" style="font-size:0.85rem;padding:9px 16px;">
+              ▶ Reproducir Ep. 01
+            </button>
+            <a href="biblioteca.html#podcast-player" class="btn btn-outline-light" style="font-size:0.82rem;padding:9px 14px;">
+              Ver Todos los Episodios →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VITRINA 5: LA RED Y PROPUESTAS DE LEY (RESUMEN)
+       ========================================================================== -->
+  <section class="section" style="background:var(--blanco-hueso);">
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+        <div>
+          <span class="mono-badge">Articulación Autónoma</span>
+          <h2>La Fuerza de las Comunidades Organizadas</h2>
+          <p style="margin:16px 0 24px;font-size:1.05rem;">
+            La Red reúne a comités de agua potable rural, brigadas vecinales contra incendios, lof mapuche, recolectoras de orilla y académicos independientes. Nuestra agenda no busca parches: planteamos la superación integral del modelo agroextractivo forestal.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="la-red.html" class="btn btn-primary">Conoce La Red & 5 Propuestas de Ley →</a>
+          </div>
+        </div>
+        <div style="background:#FFF;padding:28px;border-radius:var(--radio-md);border:1px solid var(--borde-suave);box-shadow:var(--sombra-card);">
+          <h4 style="color:var(--bosque-profundo);margin-bottom:14px;font-size:1.2rem;">Pilares de la Transición Justa</h4>
+          <ol style="padding-left:18px;display:flex;flex-direction:column;gap:10px;font-size:0.92rem;color:#383F3B;">
+            <li><strong>Moratoria Forestal Inmediata:</strong> Fin a la expansión sobre suelos de aptitud agrícola y cuencas abastecedoras de agua.</li>
+            <li><strong>Cortafuegos de 1.000m:</strong> Exclusión de plantaciones comerciales en el entorno de todo centro poblado.</li>
+            <li><strong>Plan Nacional de Restauración Nativa:</strong> Financiamiento público a viveros comunitarios y reforestación de especies nativas.</li>
+            <li><strong>Soberanía Hídrica Comunitaria:</strong> Reconocimiento legal prioritario al consumo humano y ecosistémico.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PETITORIO CIUDADANO & FORMULARIO DE ADHESIÓN
+       ========================================================================== -->
+  <section class="section" id="unete" style="background:var(--bosque-profundo);color:var(--blanco-hueso);">
+    <div class="wrap">
+      <div class="unete-grid-layout">
+        <div>
+          <span class="mono-badge badge-light">Campaña Permanente 2026</span>
+          <h2 style="color:var(--blanco-hueso);">Súmate a la Red</h2>
+          <p style="color:#C6D4CC;font-size:1.05rem;margin-bottom:28px;">
+            Tu adhesión suma fuerza a la presentación del proyecto de ley por la moratoria forestal y la protección de las cuencas del centro-sur.
+          </p>
+
+          <div class="petition-tracker-card">
+            <span class="petition-badge">CARTA ABIERTA POR LA MORATORIA FORESTAL</span>
+            <div class="signatures-counter">
+              <span id="signatureCount">14.825</span> <span>/ 20.000 firmas</span>
+            </div>
+            <div class="petition-progress-bar">
+              <div class="petition-progress-fill" id="signatureBarFill" style="width:74%;"></div>
+            </div>
+            <span style="font-size:0.8rem;color:#A4B8AD;font-family:'IBM Plex Mono',monospace;">Meta ciudadana para ingresar indicaciones al Congreso</span>
+          </div>
+        </div>
+
+        <div class="join-form-wrapper">
+          <h3 style="font-size:1.4rem;color:var(--bosque-profundo);margin-bottom:14px;">Firma la Declaración</h3>
+          <form id="joinForm">
+            <div class="form-group">
+              <label for="fName">Nombre y Apellido u Organización</label>
+              <input type="text" id="fName" required placeholder="Ej. Pamela Castillo Gómez">
+            </div>
+            <div class="form-group">
+              <label for="fEmail">Correo Electrónico de Contacto</label>
+              <input type="email" id="fEmail" required placeholder="correo@ejemplo.cl">
+            </div>
+            <div class="form-group">
+              <label for="fComuna">Comuna y Región</label>
+              <input type="text" id="fComuna" required placeholder="Ej. Santa Juana, Biobío">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;margin-top:10px;">
+              Sumar mi Firma a la Red
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ==========================================================================
+     FOOTER LIMPIO Y MINIMALISTA (SIN COLUMNAS REDUNDANTES DE NAVEGACIÓN)
+     ========================================================================== -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-clean-wrap">
+      <div class="footer-brand-side">
+        <span class="brand-title">RED POR LA SUPERACIÓN DEL MODELO FORESTAL</span>
+        <p class="footer-tagline">
+          Articulación plurinacional de comunidades y cuencas por la restauración ecológica, la soberanía hídrica y la vida en el centro-sur de Chile.
+        </p>
+      </div>
+      <div class="footer-contact-side">
+        <div class="footer-email-badge">
+          <span>Contacto Territorial:</span>
+          <a href="mailto:superacionmodeloforestal@gmail.com">superacionmodeloforestal@gmail.com</a>
+        </div>
+        <div class="footer-meta-links">
+          <span>© 2026 Red por la Superación del Modelo Forestal · Licencia CC-BY-SA 4.0</span>
+          <a href="admin/index.html" class="footer-admin-link">🔐 Acceso Admin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/map.js"></script>
+<script src="js/blog.js"></script>
+<script src="js/bot-juridico.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuestas Legislativas y Políticas | Red por la Superación del Modelo Forestal</title>
+<meta name="description" content="Nuestras propuestas de ley: Moratoria Forestal, Ley 1.000 Metros de Vida, Fondo Nacional de Restauración Nativa y Responsabilidad Civil por Incendios.">
+
+<!-- Tipografías de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<!-- Favicon Oficial -->
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<!-- Estilos Unificados -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Cabecera Global -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand-logo" aria-label="Inicio">
+      <div class="brand-crest" title="Red por la Superación del Modelo Forestal">
+        <img src="img/logo-resumof.png" alt="Logo Red por la Superación del Modelo Forestal" width="56" height="56" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <span class="brand-title-main">RED POR LA SUPERACIÓN</span>
+          <span class="brand-title-sub">DEL MODELO FORESTAL</span>
+        </div>
+        <span class="brand-tagline">Articulación Socioambiental · Centro-Sur</span>
+      </div>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <div class="nav-links-track">
+        <a href="diagnostico.html" class="nav-link">Diagnóstico</a>
+        <a href="mapa-conflictos.html" class="nav-link">Mapa de Conflictos</a>
+        <a href="incendios.html" class="nav-link">Incendios</a>
+        <a href="la-red.html" class="nav-link active-page">La Red & Propuestas</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="biblioteca.html" class="nav-link">Biblioteca</a>
+      </div>
+    </nav>
+
+    <div class="header-cta-group">
+      <!-- Sintonizador de Radio y Podcast en el Menú -->
+      <div class="header-audio-widget" id="headerAudioWidget" title="Sintonizador de Radio Comunitaria y Podcasts">
+        <div class="audio-widget-select-wrap">
+          <span class="audio-widget-icon">📻</span>
+          <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar radio o podcast">
+            <optgroup label="📻 Radios Comunitarias de Chile">
+              <option value="kurruf" data-type="radio" data-src="https://radio.latina.red/radiokurruf.mp3">Radio Kurruf (Biobío / 107.5 FM)</option>
+              <option value="jgm" data-type="radio" data-src="https://sonic-us.arkeo.cl/8186/stream">Radio JGM (Nacional Comunitaria)</option>
+              <option value="ritoque" data-type="radio" data-src="https://archi-us.digitalproserver.com/ritoquefm_aac">Radio Ritoque (Valparaíso)</option>
+            </optgroup>
+            <optgroup label="🎙️ Podcasts por los Bosques">
+              <option value="pod1" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/santa-juana-renacer-bosque.mp3">Ep. 01: Santa Juana tras el fuego</option>
+              <option value="pod2" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/plantaciones-no-son-bosque.mp3">Ep. 02: Las plantaciones no son bosque</option>
+              <option value="pod3" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/cuenca-contulmo-sequia.mp3">Ep. 03: Contulmo y la sed campesina</option>
+              <option value="pod4" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/mujeres-lafkenche-itrofill.mp3">Ep. 04: Mujeres lafkenche & Itrofill Mogen</option>
+            </optgroup>
+          </select>
+        </div>
+        <button id="headerAudioPlayBtn" class="header-audio-btn" aria-label="Reproducir o pausar" title="Reproducir señal o podcast">
+          <span id="headerAudioPlayIcon">▶</span>
+        </button>
+        <div class="audio-wave-bars" id="headerAudioBars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <a href="index.html#unete" class="btn btn-primary header-cta-btn">
+        <span>Únete a la Red</span>
+        <span class="cta-counter-chip">14.8k</span>
+      </a>
+      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú">
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú Móvil -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-tag">NAVEGACIÓN TERRITORIAL</span>
+      <button class="mobile-drawer-close" id="mobileDrawerClose">✕</button>
+    </div>
+    <div class="mobile-nav-group">
+      <a href="diagnostico.html" class="mobile-nav-link"><span>📊</span> Diagnóstico</a>
+      <a href="mapa-conflictos.html" class="mobile-nav-link"><span>🗺️</span> Mapa de Conflictos</a>
+      <a href="incendios.html" class="mobile-nav-link"><span>🔥</span> Incendios Forestales</a>
+      <a href="la-red.html" class="mobile-nav-link active"><span>✊</span> La Red & 5 Propuestas de Ley</a>
+      <a href="blog.html" class="mobile-nav-link"><span>📰</span> Blog & Noticias</a>
+      <a href="biblioteca.html" class="mobile-nav-link"><span>📚</span> Biblioteca</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Subpage Hero con Banner Unsplash -->
+  <section class="subpage-hero hero-propuestas">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Inicio</a> <span>/</span> <span>Propuestas</span>
+      </div>
+      <span class="mono-badge badge-amber">HOJA DE RUTA LEGISLATIVA</span>
+      <h1>Propuestas Políticas para la Transición Justa</h1>
+      <p class="lead">
+        No buscamos maquillar el modelo con certificaciones voluntarias. Planteamos transformaciones legales vinculantes para restaurar la habitabilidad del centro-sur.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5 Pilares Legislativos -->
+  <section class="section" style="background:#FFF;padding-top:40px;">
+    <div class="wrap">
+      <div style="display:flex;flex-direction:column;gap:30px;">
+        <div class="propuesta-card">
+          <div class="propuesta-badge">PILAR 01 · URGENCIA INMEDIATA</div>
+          <h3>Moratoria Forestal y Prohibición de Nuevas Plantaciones</h3>
+          <p>
+            Suspensión inmediata de cualquier nueva plantación de especies exóticas invasoras (pino y eucalipto) en suelos con aptitud agrícola, cabeceras de cuencas de agua potable rural y áreas colindantes a comunidades campesinas e indígenas.
+          </p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--verde-musgo);margin-top:10px;">
+            Impacto esperado: Detención del avance de la frontera forestal sobre el bosque nativo remanente.
+          </div>
+        </div>
+
+        <div class="propuesta-card">
+          <div class="propuesta-badge">PILAR 02 · SEGURIDAD CIUDADANA</div>
+          <h3>Ley "1.000 Metros de Vida": Cortafuegos Agroecológicos Obligatorios</h3>
+          <p>
+            Obligación legal a las empresas tenedoras de predios forestales de retirar toda plantación en una franja de 1.000 metros alrededor de áreas urbanas, pueblos, villorrios y escuelas rurales, transfiriendo el uso de suelo a agricultura campesina y amortiguación nativa.
+          </p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--verde-musgo);margin-top:10px;">
+            Impacto esperado: Eliminación del riesgo de tormentas de fuego en interfases habitadas.
+          </div>
+        </div>
+
+        <div class="propuesta-card">
+          <div class="propuesta-badge">PILAR 03 · REPARACIÓN AMBIENTAL</div>
+          <h3>Fondo Nacional de Restauración Hidrológica de Cuencas</h3>
+          <p>
+            Creación de un fondo público financiado con impuestos específicos a las grandes exportadoras de celulosa, destinado exclusivamente a financiar viveros comunitarios, eliminación de especies invasoras y reforestación de especies nativas higrófilas en cabeceras de agua.
+          </p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--verde-musgo);margin-top:10px;">
+            Impacto esperado: Recuperación progresiva del caudal de esteros y vertientes de agua dulce.
+          </div>
+        </div>
+
+        <div class="propuesta-card">
+          <div class="propuesta-badge">PILAR 04 · JUSTICIA TRIBUTARIA</div>
+          <h3>Fin a Subsidios Directos y Exenciones Tributarias</h3>
+          <p>
+            Derogación definitiva de cualquier subsidio directo o indirecto al raleo, poda y fomento forestal industrial. Exigencia de pago íntegro de patentes municipales en las comunas donde se ubican las faenas y no en las casas matrices de Santiago.
+          </p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--verde-musgo);margin-top:10px;">
+            Impacto esperado: Descentralización tributaria y freno a la especulación de tierras.
+          </div>
+        </div>
+
+        <div class="propuesta-card">
+          <div class="propuesta-badge">PILAR 05 · RESPONSABILIDAD PENAL Y CIVIL</div>
+          <h3>Responsabilidad Civil Objetiva de las Empresas Forestales</h3>
+          <p>
+            Modificación del código civil y ambiental para establecer la responsabilidad civil objetiva de los dueños de plantaciones continuas por los daños materiales, personales y ambientales causados por incendios que se originen o propaguen a través de sus predios sin manejo preventivo.
+          </p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--verde-musgo);margin-top:10px;">
+            Impacto esperado: Fin a la impunidad económica frente a las pérdidas sufridas por las familias campesinas.
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:50px;">
+        <a href="index.html#unete" class="btn btn-primary" style="padding:14px 28px;font-size:1.05rem;">
+          Firma el Petitorio por Estas 5 Propuestas de Ley →
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer Limpio y Minimalista -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-clean-wrap">
+      <div class="footer-brand-side">
+        <span class="brand-title">RED POR LA SUPERACIÓN DEL MODELO FORESTAL</span>
+        <p class="footer-tagline">
+          Articulación plurinacional de comunidades y cuencas por la restauración ecológica, la soberanía hídrica y la vida en el centro-sur de Chile.
+        </p>
+      </div>
+      <div class="footer-contact-side">
+        <div class="footer-email-badge">
+          <span>Contacto Territorial:</span>
+          <a href="mailto:superacionmodeloforestal@gmail.com">superacionmodeloforestal@gmail.com</a>
+        </div>
+        <div class="footer-meta-links">
+          <span>© 2026 Red por la Superación del Modelo Forestal · Licencia CC-BY-SA 4.0</span>
+          <a href="admin/index.html" class="footer-admin-link">🔐 Acceso Admin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/bot-juridico.js"></script>
+</body>
+</html>

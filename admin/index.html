@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Administración | Red por la Superación del Modelo Forestal</title>
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Favicon Oficial -->
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="apple-touch-icon" href="../img/favicon.png">
+
+<!-- Tipografías de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Estilos -->
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<!-- Overlay de Autenticación / Login -->
+<div class="admin-login-overlay" id="adminLoginOverlay">
+  <div class="admin-login-card">
+    <div class="admin-login-logo">
+      <img src="../img/logo-resumof.png" alt="Emblema Red por la Superación del Modelo Forestal">
+    </div>
+    <h2>Panel de Administración</h2>
+    <p>Red por la Superación del Modelo Forestal · Centro-Sur</p>
+
+    <form id="adminLoginForm">
+      <div class="form-group-admin" style="text-align:left;">
+        <label for="adminEmail">Correo Administrador Vinculado</label>
+        <input type="email" id="adminEmail" class="form-control-admin" required value="superacionmodeloforestal@gmail.com" readonly style="background:rgba(0,0,0,0.3);color:var(--admin-accent);">
+      </div>
+      <div class="form-group-admin" style="text-align:left;">
+        <label for="adminPassword">Clave de Acceso</label>
+        <input type="password" id="adminPassword" class="form-control-admin" required placeholder="Ingresa tu clave de acceso" autocomplete="current-password">
+        <small style="color:#8E9D95;font-size:0.75rem;margin-top:4px;display:block;">
+          Clave predeterminada: <code>resumof2026</code>
+        </small>
+      </div>
+      <button type="submit" class="btn-admin btn-admin-primary" style="width:100%;justify-content:center;padding:12px;font-size:0.95rem;margin-top:10px;">
+        🔐 Ingresar al Sistema
+      </button>
+      <div style="margin-top:18px;">
+        <a href="../index.html" style="color:var(--admin-text-muted);font-size:0.82rem;text-decoration:none;">← Volver al sitio público</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Barra Lateral (Sidebar) -->
+<aside class="admin-sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <img src="../img/logo-resumof.png" alt="Logo ReSuMoF">
+    </div>
+    <div>
+      <div class="sidebar-brand-title">RED SUPERACIÓN</div>
+      <span class="sidebar-brand-sub">PANEL DE CONTROL</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <button type="button" class="sidebar-nav-item active" data-tab="dashboard">
+      <div class="sidebar-item-left">
+        <span>📊</span> <span>Dashboard</span>
+      </div>
+    </button>
+
+    <button type="button" class="sidebar-nav-item" data-tab="comentarios">
+      <div class="sidebar-item-left">
+        <span>💬</span> <span>Comentarios</span>
+      </div>
+      <span class="badge-count" id="pendingCommentsBadge">0</span>
+    </button>
+
+    <button type="button" class="sidebar-nav-item" data-tab="denuncias">
+      <div class="sidebar-item-left">
+        <span>📢</span> <span>Denuncias Mapa</span>
+      </div>
+      <span class="badge-count" id="pendingConflictsBadge">0</span>
+    </button>
+
+    <button type="button" class="sidebar-nav-item" data-tab="articulos">
+      <div class="sidebar-item-left">
+        <span>📰</span> <span>Artículos & Blog</span>
+      </div>
+    </button>
+
+    <button type="button" class="sidebar-nav-item" data-tab="biblioteca">
+      <div class="sidebar-item-left">
+        <span>📚</span> <span>Biblioteca & Medios</span>
+      </div>
+    </button>
+
+    <button type="button" class="sidebar-nav-item" data-tab="ajustes">
+      <div class="sidebar-item-left">
+        <span>⚙️</span> <span>Ajustes & Respaldo</span>
+      </div>
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <span class="admin-mail-pill" title="superacionmodeloforestal@gmail.com">
+      ✉️ superacionmodeloforestal@gmail.com
+    </span>
+    <div style="display:flex;gap:8px;justify-content:space-between;">
+      <a href="../index.html" class="btn-admin btn-admin-outline" style="flex:1;font-size:0.75rem;padding:6px 8px;justify-content:center;" target="_blank">
+        Ver Web ↗
+      </a>
+      <button type="button" class="btn-admin btn-admin-danger" id="logoutBtn" style="font-size:0.75rem;padding:6px 10px;" title="Cerrar sesión">
+        Salir
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- Área de Contenido Principal -->
+<main class="admin-main">
+  <!-- Topbar -->
+  <header class="admin-topbar">
+    <div class="topbar-title">
+      <h1 id="pageHeading">Dashboard General</h1>
+    </div>
+    <div class="topbar-actions">
+      <button type="button" class="btn-admin btn-admin-primary" id="btnQuickNewPost">
+        + Redactar Artículo
+      </button>
+      <a href="mailto:superacionmodeloforestal@gmail.com" class="btn-admin btn-admin-outline" title="Abrir correo oficial">
+        ✉️ Contactar Equipo
+      </a>
+    </div>
+  </header>
+
+  <!-- Cuerpo de Vistas -->
+  <div class="admin-body">
+    
+    <!-- VISTA 1: DASHBOARD -->
+    <section class="admin-tab-pane active" id="pane-dashboard">
+      <div class="kpi-row">
+        <div class="kpi-box pending" onclick="switchTab('comentarios')" style="cursor:pointer;" title="Ver comentarios en espera">
+          <span class="kpi-box-title">Comentarios Pendientes</span>
+          <span class="kpi-box-value" id="kpiPendingComments">0</span>
+          <small style="color:var(--admin-text-muted);font-size:0.75rem;">Requieren visto bueno</small>
+        </div>
+
+        <div class="kpi-box pending" onclick="switchTab('denuncias')" style="cursor:pointer;" title="Ver denuncias en espera">
+          <span class="kpi-box-title">Denuncias en Espera</span>
+          <span class="kpi-box-value" id="kpiPendingConflicts">0</span>
+          <small style="color:var(--admin-text-muted);font-size:0.75rem;">Esperando autorización</small>
+        </div>
+
+        <div class="kpi-box" onclick="switchTab('articulos')" style="cursor:pointer;">
+          <span class="kpi-box-title">Artículos Publicados</span>
+          <span class="kpi-box-value" id="kpiTotalPosts">0</span>
+          <small style="color:var(--admin-text-muted);font-size:0.75rem;">Noticias & borradores</small>
+        </div>
+
+        <div class="kpi-box" onclick="switchTab('biblioteca')" style="cursor:pointer;">
+          <span class="kpi-box-title">Documentos Técnicos</span>
+          <span class="kpi-box-value" id="kpiTotalDocs">0</span>
+          <small style="color:var(--admin-text-muted);font-size:0.75rem;">Informes en biblioteca</small>
+        </div>
+      </div>
+
+      <!-- Tarjeta informativa institucional -->
+      <div class="admin-card" style="border-left:4px solid var(--admin-accent);">
+        <div class="admin-card-header">
+          <h3>🌱 Sistema Central de Gestión Territorial</h3>
+          <span class="mod-badge mod-badge-approved">ESTADO: ACTIVO</span>
+        </div>
+        <p style="font-size:0.92rem;color:var(--admin-text-muted);line-height:1.6;margin-bottom:14px;">
+          Bienvenido al centro de administración de la <strong>Red por la Superación del Modelo Forestal</strong>. Desde aquí puedes autorizar las denuncias enviadas desde los territorios antes de publicarlas en el mapa interactivo, moderar los comentarios del debate comunitario, y publicar nuevas crónicas o documentos de investigación.
+        </p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <div style="background:rgba(0,0,0,0.25);padding:10px 16px;border-radius:6px;font-size:0.84rem;">
+            <strong>Correo Oficial:</strong> <a href="mailto:superacionmodeloforestal@gmail.com" style="color:var(--admin-accent);text-decoration:none;">superacionmodeloforestal@gmail.com</a>
+          </div>
+          <div style="background:rgba(0,0,0,0.25);padding:10px 16px;border-radius:6px;font-size:0.84rem;">
+            <strong>Seguridad:</strong> Moderación estricta habilitada
+          </div>
+        </div>
+      </div>
+
+      <!-- Accesos Rápidos -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>💬 Últimos Comentarios en Espera</h3>
+          </div>
+          <div id="dashPendingCommentsPreview">
+            <!-- Renderizado dinámico -->
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>📢 Últimas Denuncias en Espera</h3>
+          </div>
+          <div id="dashPendingConflictsPreview">
+            <!-- Renderizado dinámico -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 2: MODERACIÓN DE COMENTARIOS -->
+    <section class="admin-tab-pane" id="pane-comentarios">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h3>Cola de Moderación: Comentarios de Lectores</h3>
+            <p style="font-size:0.82rem;color:var(--admin-text-muted);margin-top:2px;">
+              Los comentarios permanecen ocultos en la web pública hasta que hagas clic en "Aprobar y Publicar".
+            </p>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="btn-admin btn-admin-outline" id="filterCommentsPendingBtn" onclick="filterCommentsTab('pending')">
+              Pendientes
+            </button>
+            <button type="button" class="btn-admin btn-admin-outline" id="filterCommentsApprovedBtn" onclick="filterCommentsTab('approved')">
+              Aprobados
+            </button>
+          </div>
+        </div>
+
+        <div id="commentsModerationList">
+          <!-- Renderizado dinámico de comentarios -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 3: MODERACIÓN DE DENUNCIAS DEL MAPA -->
+    <section class="admin-tab-pane" id="pane-denuncias">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h3>Cola de Moderación: Denuncias Territoriales del Mapa</h3>
+            <p style="font-size:0.82rem;color:var(--admin-text-muted);margin-top:2px;">
+              Verifica los datos técnicos antes de autorizar su publicación en la cartografía comunitaria.
+            </p>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button type="button" class="btn-admin btn-admin-outline" id="filterConflictsPendingBtn" onclick="filterConflictsTab('pending')">
+              Pendientes
+            </button>
+            <button type="button" class="btn-admin btn-admin-outline" id="filterConflictsApprovedBtn" onclick="filterConflictsTab('approved')">
+              Aprobadas en Mapa
+            </button>
+          </div>
+        </div>
+
+        <div id="conflictsModerationList">
+          <!-- Renderizado dinámico de denuncias -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 4: GESTOR DE ARTÍCULOS Y BLOG -->
+    <section class="admin-tab-pane" id="pane-articulos">
+      <!-- Formulario para agregar / editar artículo -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 id="articleFormHeader">📝 Redactar Nuevo Artículo o Crónica</h3>
+          <button type="button" class="btn-admin btn-admin-outline" id="btnCancelEditPost" style="display:none;" onclick="cancelEditPost()">
+            Cancelar Edición
+          </button>
+        </div>
+
+        <form id="adminPostForm">
+          <input type="hidden" id="editingPostId" value="">
+
+          <div class="form-row-2">
+            <div class="form-group-admin">
+              <label for="postTitle">Título del Artículo *</label>
+              <input type="text" id="postTitle" class="form-control-admin" required placeholder="Ej. Encuentro Birregional por la Moratoria Forestal">
+            </div>
+
+            <div class="form-group-admin">
+              <label for="postCategory">Categoría *</label>
+              <select id="postCategory" class="form-control-admin" required>
+                <option value="Comunicados">Comunicados</option>
+                <option value="Investigación">Investigación & Datos</option>
+                <option value="Campañas">Campañas Ciudadanas</option>
+                <option value="Borradores">Borrador en Discusión</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group-admin">
+              <label for="postAuthor">Autor o Colectivo *</label>
+              <input type="text" id="postAuthor" class="form-control-admin" required placeholder="Ej. Mesa Coordinadora de la Red">
+            </div>
+
+            <div class="form-group-admin">
+              <label for="postTerritory">Territorio o Comuna *</label>
+              <input type="text" id="postTerritory" class="form-control-admin" required placeholder="Ej. Santa Juana / Cuenca del Biobío">
+            </div>
+          </div>
+
+          <div class="form-group-admin">
+            <label for="postImage">URL de la Imagen de Portada</label>
+            <input type="url" id="postImage" class="form-control-admin" placeholder="https://images.unsplash.com/photo-..." value="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=80">
+            <small style="color:var(--admin-text-muted);font-size:0.75rem;margin-top:4px;display:block;">
+              Sugerencias rápidas: 
+              <a href="#" style="color:var(--admin-accent);" onclick="setPostPresetImg('bosque');return false;">Bosque Nativo</a> · 
+              <a href="#" style="color:var(--admin-accent);" onclick="setPostPresetImg('incendio');return false;">Megaincendio</a> · 
+              <a href="#" style="color:var(--admin-accent);" onclick="setPostPresetImg('asamblea');return false;">Comunidad</a> · 
+              <a href="#" style="color:var(--admin-accent);" onclick="setPostPresetImg('agua');return false;">Río / Agua</a>
+            </small>
+          </div>
+
+          <div class="form-group-admin">
+            <label for="postSummary">Resumen Breve (Bajada) *</label>
+            <textarea id="postSummary" class="form-control-admin" required rows="2" placeholder="Síntesis que aparecerá en la tarjeta del blog..."></textarea>
+          </div>
+
+          <div class="form-group-admin">
+            <label for="postContent">Contenido Completo del Artículo (Permite párrafos y formato) *</label>
+            <textarea id="postContent" class="form-control-admin" required rows="6" placeholder="Redacta el texto aquí..."></textarea>
+          </div>
+
+          <div class="form-group-admin" style="display:flex;align-items:center;gap:10px;">
+            <input type="checkbox" id="postIsDraft" style="width:18px;height:18px;accent-color:var(--admin-accent);">
+            <label for="postIsDraft" style="margin-bottom:0;cursor:pointer;">
+              Marcar como <strong>Borrador de Trabajo Abierto a Observaciones</strong> (aparecerá en la pestaña 'Borradores' con llamado a aportes comunitarios)
+            </label>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:16px;">
+            <button type="submit" class="btn-admin btn-admin-primary" id="btnSavePost">
+              💾 Guardar y Publicar Artículo
+            </button>
+            <button type="reset" class="btn-admin btn-admin-outline">
+              Limpiar Campos
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Listado de Artículos Existentes -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3>Listado de Artículos en la Plataforma</h3>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--admin-text-muted);" id="articlesCountText">0 artículos</span>
+        </div>
+        <div id="adminArticlesList">
+          <!-- Renderizado dinámico de artículos -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 5: GESTOR DE BIBLIOTECA & ARCHIVO AUDIOVISUAL -->
+    <section class="admin-tab-pane" id="pane-biblioteca">
+      <!-- Subir Nuevo Documento Técnico -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3>📚 Agregar Documento a la Biblioteca Técnica</h3>
+        </div>
+        <form id="adminDocForm">
+          <div class="form-row-2">
+            <div class="form-group-admin">
+              <label for="docTitle">Título del Documento *</label>
+              <input type="text" id="docTitle" class="form-control-admin" required placeholder="Ej. Estudio Hidrológico de Microcuencas">
+            </div>
+            <div class="form-group-admin">
+              <label for="docTopic">Tema / Eje *</label>
+              <select id="docTopic" class="form-control-admin" required>
+                <option value="Agua">Agua & Crisis Hídrica</option>
+                <option value="Incendios">Incendios & Combustibles</option>
+                <option value="Leyes">Leyes & DL 701</option>
+                <option value="Restauración">Restauración Nativa</option>
+                <option value="Pueblos">Derechos Mapuche & Campesinos</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group-admin">
+              <label for="docAuthor">Autor o Institución *</label>
+              <input type="text" id="docAuthor" class="form-control-admin" required placeholder="Ej. Comisión Técnica ReSuMoF">
+            </div>
+            <div class="form-group-admin">
+              <label for="docYear">Año de Publicación</label>
+              <input type="text" id="docYear" class="form-control-admin" value="2026">
+            </div>
+          </div>
+
+          <div class="form-group-admin">
+            <label for="docSummary">Resumen del Estudio</label>
+            <textarea id="docSummary" class="form-control-admin" rows="2" placeholder="Breve descripción del informe..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-admin btn-admin-primary">
+            + Añadir Documento a la Biblioteca
+          </button>
+        </form>
+      </div>
+
+      <!-- Configuración Archivo Audiovisual -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3>🎬 Documentales en el Archivo Audiovisual</h3>
+        </div>
+        <p style="font-size:0.88rem;color:var(--admin-text-muted);margin-bottom:18px;">
+          Actualmente están configurados los dos documentales clave de <strong>Resumen TV</strong>:
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+          <div style="background:rgba(0,0,0,0.25);border:1px solid var(--admin-card-border);border-radius:8px;padding:16px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+              <img src="https://i.ytimg.com/vi/A42dHCxuJ1w/hqdefault.jpg" style="width:70px;height:45px;object-fit:cover;border-radius:4px;">
+              <div>
+                <strong style="font-size:0.9rem;display:block;">Plantar Pobreza, el Negocio Forestal</strong>
+                <span style="font-size:0.75rem;color:var(--admin-accent);font-family:'IBM Plex Mono',monospace;">ID: A42dHCxuJ1w</span>
+              </div>
+            </div>
+            <a href="https://www.youtube.com/watch?v=A42dHCxuJ1w" target="_blank" class="btn-admin btn-admin-outline" style="font-size:0.75rem;padding:4px 10px;">
+              Abrir en YouTube ↗
+            </a>
+          </div>
+
+          <div style="background:rgba(0,0,0,0.25);border:1px solid var(--admin-card-border);border-radius:8px;padding:16px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+              <img src="https://i.ytimg.com/vi/1-kVhdavxDw/hqdefault.jpg" style="width:70px;height:45px;object-fit:cover;border-radius:4px;">
+              <div>
+                <strong style="font-size:0.9rem;display:block;">Llamas del Despojo: Incendios</strong>
+                <span style="font-size:0.75rem;color:var(--admin-accent);font-family:'IBM Plex Mono',monospace;">ID: 1-kVhdavxDw</span>
+              </div>
+            </div>
+            <a href="https://www.youtube.com/watch?v=1-kVhdavxDw" target="_blank" class="btn-admin btn-admin-outline" style="font-size:0.75rem;padding:4px 10px;">
+              Abrir en YouTube ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA 6: AJUSTES & RESPALDO -->
+    <section class="admin-tab-pane" id="pane-ajustes">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3>⚙️ Configuración Institucional y Vinculación</h3>
+        </div>
+        <div class="form-group-admin">
+          <label>Correo Electrónico Administrador</label>
+          <input type="email" class="form-control-admin" value="superacionmodeloforestal@gmail.com" readonly style="max-width:400px;background:rgba(0,0,0,0.2);">
+          <small style="color:var(--admin-text-muted);font-size:0.78rem;margin-top:4px;display:block;">
+            Todas las notificaciones, consultas territoriales y avisos de moderación están vinculados a esta casilla.
+          </small>
+        </div>
+
+        <div style="margin-top:24px;border-top:1px solid var(--admin-card-border);padding-top:20px;">
+          <h4 style="font-size:1rem;margin-bottom:10px;">Copia de Seguridad de la Plataforma</h4>
+          <p style="font-size:0.88rem;color:var(--admin-text-muted);margin-bottom:16px;">
+            Descarga un respaldo en JSON con todos los artículos, comentarios aprobados, denuncias y documentos técnicos.
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button type="button" class="btn-admin btn-admin-primary" id="btnExportData">
+              📥 Exportar Base de Datos (JSON)
+            </button>
+            <label class="btn-admin btn-admin-outline" style="cursor:pointer;margin:0;">
+              📤 Importar Copia de Respaldo
+              <input type="file" id="importFileInput" accept=".json" style="display:none;">
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Scripts -->
+<script src="../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog, Noticias y Borradores Territoriales | Red por la Superación del Modelo Forestal</title>
+<meta name="description" content="Crónicas territoriales, comunicados oficiales, investigaciones de campo y borradores de propuestas abiertas a comentarios y debate comunitario.">
+
+<!-- Tipografías de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<!-- Favicon Oficial -->
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<!-- Estilos Unificados -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Cabecera Global -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand-logo" aria-label="Inicio">
+      <div class="brand-crest" title="Red por la Superación del Modelo Forestal">
+        <img src="img/logo-resumof.png" alt="Logo Red por la Superación del Modelo Forestal" width="56" height="56" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <span class="brand-title-main">RED POR LA SUPERACIÓN</span>
+          <span class="brand-title-sub">DEL MODELO FORESTAL</span>
+        </div>
+        <span class="brand-tagline">Articulación Socioambiental · Centro-Sur</span>
+      </div>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <div class="nav-links-track">
+        <a href="diagnostico.html" class="nav-link">Diagnóstico</a>
+        <a href="mapa-conflictos.html" class="nav-link">Mapa de Conflictos</a>
+        <a href="incendios.html" class="nav-link">Incendios</a>
+        <a href="la-red.html" class="nav-link">La Red & Propuestas</a>
+        <a href="blog.html" class="nav-link active-page">Blog</a>
+        <a href="biblioteca.html" class="nav-link">Biblioteca</a>
+      </div>
+    </nav>
+
+    <div class="header-cta-group">
+      <!-- Selector y Reproductor Directo de Radio Comunitaria / Podcast -->
+      <div class="header-audio-widget" id="headerAudioWidget">
+        <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar Radio o Podcast">
+          <option value="kurruf">📻 Radio Kurruf (Wallmapu)</option>
+          <option value="jgm">📻 Radio JGM (Comunitaria)</option>
+          <option value="ritoque">📻 Radio Ritoque (Valparaíso)</option>
+          <option value="podcast1">🎙️ Podcast: Defensa Bosque Nativo</option>
+          <option value="podcast2">🎙️ Podcast: Megaincendios y Monocultivo</option>
+        </select>
+        <button id="headerAudioPlayBtn" class="header-audio-play-btn" title="Reproducir / Pausar" aria-label="Reproducir señal de audio">
+          <span class="audio-play-icon" id="headerAudioPlayIcon">▶</span>
+        </button>
+        <div class="audio-wave-anim" id="headerAudioWave" style="display:none;">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <a href="index.html#unete" class="btn btn-primary header-cta-btn">
+        <span>Únete a la Red</span>
+        <span class="cta-counter-chip">14.8k</span>
+      </a>
+      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú">
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú Móvil -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-tag">NAVEGACIÓN TERRITORIAL</span>
+      <button class="mobile-drawer-close" id="mobileDrawerClose">✕</button>
+    </div>
+    <div class="mobile-nav-group">
+      <a href="diagnostico.html" class="mobile-nav-link"><span>📊</span> Diagnóstico</a>
+      <a href="mapa-conflictos.html" class="mobile-nav-link"><span>🗺️</span> Mapa de Conflictos</a>
+      <a href="incendios.html" class="mobile-nav-link"><span>🔥</span> Incendios Forestales</a>
+      <a href="la-red.html" class="mobile-nav-link"><span>✊</span> La Red & 5 Propuestas de Ley</a>
+      <a href="blog.html" class="mobile-nav-link active"><span>📰</span> Blog & Noticias</a>
+      <a href="biblioteca.html" class="mobile-nav-link"><span>📚</span> Biblioteca</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Subpage Hero con Banner Unsplash -->
+  <section class="subpage-hero hero-blog">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Inicio</a> <span>/</span> <span>Blog & Noticias</span>
+      </div>
+      <span class="mono-badge">COMUNICACIÓN & DEBATE TERRITORIAL</span>
+      <h1>Actualidad Territorial, Crónicas y Borradores Abiertos</h1>
+      <p class="lead">
+        Espacio de prensa autónoma de las comunidades. Revisa las últimas investigaciones, declaraciones oficiales y participa con tus comentarios en los borradores de propuestas de la Red.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filtro de Categorías y Grilla de Artículos -->
+  <section class="section" style="padding-top:40px;background:var(--blanco-hueso);">
+    <div class="wrap">
+      <!-- Filtro Pills -->
+      <div class="blog-filter-pills" id="blogFilterContainer">
+        <button class="blog-pill active" data-cat="todos">Todas las publicaciones</button>
+        <button class="blog-pill" data-cat="Borradores" style="border:1px solid var(--ambar-tierra);font-weight:700;">
+          📝 Borradores en Discusión
+        </button>
+        <button class="blog-pill" data-cat="Comunicados">Comunicados Oficiales</button>
+        <button class="blog-pill" data-cat="Investigación">Investigación & Datos</button>
+        <button class="blog-pill" data-cat="Campañas">Campañas Activas</button>
+      </div>
+
+      <!-- Alerta Explicativa de Borradores -->
+      <div style="background:var(--blanco-pergamino);border:1px dashed var(--ambar-tierra);border-radius:var(--radio-md);padding:16px 20px;margin-bottom:30px;display:flex;align-items:center;gap:14px;">
+        <span style="font-size:1.8rem;">💡</span>
+        <p style="font-size:0.92rem;color:var(--carbon-medio);margin:0;">
+          <strong>Participación Comunitaria Abierta:</strong> Los artículos marcados como <em>Borrador</em> son minutas técnicas y protocolos vecinales en proceso de redacción. Puedes ingresar a ellos y utilizar la <strong>caja de comentarios</strong> al pie de cada artículo para enriquecerlos con la realidad de tu cuenca.
+        </p>
+      </div>
+
+      <!-- Grilla de Artículos del Blog -->
+      <div class="blog-posts-grid" id="blogPostsContainer">
+        <!-- Generado dinámicamente por js/blog.js -->
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer Limpio y Minimalista -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-clean-wrap">
+      <div class="footer-brand-side">
+        <span class="brand-title">RED POR LA SUPERACIÓN DEL MODELO FORESTAL</span>
+        <p class="footer-tagline">
+          Articulación plurinacional de comunidades y cuencas por la restauración ecológica, la soberanía hídrica y la vida en el centro-sur de Chile.
+        </p>
+      </div>
+      <div class="footer-contact-side">
+        <div class="footer-email-badge">
+          <span>Contacto Territorial:</span>
+          <a href="mailto:superacionmodeloforestal@gmail.com">superacionmodeloforestal@gmail.com</a>
+        </div>
+        <div class="footer-meta-links">
+          <span>© 2026 Red por la Superación del Modelo Forestal · Licencia CC-BY-SA 4.0</span>
+          <a href="admin/index.html" class="footer-admin-link">🔐 Acceso Admin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="js/main.js"></script>
+<script src="js/blog.js"></script>
+<script src="js/bot-juridico.js"></script>
+
+</body>
+</html>

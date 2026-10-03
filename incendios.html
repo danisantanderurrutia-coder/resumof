@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Incendios Forestales y Monocultivo | Red por la Superación del Modelo Forestal</title>
+<meta name="description" content="Análisis territorial de los megaincendios en el centro-sur de Chile: continuidad de combustible, sequedad de cuencas y la propuesta de ley de 1.000 metros de cortafuegos.">
+
+<!-- Tipografías de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<!-- Favicon Oficial -->
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<!-- Estilos Unificados -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Cabecera Global -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand-logo" aria-label="Inicio">
+      <div class="brand-crest" title="Red por la Superación del Modelo Forestal">
+        <img src="img/logo-resumof.png" alt="Logo Red por la Superación del Modelo Forestal" width="56" height="56" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <span class="brand-title-main">RED POR LA SUPERACIÓN</span>
+          <span class="brand-title-sub">DEL MODELO FORESTAL</span>
+        </div>
+        <span class="brand-tagline">Articulación Socioambiental · Centro-Sur</span>
+      </div>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <div class="nav-links-track">
+        <a href="diagnostico.html" class="nav-link">Diagnóstico</a>
+        <a href="mapa-conflictos.html" class="nav-link">Mapa de Conflictos</a>
+        <a href="incendios.html" class="nav-link active-page">Incendios</a>
+        <a href="la-red.html" class="nav-link">La Red & Propuestas</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="biblioteca.html" class="nav-link">Biblioteca</a>
+      </div>
+    </nav>
+
+    <div class="header-cta-group">
+      <!-- Sintonizador de Radio y Podcast en el Menú -->
+      <div class="header-audio-widget" id="headerAudioWidget" title="Sintonizador de Radio Comunitaria y Podcasts">
+        <div class="audio-widget-select-wrap">
+          <span class="audio-widget-icon">📻</span>
+          <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar radio o podcast">
+            <optgroup label="📻 Radios Comunitarias de Chile">
+              <option value="kurruf" data-type="radio" data-src="https://radio.latina.red/radiokurruf.mp3">Radio Kurruf (Biobío / 107.5 FM)</option>
+              <option value="jgm" data-type="radio" data-src="https://sonic-us.arkeo.cl/8186/stream">Radio JGM (Nacional Comunitaria)</option>
+              <option value="ritoque" data-type="radio" data-src="https://archi-us.digitalproserver.com/ritoquefm_aac">Radio Ritoque (Valparaíso)</option>
+            </optgroup>
+            <optgroup label="🎙️ Podcasts por los Bosques">
+              <option value="pod1" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/santa-juana-renacer-bosque.mp3">Ep. 01: Santa Juana tras el fuego</option>
+              <option value="pod2" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/plantaciones-no-son-bosque.mp3">Ep. 02: Las plantaciones no son bosque</option>
+              <option value="pod3" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/cuenca-contulmo-sequia.mp3">Ep. 03: Contulmo y la sed campesina</option>
+              <option value="pod4" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/mujeres-lafkenche-itrofill.mp3">Ep. 04: Mujeres lafkenche & Itrofill Mogen</option>
+            </optgroup>
+          </select>
+        </div>
+        <button id="headerAudioPlayBtn" class="header-audio-btn" aria-label="Reproducir o pausar" title="Reproducir señal o podcast">
+          <span id="headerAudioPlayIcon">▶</span>
+        </button>
+        <div class="audio-wave-bars" id="headerAudioBars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <a href="index.html#unete" class="btn btn-primary header-cta-btn">
+        <span>Únete a la Red</span>
+        <span class="cta-counter-chip">14.8k</span>
+      </a>
+      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú">
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú Móvil -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-tag">NAVEGACIÓN TERRITORIAL</span>
+      <button class="mobile-drawer-close" id="mobileDrawerClose">✕</button>
+    </div>
+    <div class="mobile-nav-group">
+      <a href="diagnostico.html" class="mobile-nav-link"><span>📊</span> Diagnóstico</a>
+      <a href="mapa-conflictos.html" class="mobile-nav-link"><span>🗺️</span> Mapa de Conflictos</a>
+      <a href="incendios.html" class="mobile-nav-link active"><span>🔥</span> Incendios Forestales</a>
+      <a href="la-red.html" class="mobile-nav-link"><span>✊</span> La Red & 5 Propuestas de Ley</a>
+      <a href="blog.html" class="mobile-nav-link"><span>📰</span> Blog & Noticias</a>
+      <a href="biblioteca.html" class="mobile-nav-link"><span>📚</span> Biblioteca</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Subpage Hero con Banner Unsplash -->
+  <section class="subpage-hero hero-incendios" style="border-bottom:2px solid var(--terracota-fuego);">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Inicio</a> <span>/</span> <span>Especial Incendios</span>
+      </div>
+      <span class="fire-badge">🔥 ANÁLISIS ECOLÓGICO & PROPUESTA DE LEY</span>
+      <h1>Incendios Forestales y Monocultivo:<br>La Trampa del Fuego Continuo</h1>
+      <p class="lead">
+        El centro-sur de Chile no se quema por azar climático: se quema por un ordenamiento territorial que plantó millones de hectáreas de combustible homogéneo pegado a las casas.
+      </p>
+    </div>
+  </section>
+
+  <!-- Cifras de la Emergencia Ígnea -->
+  <section class="section" style="padding-top:40px;background:#FFF;">
+    <div class="wrap">
+      <div class="fire-stats-strip">
+        <div class="fire-stat-box">
+          <div class="num">92.4%</div>
+          <div class="desc">de la superficie quemada en los megaincendios de 2023 correspondió a plantaciones de pino y eucalipto.</div>
+        </div>
+        <div class="fire-stat-box">
+          <div class="num">800 m</div>
+          <div class="desc">Distancia promedio a la que vuelan las pavesas ardientes de pino impulsadas por viento puelche superando cortafuegos.</div>
+        </div>
+        <div class="fire-stat-box">
+          <div class="num">70%</div>
+          <div class="desc">del territorio comunal de Santa Juana arrasado en menos de 48 horas en la tormenta de fuego de febrero de 2023.</div>
+        </div>
+        <div class="fire-stat-box">
+          <div class="num">1.000 m</div>
+          <div class="desc">Franja mínima libre de plantaciones exóticas que la Red exige por ley en torno a zonas habitadas.</div>
+        </div>
+      </div>
+
+      <!-- Sección 1: La Ciencia del Fuego y el Combustible Continuo -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:50px;align-items:center;">
+        <div>
+          <span class="mono-badge">Biomasa & Combustibilidad</span>
+          <h2>¿Por Qué las Plantaciones Generan Tormentas de Fuego?</h2>
+          <p style="margin:16px 0;font-size:1.02rem;">
+            A diferencia de los bosques nativos diversos y de varios estratos verticales, los monocultivos de <em>Pinus radiata</em> y <em>Eucalyptus globulus</em> son plantados en densidades extremas (1.100 a 1.600 árboles por hectárea) con copas continuas que forman un techo de fuego ininterrumpido.
+          </p>
+          <p style="margin-bottom:16px;font-size:1.02rem;">
+            Ambas especies exóticas poseen una altísima carga de aceites esenciales terpénicos y resinas que desprenden gases inflamables a temperaturas superiores a los 30 °C, provocando que el fuego salte de la superficie a las copas (fuego de copa) a velocidades que sobrepasan la capacidad de cualquier brigada terrestre.
+          </p>
+          <div style="background:var(--blanco-pergamino);padding:18px;border-radius:var(--radio-md);border-left:4px solid var(--terracota-fuego);">
+            <strong style="color:var(--terracota-oscura);">El Círculo Vicioso de la Sequedad:</strong>
+            <p style="font-size:0.9rem;margin-top:6px;">
+              El eucalipto extrae el agua de las napas y del primer metro de suelo, eliminando la humedad ambiental de la cuenca. Cuando llega el verano, el suelo se encuentra en punto de sequedad extrema, convirtiendo al sotobosque en yesca pura.
+            </p>
+          </div>
+        </div>
+
+        <div style="background:var(--bosque-nocturno);color:var(--blanco-hueso);padding:30px;border-radius:var(--radio-lg);border:1px solid rgba(214,64,32,0.4);">
+          <h3 style="color:#F4D389;font-size:1.4rem;margin-bottom:16px;">Comparativa de Comportamiento del Fuego</h3>
+          <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.2);text-align:left;">
+                <th style="padding:8px 4px;color:#A4B8AD;">Factor</th>
+                <th style="padding:8px 4px;color:#F48989;">Monocultivo Pino/Eucalipto</th>
+                <th style="padding:8px 4px;color:#89F4B3;">Bosque Nativo Templado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                <td style="padding:10px 4px;"><strong>Humedad de Hoja</strong></td>
+                <td style="padding:10px 4px;color:#FFA8A8;">Baja (&lt; 65% en verano)</td>
+                <td style="padding:10px 4px;color:#B2FFCD;">Alta (&gt; 110% en sotobosque)</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                <td style="padding:10px 4px;"><strong>Estructura</strong></td>
+                <td style="padding:10px 4px;color:#FFA8A8;">Dosel continuo monótono</td>
+                <td style="padding:10px 4px;color:#B2FFCD;">Multi-estrato con claros húmedos</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                <td style="padding:10px 4px;"><strong>Velocidad Avance</strong></td>
+                <td style="padding:10px 4px;color:#FFA8A8;">Hasta 12 km/h con viento</td>
+                <td style="padding:10px 4px;color:#B2FFCD;">0.5 a 1.5 km/h (efecto freno)</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 4px;"><strong>Generación Pavesas</strong></td>
+                <td style="padding:10px 4px;color:#FFA8A8;">Masiva (conos ardiendo)</td>
+                <td style="padding:10px 4px;color:#B2FFCD;">Mínima o nula</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 2: Infografía de la Propuesta "1.000 Metros de Vida" -->
+  <section class="section" style="background:var(--blanco-pergamino);">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge badge-amber">Propuesta de Ley Ciudadana</span>
+          <h2>Iniciativa "1.000 Metros de Vida"</h2>
+        </div>
+        <p class="lead">
+          Frente a la ineficacia de los cortafuegos de 15 a 30 metros que actualmente exige la normativa, exigimos un cinturón de seguridad real para salvaguardar la vida campesina y urbana.
+        </p>
+      </div>
+
+      <div class="firebreak-infographic">
+        <h3 style="font-size:1.6rem;color:#F4D389;margin-bottom:12px;">Cinturón de Amortiguación Agroecológica Perimetral</h3>
+        <p style="color:#C6D4CC;max-width:75ch;font-size:0.98rem;">
+          La propuesta no busca dejar tierras estériles de tierra pelada, sino reconvertir el primer kilómetro perimetral en un mosaico productivo campesino resistente al fuego.
+        </p>
+
+        <div class="firebreak-visual">
+          <div class="firebreak-zone pueblo">
+            <span style="font-size:2rem;margin-bottom:8px;">🏘️</span>
+            <strong style="color:#F9F7F2;font-size:1.1rem;">Zona Urbana / Pueblo</strong>
+            <small style="color:#D2DDD7;margin-top:6px;">Viviendas, postas rurales, escuelas, comités APR.</small>
+          </div>
+
+          <div class="firebreak-zone buffer">
+            <span style="font-size:2rem;margin-bottom:8px;">🌾 🍎 💧</span>
+            <strong style="color:#F4D389;font-size:1.15rem;">FAJA PROTECTORA DE 1.000 METROS</strong>
+            <small style="color:#F9F7F2;margin-top:8px;line-height:1.4;">
+              • Agricultura campesina y chacras verdes<br>
+              • Viveros y bosque nativo higrófilo (canelos, arrayanes)<br>
+              • Huertos frutales y pastoreo limpio<br>
+              <strong>0% monocultivo de pino o eucalipto</strong>
+            </small>
+          </div>
+
+          <div class="firebreak-zone pino">
+            <span style="font-size:2rem;margin-bottom:8px;">🌲 🏭</span>
+            <strong style="color:#FFA8A8;font-size:1.1rem;">Zona Forestal Excluida</strong>
+            <small style="color:#E6DFD5;margin-top:6px;">Empresas obligadas a retirar plantaciones a más de 1 km.</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beneficios del Bosque Nativo como Cortafuego -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;margin-top:36px;">
+        <div class="diag-card" style="background:#FFF;">
+          <div class="diag-card-icon">🌱</div>
+          <h4>Humedad Permanente de Cuenca</h4>
+          <p>Las raíces profundas del bosque esclerófilo y templado esponjan el suelo, recargando los acuíferos subterráneos que mantienen el pasto y sotobosque verde durante todo el estío.</p>
+        </div>
+        <div class="diag-card" style="background:#FFF;">
+          <div class="diag-card-icon">🛡️</div>
+          <h4>Freno Mecánico al Avance Ígneo</h4>
+          <p>Hojas coriáceas de especies nativas (como boldo, peumo o litre) no poseen resinas explosivas y absorben calor antes de arder, disminuyendo la radiación térmica sobre las casas.</p>
+        </div>
+        <div class="diag-card" style="background:#FFF;">
+          <div class="diag-card-icon">🚜</div>
+          <h4>Recuperación de la Soberanía Alimentaria</h4>
+          <p>La franja de amortiguación devuelve las mejores tierras agrícolas a las comunidades para producción de hortalizas, legumbres de secano y viñas patrimoniales campesinas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 3: Cronología Histórica de Megaincendios -->
+  <section class="section" style="background:#FFF;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge">Memoria Territorial</span>
+          <h2>Cronología de las Tormentas de Fuego</h2>
+        </div>
+        <p class="lead">
+          La historia reciente demuestra que mientras no cambie el patrón de monocultivo contiguo, cada verano será una ruleta rusa para las poblaciones del sur.
+        </p>
+      </div>
+
+      <div class="fire-timeline">
+        <div class="fire-timeline-item">
+          <span style="font-family:'IBM Plex Mono',monospace;color:var(--terracota-fuego);font-weight:700;font-size:0.85rem;">ENERO - FEBRERO 2017 · TORMENTA DE FUEGO DEL MAULE</span>
+          <h3 style="margin:6px 0 10px;font-size:1.3rem;">Desastre de Las Máquinas y Destrucción Total de Santa Olga</h3>
+          <p style="font-size:0.95rem;color:#383F3B;line-height:1.55;">
+            Más de 570.000 hectáreas consumidas en pocos días. El pueblo maderero de Santa Olga fue completamente devorado por el fuego debido a que las plantaciones industriales colindaban directamente con las casas sin cortafuegos de seguridad.
+          </p>
+        </div>
+
+        <div class="fire-timeline-item">
+          <span style="font-family:'IBM Plex Mono',monospace;color:var(--terracota-fuego);font-weight:700;font-size:0.85rem;">FEBRERO 2023 · CRISIS BIRREGIONAL BIOBÍO & ARAUCANÍA</span>
+          <h3 style="margin:6px 0 10px;font-size:1.3rem;">Tragedia en Santa Juana, Purén, Lumaco y Tomé</h3>
+          <p style="font-size:0.95rem;color:#383F3B;line-height:1.55;">
+            26 personas fallecidas y miles de familias damnificadas. En Santa Juana, los focos se propagaron velozmente por paños de eucalipto seco, rodeando el radio urbano e incomunicando los puentes sobre el río Biobío.
+          </p>
+        </div>
+
+        <div class="fire-timeline-item">
+          <span style="font-family:'IBM Plex Mono',monospace;color:var(--terracota-fuego);font-weight:700;font-size:0.85rem;">2024 - 2026 · VIGILANCIA PERMANENTE & RESISTENCIA</span>
+          <h3 style="margin:6px 0 10px;font-size:1.3rem;">Articulación de Brigadas Comunitarias y Fiscalización de Predios</h3>
+          <p style="font-size:0.95rem;color:#383F3B;line-height:1.55;">
+            Las comunidades territoriales organizadas han tomado la iniciativa: catastran predios forestales sin fajas de seguridad, denuncian ante municipios y exigen la moratoria a la replantación de especies invasoras en zonas arrasadas.
+          </p>
+        </div>
+      </div>
+
+      <div style="background:var(--blanco-pergamino);border-radius:var(--radio-md);padding:24px;margin-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+        <div>
+          <h4 style="font-size:1.2rem;color:var(--bosque-profundo);margin-bottom:6px;">¿Conoces un predio forestal abandonado sin cortafuegos?</h4>
+          <p style="font-size:0.92rem;color:var(--gris-ceniza);margin:0;">Regístralo en el Mapa de Conflictos para visibilizar el riesgo y coordinar denuncias comunitarias.</p>
+        </div>
+        <a href="mapa-conflictos.html" class="btn btn-primary">
+          Ir al Mapa & Denunciar Predio Riesgoso →
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer Limpio y Minimalista -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-clean-wrap">
+      <div class="footer-brand-side">
+        <span class="brand-title">RED POR LA SUPERACIÓN DEL MODELO FORESTAL</span>
+        <p class="footer-tagline">
+          Articulación plurinacional de comunidades y cuencas por la restauración ecológica, la soberanía hídrica y la vida en el centro-sur de Chile.
+        </p>
+      </div>
+      <div class="footer-contact-side">
+        <div class="footer-email-badge">
+          <span>Contacto Territorial:</span>
+          <a href="mailto:superacionmodeloforestal@gmail.com">superacionmodeloforestal@gmail.com</a>
+        </div>
+        <div class="footer-meta-links">
+          <span>© 2026 Red por la Superación del Modelo Forestal · Licencia CC-BY-SA 4.0</span>
+          <a href="admin/index.html" class="footer-admin-link">🔐 Acceso Admin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/bot-juridico.js"></script>
+</body>
+</html>

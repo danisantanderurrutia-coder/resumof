@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca Documental y Medios | Red por la Superación del Modelo Forestal</title>
+<meta name="description" content="Informes técnicos, estudios hidrológicos, minutas jurídicas, podcast 'Voces de la Cuenca' y archivo audiovisual de la defensa territorial.">
+
+<!-- Tipografías de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<!-- Favicon Oficial -->
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<!-- Estilos Unificados -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Cabecera Global -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand-logo" aria-label="Inicio">
+      <div class="brand-crest" title="Red por la Superación del Modelo Forestal">
+        <img src="img/logo-resumof.png" alt="Logo Red por la Superación del Modelo Forestal" width="56" height="56" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <span class="brand-title-main">RED POR LA SUPERACIÓN</span>
+          <span class="brand-title-sub">DEL MODELO FORESTAL</span>
+        </div>
+        <span class="brand-tagline">Articulación Socioambiental · Centro-Sur</span>
+      </div>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <div class="nav-links-track">
+        <a href="diagnostico.html" class="nav-link">Diagnóstico</a>
+        <a href="mapa-conflictos.html" class="nav-link">Mapa de Conflictos</a>
+        <a href="incendios.html" class="nav-link">Incendios</a>
+        <a href="la-red.html" class="nav-link">La Red & Propuestas</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="biblioteca.html" class="nav-link active-page">Biblioteca</a>
+      </div>
+    </nav>
+
+    <div class="header-cta-group">
+      <!-- Selector y Reproductor Directo de Radio Comunitaria / Podcast -->
+      <div class="header-audio-widget" id="headerAudioWidget">
+        <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar Radio o Podcast">
+          <option value="kurruf">📻 Radio Kurruf (Wallmapu)</option>
+          <option value="jgm">📻 Radio JGM (Comunitaria)</option>
+          <option value="ritoque">📻 Radio Ritoque (Valparaíso)</option>
+          <option value="podcast1">🎙️ Podcast: Defensa Bosque Nativo</option>
+          <option value="podcast2">🎙️ Podcast: Megaincendios y Monocultivo</option>
+        </select>
+        <button id="headerAudioPlayBtn" class="header-audio-play-btn" title="Reproducir / Pausar" aria-label="Reproducir señal de audio">
+          <span class="audio-play-icon" id="headerAudioPlayIcon">▶</span>
+        </button>
+        <div class="audio-wave-anim" id="headerAudioWave" style="display:none;">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <a href="index.html#unete" class="btn btn-primary header-cta-btn">
+        <span>Únete a la Red</span>
+        <span class="cta-counter-chip">14.8k</span>
+      </a>
+      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú">
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú Móvil -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-tag">NAVEGACIÓN TERRITORIAL</span>
+      <button class="mobile-drawer-close" id="mobileDrawerClose">✕</button>
+    </div>
+    <div class="mobile-nav-group">
+      <a href="diagnostico.html" class="mobile-nav-link"><span>📊</span> Diagnóstico</a>
+      <a href="mapa-conflictos.html" class="mobile-nav-link"><span>🗺️</span> Mapa de Conflictos</a>
+      <a href="incendios.html" class="mobile-nav-link"><span>🔥</span> Incendios Forestales</a>
+      <a href="la-red.html" class="mobile-nav-link"><span>✊</span> La Red & 5 Propuestas de Ley</a>
+      <a href="blog.html" class="mobile-nav-link"><span>📰</span> Blog & Noticias</a>
+      <a href="biblioteca.html" class="mobile-nav-link active"><span>📚</span> Biblioteca</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Subpage Hero con Banner Unsplash -->
+  <section class="subpage-hero hero-biblioteca">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="index.html">Inicio</a> <span>/</span> <span>Biblioteca & Medios</span>
+      </div>
+      <span class="mono-badge">ARCHIVO TERRITORIAL ABIERTO</span>
+      <h1>Centro de Documentación y Medios</h1>
+      <p class="lead">
+        Informes científicos independientes, minutas parlamentarias, cartillas de viverización comunitaria y el archivo sonoro "Voces de la Cuenca".
+      </p>
+    </div>
+  </section>
+
+  <!-- Biblioteca de Documentos -->
+  <section class="section" id="biblioteca" style="background:var(--bosque-profundo);color:var(--blanco-hueso);padding-top:40px;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge badge-light">Documentos Técnicos</span>
+          <h2 style="color:var(--blanco-hueso);">Informes y Publicaciones</h2>
+        </div>
+        <p class="lead" style="color:#BDC9C2;">
+          Descarga gratuita de minutas, catastro de aguas y estudios de megaincendios para dirigentes sociales y estudiantes.
+        </p>
+      </div>
+
+      <!-- Barra de Filtros -->
+      <div class="bib-toolbar">
+        <input type="text" class="bib-search-input" id="bibSearchInput" placeholder="Buscar por título, autor o palabra clave...">
+        
+        <select class="bib-select" id="bibTopicSelect">
+          <option value="todos">Todos los Temas</option>
+          <option value="Agua">Crisis Hídrica & Cuencas</option>
+          <option value="Incendios">Megaincendios & Combustibles</option>
+          <option value="Leyes">Legislación & Decreto 701</option>
+          <option value="Restauración">Restauración de Bosque Nativo</option>
+          <option value="Pueblos">Derechos Mapuche & Campesinos</option>
+        </select>
+
+        <select class="bib-select" id="bibYearSelect">
+          <option value="todos">Todos los Años</option>
+          <option value="2026">2026</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
+
+      <!-- Grilla de Documentos -->
+      <div class="bib-grid" id="bibContainer">
+        <!-- Renderizado por js/biblioteca.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Radio Comunitaria y Podcast por la Defensa de los Bosques -->
+  <section class="section" id="multimedia" style="background:#F7F5EE;border-top:1px solid var(--borde-suave);border-bottom:1px solid var(--borde-suave);padding-top:40px;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge badge-amber">Transmisión & Memoria Oral Territorial</span>
+          <h2>Radio Comunitaria en Vivo y Podcasts de los Bosques</h2>
+        </div>
+        <p class="lead">
+          Conéctate en directo con las emisoras libres de Chile y escucha los testimonios, debates científicos y saberes ancestrales en defensa del bosque nativo y las aguas.
+        </p>
+      </div>
+
+      <!-- MÓDULO 1: RADIO COMUNITARIA EN VIVO DE CHILE -->
+      <div class="radio-live-card" style="margin-bottom:48px;">
+        <div class="radio-live-header">
+          <div class="radio-badge-group">
+            <span class="live-pulse-badge"><span class="pulse-dot"></span> EN VIVO DESDE CHILE</span>
+            <span class="mono-badge" style="background:rgba(255,255,255,0.15);color:#FFF;border:none;" id="stationDialBadge">WALLMAPU · 107.5 FM / SEÑAL ONLINE</span>
+          </div>
+          <div class="radio-stations-nav" role="tablist">
+            <button class="station-tab-btn active" data-station="kurruf" type="button">
+              📻 Radio Kurruf <span class="tab-reg">(Wallmapu/Sur)</span>
+            </button>
+            <button class="station-tab-btn" data-station="jgm" type="button">
+              📻 Radio JGM <span class="tab-reg">(Comunitaria Central)</span>
+            </button>
+            <button class="station-tab-btn" data-station="ritoque" type="button">
+              📻 Radio Ritoque <span class="tab-reg">(Valparaíso)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="radio-player-body">
+          <div class="radio-main-info">
+            <div class="radio-avatar-icon">📡</div>
+            <div style="flex:1;">
+              <span class="radio-sub-origin" id="stationOrigin">Región del Biobío y La Araucanía · Comunicación Popular y Autónoma</span>
+              <h3 class="radio-main-title" id="stationName">Radio Kurruf: Medios Libres y Defensa Territorial</h3>
+              <p class="radio-main-desc" id="stationDesc">
+                Emisora comunitaria que transmite desde el centro-sur y Wallmapu. Cobertura ininterrumpida de los conflictos por la defensa de los bosques, la crisis hídrica inducida por forestales y la autonomía de las comunidades.
+              </p>
+              <div class="radio-status-indicator">
+                <span class="status-dot-state" id="radioStatusDot"></span>
+                <span class="status-text-state" id="radioStatusText">Listo para sintonizar en vivo. Haz clic en 'Sintonizar Señal'.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="radio-controls-box">
+            <!-- Audio nativo oculto para streaming continuo -->
+            <audio id="liveRadioAudio" preload="none"></audio>
+
+            <button class="radio-big-play-btn" id="radioPlayBtn" aria-label="Sintonizar Radio en Vivo">
+              <span id="radioPlayIcon">▶</span>
+              <span id="radioBtnLabel">Sintonizar Señal</span>
+            </button>
+
+            <!-- Ecualizador en Vivo -->
+            <div class="radio-live-visualizer" id="radioVisualizer">
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+              <span class="eq-col"></span>
+            </div>
+
+            <!-- Control de Volumen -->
+            <div class="radio-volume-control">
+              <span class="vol-icon" id="volIcon">🔊</span>
+              <input type="range" id="radioVolSlider" min="0" max="1" step="0.05" value="0.8" aria-label="Volumen de radio">
+            </div>
+
+            <div class="radio-external-link">
+              <a href="https://radiokurruf.org" target="_blank" rel="noopener" id="stationWebLink" class="btn btn-outline-light" style="font-size:0.75rem;padding:6px 12px;">
+                Visitar Sitio Web Oficial ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MÓDULO 2: PODCAST POR LA DEFENSA DE LOS BOSQUES -->
+      <div class="multimedia-layout">
+        <div class="podcast-player-box" style="background:var(--bosque-profundo);color:var(--blanco-hueso);">
+          <!-- Elemento de audio para podcast -->
+          <audio id="podcastAudioElement" preload="metadata"></audio>
+
+          <div class="current-track-info">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+              <span class="current-track-tag">PODCAST · SERIE OFICIAL RE-SU-MO-F & ALIADOS</span>
+              <span class="mono-badge badge-amber" style="font-size:0.68rem;">ALIANZA CON AIFBN & OLCA</span>
+            </div>
+            <h3 class="current-track-title" id="playerEpTitle">Santa Juana después del fuego: el renacer del bosque nativo</h3>
+            <p class="current-track-desc" id="playerEpDesc">Conversación con dirigentas campesinas de comités de agua tras el incendio de 2023. Técnicas comunitarias de viverización y restauración.</p>
+          </div>
+
+          <!-- Waveform Visualizer -->
+          <div class="waveform-visualizer" id="waveform"></div>
+
+          <!-- Controles de Audio -->
+          <div class="audio-controls">
+            <button class="play-pause-btn" id="playPauseBtn" aria-label="Reproducir Episodio">
+              <span id="playIcon">▶</span>
+            </button>
+            <div class="progress-track-wrapper">
+              <div class="time-readout">
+                <span id="currentTime">00:00</span>
+                <span id="totalTime">28:45</span>
+              </div>
+              <div class="progress-bar-container" id="progressBar" title="Haz clic para adelantar o retroceder">
+                <div class="progress-bar-fill" id="progressFill" style="width:0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plataformas de Podcast Abiertas -->
+          <div class="podcast-platforms-row">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:#A1B0A8;">Escuchar y seguir en:</span>
+            <a href="https://open.spotify.com/search/bosque%20nativo%20chile" target="_blank" rel="noopener" class="platform-chip spotify-chip">
+              🟢 Spotify
+            </a>
+            <a href="https://www.ivoox.com/podcast-voces-del-bosque_sq_f1784918_1.html" target="_blank" rel="noopener" class="platform-chip ivoox-chip">
+              🟠 iVoox
+            </a>
+            <a href="https://radiokurruf.org/category/audios/" target="_blank" rel="noopener" class="platform-chip kurruf-chip">
+              📻 Radio Kurruf Audios
+            </a>
+            <a href="https://olca.cl" target="_blank" rel="noopener" class="platform-chip olca-chip">
+              🌿 Archivo OLCA
+            </a>
+          </div>
+
+          <!-- Lista de Episodios Disponibles -->
+          <div class="episodes-list" style="margin-top:20px;">
+            <div class="episode-item active" data-index="0">
+              <div>
+                <span class="ep-number">EP. 01</span>
+                <span class="ep-title">Santa Juana después del fuego: el renacer del bosque</span>
+              </div>
+              <span class="ep-duration">28:45</span>
+            </div>
+
+            <div class="episode-item" data-index="1">
+              <div>
+                <span class="ep-number">EP. 02</span>
+                <span class="ep-title">¿Por qué las plantaciones no son bosque? Claves con AIFBN</span>
+              </div>
+              <span class="ep-duration">34:10</span>
+            </div>
+
+            <div class="episode-item" data-index="2">
+              <div>
+                <span class="ep-number">EP. 03</span>
+                <span class="ep-title">La cuenca de Contulmo y la sed campesina frente al eucalipto</span>
+              </div>
+              <span class="ep-duration">22:15</span>
+            </div>
+
+            <div class="episode-item" data-index="3">
+              <div>
+                <span class="ep-number">EP. 04</span>
+                <span class="ep-title">Mujeres lafkenche y la defensa comunitaria del Itrofill Mogen</span>
+              </div>
+              <span class="ep-duration">31:00</span>
+            </div>
+
+            <div class="episode-item" data-index="4">
+              <div>
+                <span class="ep-number">EP. 05</span>
+                <span class="ep-title">Zonas de sacrificio forestal y celulosa: De Nacimiento a Valdivia</span>
+              </div>
+              <span class="ep-duration">26:30</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna de Cápsulas Audiovisuales Destacadas -->
+        <div class="videos-gallery">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+            <h4 style="font-size:1.15rem;margin:0;color:var(--bosque-profundo);">Archivo Audiovisual Destacado</h4>
+            <span class="mono-badge badge-amber">Resumen TV</span>
+          </div>
+
+          <div class="video-thumb-card" style="background:#FFF;border-color:var(--borde-suave);" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/A42dHCxuJ1w?autoplay=1', 'PLANTAR POBREZA, EL NEGOCIO FORESTAL EN CHILE - DOCUMENTAL', 'https://www.youtube.com/watch?v=A42dHCxuJ1w')">
+            <img class="video-thumb-img" src="https://i.ytimg.com/vi/A42dHCxuJ1w/hqdefault.jpg" alt="Documental Plantar Pobreza">
+            <div class="video-thumb-info">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--terracota-viva);font-weight:700;">DOCUMENTAL CENTRAL</span>
+              <h5 style="color:var(--bosque-profundo);">Plantar Pobreza: El Negocio Forestal en Chile</h5>
+              <span style="color:#59635D;font-size:0.78rem;">Investigación de Resumen TV · Click para reproducir ▶</span>
+            </div>
+          </div>
+
+          <div class="video-thumb-card" style="background:#FFF;border-color:var(--borde-suave);" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/1-kVhdavxDw?autoplay=1', 'Llamas del Despojo: Incendios del Negocio Forestal - Documental', 'https://www.youtube.com/watch?v=1-kVhdavxDw')">
+            <img class="video-thumb-img" src="https://i.ytimg.com/vi/1-kVhdavxDw/hqdefault.jpg" alt="Documental Llamas del Despojo">
+            <div class="video-thumb-info">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--terracota-viva);font-weight:700;">DOCUMENTAL MEGAINCENDIOS</span>
+              <h5 style="color:var(--bosque-profundo);">Llamas del Despojo: Incendios del Negocio Forestal</h5>
+              <span style="color:#59635D;font-size:0.78rem;">Investigación de Resumen TV · Click para reproducir ▶</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DEDICADA: ARCHIVO AUDIOVISUAL COMPLETO -->
+  <section class="section" id="archivo-audiovisual" style="background:var(--bosque-profundo);color:var(--blanco-hueso);border-top:1px solid rgba(255,255,255,0.1);">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="mono-badge badge-amber">Cine Documental & Memoria Territorial</span>
+          <h2 style="color:var(--blanco-hueso);">Archivo Audiovisual</h2>
+        </div>
+        <p class="lead" style="color:#BDC9C2;">
+          Obras audiovisuales e investigaciones periodísticas indispensables para comprender el despojo del agua, los megaincendios y la resistencia de las comunidades.
+        </p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));gap:28px;" id="audiovisualGrid">
+        
+        <!-- Documental 1: Plantar Pobreza -->
+        <article class="video-card-featured">
+          <div class="video-card-cover" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/A42dHCxuJ1w?autoplay=1', 'PLANTAR POBREZA, EL NEGOCIO FORESTAL EN CHILE - DOCUMENTAL', 'https://www.youtube.com/watch?v=A42dHCxuJ1w')">
+            <img src="https://i.ytimg.com/vi/A42dHCxuJ1w/hqdefault.jpg" alt="Documental Plantar Pobreza">
+            <div class="video-card-play-overlay">
+              <div class="play-circle-btn">▶</div>
+            </div>
+          </div>
+          <div class="video-card-content">
+            <div class="video-badge-row">
+              <span class="video-badge-source">RESUMEN TV · INVESTIGACIÓN CENTRAL</span>
+              <span class="mono-badge badge-amber">DOCUMENTAL</span>
+            </div>
+            <h3 class="video-card-title">PLANTAR POBREZA, EL NEGOCIO FORESTAL EN CHILE</h3>
+            <p class="video-card-desc">
+              Exhaustivo documental de investigación sobre los orígenes, financiamiento público vía Decreto Ley 701 y devastadoras consecuencias socioambientales del modelo forestal en el centro-sur de Chile.
+            </p>
+            <div class="video-card-footer">
+              <button type="button" class="btn btn-primary" style="font-size:0.84rem;padding:7px 16px;" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/A42dHCxuJ1w?autoplay=1', 'PLANTAR POBREZA, EL NEGOCIO FORESTAL EN CHILE - DOCUMENTAL', 'https://www.youtube.com/watch?v=A42dHCxuJ1w')">
+                Ver Documental ▶
+              </button>
+              <a href="https://www.youtube.com/watch?v=A42dHCxuJ1w" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light" style="font-size:0.8rem;padding:6px 12px;">
+                YouTube ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Documental 2: Llamas del Despojo -->
+        <article class="video-card-featured">
+          <div class="video-card-cover" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/1-kVhdavxDw?autoplay=1', 'Llamas del Despojo: Incendios del Negocio Forestal - Documental', 'https://www.youtube.com/watch?v=1-kVhdavxDw')">
+            <img src="https://i.ytimg.com/vi/1-kVhdavxDw/hqdefault.jpg" alt="Documental Llamas del Despojo">
+            <div class="video-card-play-overlay">
+              <div class="play-circle-btn">▶</div>
+            </div>
+          </div>
+          <div class="video-card-content">
+            <div class="video-badge-row">
+              <span class="video-badge-source">RESUMEN TV · MEMORIA & MEGAINCENDIOS</span>
+              <span class="mono-badge badge-amber">DOCUMENTAL</span>
+            </div>
+            <h3 class="video-card-title">Llamas del Despojo: Incendios del Negocio Forestal</h3>
+            <p class="video-card-desc">
+              Registro documental testimonial que analiza los factores estructurales detrás de los megaincendios que han arrasado con pueblos y cuencas en el Biobío, Ñuble y Maule, exponiendo la falta de regulación a las plantaciones continuas.
+            </p>
+            <div class="video-card-footer">
+              <button type="button" class="btn btn-primary" style="font-size:0.84rem;padding:7px 16px;" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/1-kVhdavxDw?autoplay=1', 'Llamas del Despojo: Incendios del Negocio Forestal - Documental', 'https://www.youtube.com/watch?v=1-kVhdavxDw')">
+                Ver Documental ▶
+              </button>
+              <a href="https://www.youtube.com/watch?v=1-kVhdavxDw" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light" style="font-size:0.8rem;padding:6px 12px;">
+                YouTube ↗
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Modal de Lectura de Documento -->
+<div class="modal-overlay" id="docReaderModal">
+  <div class="modal-card" style="max-width:680px;">
+    <button class="modal-close-btn" id="closeDocModalBtn" aria-label="Cerrar modal">×</button>
+    <span class="mono-badge badge-amber" id="docModalBadge">DOCUMENTO TÉCNICO</span>
+    <h3 id="docModalTitle" style="font-size:1.5rem;margin:10px 0 6px;color:var(--bosque-profundo);">Título del Documento</h3>
+    <div id="docModalMeta" style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--gris-ceniza);margin-bottom:18px;">
+      Autor / Año
+    </div>
+    <div id="docModalBody" style="font-size:0.95rem;color:#333;line-height:1.6;margin-bottom:24px;"></div>
+    <div style="display:flex;gap:12px;justify-content:flex-end;">
+      <button type="button" class="btn btn-outline-dark" onclick="closeDocModal()">Cerrar</button>
+      <a href="#" class="btn btn-primary" id="docModalDownloadBtn">⬇ Descargar PDF</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de Reproducción de Video -->
+<div class="modal-overlay" id="videoModal">
+  <div class="modal-card" style="max-width:860px;width:95%;padding:22px;background:#0A1713;border:1px solid rgba(249,247,242,0.18);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <h3 id="videoModalTitle" style="color:var(--blanco-hueso);font-size:1.15rem;margin:0;">Reproduciendo Video</h3>
+      <button class="modal-close-btn" id="closeVideoModalBtn" aria-label="Cerrar video" style="color:#FFF;background:none;border:none;font-size:1.8rem;cursor:pointer;">×</button>
+    </div>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:6px;background:#000;">
+      <iframe id="videoIframe" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:#A9B9B0;">Producción y Difusión: Resumen TV</span>
+      <a id="videoDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light" style="font-size:0.8rem;padding:6px 14px;">
+        Ver en YouTube Oficial ↗
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer Limpio y Minimalista -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-clean-wrap">
+      <div class="footer-brand-side">
+        <span class="brand-title">RED POR LA SUPERACIÓN DEL MODELO FORESTAL</span>
+        <p class="footer-tagline">
+          Articulación plurinacional de comunidades y cuencas por la restauración ecológica, la soberanía hídrica y la vida en el centro-sur de Chile.
+        </p>
+      </div>
+      <div class="footer-contact-side">
+        <div class="footer-email-badge">
+          <span>Contacto Territorial:</span>
+          <a href="mailto:superacionmodeloforestal@gmail.com">superacionmodeloforestal@gmail.com</a>
+        </div>
+        <div class="footer-meta-links">
+          <span>© 2026 Red por la Superación del Modelo Forestal · Licencia CC-BY-SA 4.0</span>
+          <a href="admin/index.html" class="footer-admin-link">🔐 Acceso Admin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/biblioteca.js"></script>
+<script src="js/bot-juridico.js"></script>
+</body>
+</html>

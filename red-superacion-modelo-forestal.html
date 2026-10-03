@@ -1,0 +1,4441 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red por la Superación del Modelo Forestal | Centro-Sur de Chile</title>
+<meta name="description" content="Articulación socioambiental de los territorios del centro-sur de Chile por la restauración ecológica, la soberanía hídrica y la vida frente al monocultivo forestal.">
+
+<!-- Tipografías Premium de Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+<!-- Favicon Oficial -->
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<style>
+/* ==========================================================================
+   VARIABLES Y SISTEMA DE DISEÑO: BOSQUE AUSTRAL & TIERRA VIVA
+   ========================================================================== */
+:root {
+  --bosque-nocturno: #0A1612;
+  --bosque-profundo: #11261F;
+  --verde-nativo: #1E3F32;
+  --verde-musgo: #2F5946;
+  --verde-brote: #4E8262;
+  --verde-esclerofilo: #7D9F71;
+  --terracota-viva: #C24B2A;
+  --terracota-fuego: #D64020;
+  --terracota-oscura: #872E16;
+  --ambar-tierra: #DDA136;
+  --ambar-suave: #F4D389;
+  --azul-cuenca: #2B6979;
+  --azul-glaciar: #4F8C9E;
+  --carbon-puro: #161917;
+  --carbon-medio: #2A2F2C;
+  --gris-ceniza: #565C58;
+  --gris-suave: #8D948F;
+  --blanco-hueso: #F9F7F2;
+  --blanco-pergamino: #EFECE4;
+  --borde-suave: rgba(22, 25, 23, 0.12);
+  --borde-luz: rgba(249, 247, 242, 0.18);
+  --sombra-card: 0 14px 34px -8px rgba(10, 22, 18, 0.09);
+  --sombra-hover: 0 22px 42px -10px rgba(10, 22, 18, 0.18);
+  --radio-sm: 4px;
+  --radio-md: 8px;
+  --radio-lg: 16px;
+  --trans-suave: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--blanco-hueso);
+  color: var(--carbon-puro);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: 'Archivo', sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--bosque-profundo);
+}
+
+.font-accent {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+p {
+  color: #383F3B;
+  font-size: 1.02rem;
+  max-width: 68ch;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.wrap {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ==========================================================================
+   COMPONENTES BASE Y BOTONES
+   ========================================================================== */
+.mono-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: var(--radio-sm);
+  background: rgba(194, 75, 42, 0.1);
+  color: var(--terracota-viva);
+  border: 1px solid rgba(194, 75, 42, 0.3);
+  margin-bottom: 18px;
+}
+
+.mono-badge.badge-green {
+  background: rgba(47, 89, 70, 0.12);
+  color: var(--verde-musgo);
+  border-color: rgba(47, 89, 70, 0.3);
+}
+
+.mono-badge.badge-amber {
+  background: rgba(221, 161, 54, 0.15);
+  color: #9C6C16;
+  border-color: rgba(221, 161, 54, 0.4);
+}
+
+.mono-badge.badge-light {
+  background: rgba(249, 247, 242, 0.12);
+  color: var(--ambar-suave);
+  border-color: rgba(249, 247, 242, 0.25);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--radio-sm);
+  transition: var(--trans-suave);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--terracota-viva);
+  color: #FFF;
+  border: 2px solid var(--terracota-viva);
+  box-shadow: 0 4px 18px rgba(194, 75, 42, 0.35);
+}
+.btn-primary:hover {
+  background: var(--terracota-fuego);
+  border-color: var(--terracota-fuego);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(194, 75, 42, 0.45);
+}
+
+.btn-forest {
+  background: var(--bosque-profundo);
+  color: var(--blanco-hueso);
+  border: 2px solid var(--bosque-profundo);
+}
+.btn-forest:hover {
+  background: var(--verde-nativo);
+  border-color: var(--verde-nativo);
+  transform: translateY(-2px);
+}
+
+.btn-ghost-light {
+  background: rgba(249, 247, 242, 0.08);
+  color: var(--blanco-hueso);
+  border: 1.5px solid rgba(249, 247, 242, 0.4);
+  backdrop-filter: blur(8px);
+}
+.btn-ghost-light:hover {
+  background: var(--blanco-hueso);
+  color: var(--bosque-profundo);
+  border-color: var(--blanco-hueso);
+  transform: translateY(-2px);
+}
+
+.btn-outline-dark {
+  background: transparent;
+  color: var(--bosque-profundo);
+  border: 2px solid var(--bosque-profundo);
+}
+.btn-outline-dark:hover {
+  background: var(--bosque-profundo);
+  color: var(--blanco-hueso);
+}
+
+.section {
+  padding: 108px 0;
+  position: relative;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 36px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.section-head h2 {
+  font-size: clamp(2.1rem, 3.8vw, 3.2rem);
+  font-weight: 900;
+  max-width: 18ch;
+}
+
+.section-head .lead {
+  font-size: 1.1rem;
+  color: var(--gris-ceniza);
+  max-width: 44ch;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   CABECERA NAVEGACIÓN (STICKY BLUR)
+   ========================================================================== */
+/* ==========================================================================
+   CABECERA NAVEGACIÓN: STATUS BAR TERRITORIAL & HEADER ARQUITECTÓNICO
+   ========================================================================== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1200;
+  background: rgba(249, 247, 242, 0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--borde-suave);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+header.scrolled {
+  background: rgba(249, 247, 242, 0.98);
+  box-shadow: 0 10px 28px -6px rgba(10, 22, 18, 0.08);
+}
+
+/* 1. Barra Superior de Monitoreo Territorial en Tiempo Real */
+.top-status-bar {
+  background: var(--bosque-profundo);
+  border-bottom: 1px solid rgba(249, 247, 242, 0.08);
+  color: var(--blanco-pergamino);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+header.scrolled .top-status-bar {
+  height: 0;
+  opacity: 0;
+  border-bottom-color: transparent;
+}
+
+.top-status-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 28px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-label {
+  color: var(--ambar-suave);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.status-divider {
+  color: rgba(249, 247, 242, 0.25);
+}
+
+.status-detail {
+  color: #C2CBC6;
+}
+
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.status-petition-badge {
+  color: var(--ambar-suave);
+  font-weight: 600;
+}
+
+.status-cta-link {
+  color: var(--blanco-hueso);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: var(--trans-suave);
+}
+.status-cta-link:hover {
+  color: var(--terracota-viva);
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4E8262;
+  box-shadow: 0 0 0 0 rgba(78, 130, 98, 0.7);
+  animation: pulseGreen 2s infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.pulse-dot-amber {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ambar-tierra);
+  box-shadow: 0 0 0 0 rgba(221, 161, 54, 0.7);
+  animation: pulseAmber 2s infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(78, 130, 98, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(78, 130, 98, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(78, 130, 98, 0); }
+}
+
+@keyframes pulseAmber {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(221, 161, 54, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(221, 161, 54, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(221, 161, 54, 0); }
+}
+
+/* 2. Barra Principal del Header - Distribución Tripartita */
+.header-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 28px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: min-height 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header.scrolled .header-container {
+  min-height: 68px;
+}
+
+/* Identidad Gráfica y Medallón de Bosque Nativo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  flex: 0 0 auto;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.brand-logo:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.brand-crest {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.brand-logo:hover .brand-crest {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.brand-logo-img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-title-row {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand-title-main {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  color: var(--bosque-profundo);
+  white-space: nowrap;
+}
+
+.brand-title-sub {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.86rem;
+  letter-spacing: -0.01em;
+  color: var(--verde-musgo);
+  white-space: nowrap;
+}
+
+.brand-tagline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: var(--terracota-viva);
+  text-transform: uppercase;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* 3. Navegación Desktop Arquitectónica: Alineada y Centrada */
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  margin: 0 auto;
+}
+
+.nav-links-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-left: none;
+  padding-left: 0;
+}
+
+.nav-link {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--carbon-medio);
+  padding: 8px 12px;
+  border-radius: var(--radio-sm);
+  transition: var(--trans-suave);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-link:hover {
+  color: var(--terracota-viva);
+  background: rgba(194, 75, 42, 0.06);
+}
+
+.nav-link.active {
+  color: var(--bosque-profundo);
+  background: rgba(17, 38, 31, 0.08);
+  font-weight: 700;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 10px;
+  right: 10px;
+  height: 2.5px;
+  background: var(--terracota-viva);
+  border-radius: 2px;
+}
+
+/* Dropdown Biblioteca & Medios */
+.nav-dropdown-wrapper {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  cursor: pointer;
+}
+
+.dropdown-chevron {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--gris-ceniza);
+}
+
+.nav-dropdown-wrapper:hover .dropdown-chevron,
+.nav-dropdown-wrapper:focus-within .dropdown-chevron,
+.nav-dropdown-wrapper.open .dropdown-chevron {
+  transform: rotate(180deg);
+  color: var(--terracota-viva);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 290px;
+  background: var(--blanco-hueso);
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-md);
+  box-shadow: 0 18px 36px -6px rgba(10, 22, 18, 0.16);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1300;
+  backdrop-filter: blur(12px);
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown-menu,
+.nav-dropdown-wrapper:focus-within .nav-dropdown-menu,
+.nav-dropdown-wrapper.open .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radio-sm);
+  transition: var(--trans-suave);
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background: rgba(17, 38, 31, 0.06);
+}
+
+.dropdown-item-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.dropdown-item-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-item-text strong {
+  font-size: 0.84rem;
+  color: var(--bosque-profundo);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.dropdown-item-text small {
+  font-size: 0.72rem;
+  color: var(--gris-ceniza);
+  margin-top: 2px;
+  line-height: 1.25;
+}
+
+/* 4. Grupo CTA y Botón Móvil: Aparte a la Derecha */
+.header-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.header-cta-btn {
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--terracota-viva);
+  color: var(--blanco-hueso);
+  border-radius: var(--radio-sm);
+  box-shadow: 0 4px 14px rgba(194, 75, 42, 0.28);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.header-cta-btn:hover {
+  background: var(--terracota-fuego);
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(194, 75, 42, 0.38);
+}
+
+.cta-counter-chip {
+  background: rgba(255, 255, 255, 0.22);
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-sm);
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  transition: var(--trans-suave);
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(17, 38, 31, 0.06);
+  border-color: var(--bosque-profundo);
+}
+
+.menu-icon-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--bosque-profundo);
+  border-radius: 2px;
+  transition: var(--trans-suave);
+}
+
+.mobile-menu-btn.open .menu-icon-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-btn.open .menu-icon-bar:nth-child(2) {
+  opacity: 0;
+}
+.mobile-menu-btn.open .menu-icon-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* 5. Menú Móvil Drawer Arquitectónico */
+.mobile-nav-drawer {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(249, 247, 242, 0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--borde-suave);
+  padding: 24px;
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+  z-index: 1199;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  animation: drawerFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header.scrolled .mobile-nav-drawer {
+  top: 60px;
+}
+
+@keyframes drawerFadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mobile-nav-drawer.open {
+  display: flex;
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--borde-suave);
+}
+
+.mobile-drawer-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--terracota-viva);
+}
+
+.mobile-drawer-close {
+  font-size: 1.2rem;
+  color: var(--bosque-profundo);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.mobile-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mobile-group-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gris-ceniza);
+  margin-bottom: 4px;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--bosque-profundo);
+  border-radius: var(--radio-sm);
+  text-decoration: none;
+  transition: var(--trans-suave);
+  background: rgba(17, 38, 31, 0.03);
+}
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  background: rgba(194, 75, 42, 0.1);
+  color: var(--terracota-viva);
+}
+
+.mobile-drawer-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--borde-suave);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-drawer-disclaimer {
+  font-size: 0.72rem;
+  color: var(--gris-ceniza);
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ==========================================================================
+   HERO TERRITORIAL
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 90px 0 64px;
+  color: var(--blanco-hueso);
+  background-color: var(--bosque-nocturno);
+  background-image: 
+    linear-gradient(180deg, rgba(10, 22, 18, 0.45) 0%, rgba(10, 22, 18, 0.82) 60%, var(--bosque-nocturno) 100%),
+    url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=2200&q=85');
+  background-size: cover;
+  background-position: center 30%;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.hero-overlay-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(244, 211, 137, 0.06) 1px, transparent 0);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 960px;
+}
+
+.hero-content h1 {
+  color: var(--blanco-hueso);
+  font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.hero-content h1 span {
+  color: var(--ambar-suave);
+  display: block;
+}
+
+.hero-description {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  color: #D6DCD8;
+  max-width: 62ch;
+  line-height: 1.55;
+  margin-bottom: 38px;
+  font-weight: 400;
+}
+
+.hero-actions-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+/* Selector Territorial de Regiones */
+.territorio-strip {
+  border-top: 1px solid rgba(249, 247, 242, 0.18);
+  padding-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.territorio-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ambar-suave);
+}
+
+.regions-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.region-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #C8D1CC;
+  background: rgba(249, 247, 242, 0.07);
+  border: 1px solid rgba(249, 247, 242, 0.18);
+  padding: 8px 16px;
+  border-radius: var(--radio-sm);
+  transition: var(--trans-suave);
+}
+
+.region-btn:hover, .region-btn.active {
+  color: var(--blanco-hueso);
+  background: var(--terracota-viva);
+  border-color: var(--terracota-viva);
+}
+
+.region-info-toast {
+  margin-top: 8px;
+  background: rgba(17, 38, 31, 0.85);
+  border: 1px solid rgba(221, 161, 54, 0.35);
+  border-radius: var(--radio-sm);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.88rem;
+  color: #E2E8E4;
+  backdrop-filter: blur(10px);
+}
+
+/* ==========================================================================
+   OBSERVATORIO EN CIFRAS Y DIAGNÓSTICO ECOLÓGICO
+   ========================================================================== */
+#diagnostico {
+  background: var(--carbon-puro);
+  color: var(--blanco-hueso);
+  padding: 110px 0;
+  border-bottom: 1px solid rgba(249, 247, 242, 0.08);
+}
+
+#diagnostico h2 {
+  color: var(--blanco-hueso);
+}
+
+.stats-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 64px;
+}
+
+.stat-box {
+  background: var(--carbon-medio);
+  border: 1px solid rgba(249, 247, 242, 0.1);
+  border-radius: var(--radio-md);
+  padding: 32px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--trans-suave);
+}
+
+.stat-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--ambar-tierra);
+}
+
+.stat-box:nth-child(2)::before { background: var(--azul-glaciar); }
+.stat-box:nth-child(3)::before { background: var(--terracota-viva); }
+.stat-box:nth-child(4)::before { background: var(--verde-esclerofilo); }
+
+.stat-box:hover {
+  transform: translateY(-4px);
+  border-color: rgba(249, 247, 242, 0.25);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.3);
+}
+
+.stat-number {
+  font-family: 'Archivo', sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--ambar-suave);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.stat-desc {
+  font-size: 0.94rem;
+  color: #D3DAD5;
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+
+.stat-source {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: #8C9690;
+  border-top: 1px solid rgba(249, 247, 242, 0.08);
+  padding-top: 10px;
+  display: block;
+}
+
+/* ==========================================================================
+   COMPARADOR INTERACTIVO SPLIT-SLIDER (MONOCULTIVO VS BOSQUE NATIVO)
+   ========================================================================== */
+.comparator-wrapper {
+  margin: 50px 0;
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  border: 1px solid rgba(249, 247, 242, 0.15);
+  background: var(--carbon-medio);
+}
+
+.comparator-header {
+  padding: 22px 28px;
+  background: rgba(10, 22, 18, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 1px solid rgba(249, 247, 242, 0.1);
+}
+
+.comparator-title-area h3 {
+  color: var(--blanco-hueso);
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.comparator-title-area p {
+  color: #B4C0B9;
+  font-size: 0.88rem;
+  max-width: 60ch;
+}
+
+.split-slider-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  max-height: 560px;
+  user-select: none;
+  overflow: hidden;
+  cursor: ew-resize;
+}
+
+.slider-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.slider-img-after-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+  z-index: 2;
+  border-right: 3px solid #FFF;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+.slider-img-after-wrapper .slider-img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+.slider-badge {
+  position: absolute;
+  bottom: 24px;
+  z-index: 5;
+  padding: 8px 18px;
+  background: rgba(10, 22, 18, 0.88);
+  backdrop-filter: blur(8px);
+  color: var(--blanco-hueso);
+  border-radius: var(--radio-sm);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.slider-badge-before {
+  right: 24px;
+  border: 1px solid rgba(194, 75, 42, 0.5);
+}
+
+.slider-badge-after {
+  left: 24px;
+  border: 1px solid rgba(78, 130, 98, 0.5);
+}
+
+.slider-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #FFF;
+  color: var(--bosque-profundo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  pointer-events: none;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.comparator-metrics-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--carbon-puro);
+  border-top: 1px solid rgba(249, 247, 242, 0.1);
+}
+
+.metric-column {
+  padding: 24px 30px;
+}
+
+.metric-column:first-child {
+  border-right: 1px solid rgba(249, 247, 242, 0.1);
+}
+
+.metric-column h4 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-column.mono-impact h4 { color: var(--terracota-viva); }
+.metric-column.nativo-impact h4 { color: var(--verde-esclerofilo); }
+
+.metrics-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #C8D1CD;
+}
+
+.metrics-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(249, 247, 242, 0.1);
+  padding-bottom: 6px;
+}
+
+.metrics-list b {
+  color: var(--blanco-hueso);
+}
+
+/* ==========================================================================
+   EJES CRÍTICOS DEL CONFLICTO (DESPOJO, AGUA, INCENDIOS, SACRIFICIO)
+   ========================================================================== */
+.problema-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.problema-card {
+  background: rgba(249, 247, 242, 0.04);
+  border: 1px solid rgba(249, 247, 242, 0.12);
+  border-radius: var(--radio-md);
+  padding: 28px 22px;
+  transition: var(--trans-suave);
+}
+
+.problema-card:hover {
+  background: rgba(249, 247, 242, 0.08);
+  border-color: rgba(249, 247, 242, 0.28);
+  transform: translateY(-4px);
+}
+
+.problema-card .card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radio-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  background: rgba(249, 247, 242, 0.08);
+}
+
+.problema-card h4 {
+  color: var(--blanco-hueso);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+
+.problema-card p {
+  color: #B2BCB6;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   MAPA TERRITORIAL INTERACTIVO (LEAFLET AVANZADO)
+   ========================================================================== */
+#mapa {
+  background: var(--blanco-pergamino);
+  border-bottom: 1px solid var(--borde-suave);
+}
+
+.mapa-workspace {
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-card);
+  display: grid;
+  grid-template-columns: 340px 1fr;
+}
+
+.mapa-control-panel {
+  background: #FAF8F4;
+  border-right: 1px solid var(--borde-suave);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mapa-search-box {
+  position: relative;
+}
+
+.mapa-search-box input {
+  width: 100%;
+  padding: 12px 14px 12px 38px;
+  border: 1.5px solid var(--borde-suave);
+  border-radius: var(--radio-sm);
+  background: #FFF;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--trans-suave);
+}
+
+.mapa-search-box input:focus {
+  border-color: var(--bosque-profundo);
+  box-shadow: 0 0 0 3px rgba(17, 38, 31, 0.1);
+}
+
+.mapa-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gris-suave);
+  pointer-events: none;
+}
+
+.layers-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.layer-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radio-sm);
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  cursor: pointer;
+  transition: var(--trans-suave);
+  font-size: 0.9rem;
+  font-weight: 500;
+  user-select: none;
+}
+
+.layer-toggle:hover {
+  border-color: var(--carbon-puro);
+  transform: translateX(3px);
+}
+
+.layer-toggle input[type="checkbox"] {
+  accent-color: var(--bosque-profundo);
+  width: 17px;
+  height: 17px;
+}
+
+.layer-pin-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.map-stats-summary {
+  background: #EDEAE1;
+  border-radius: var(--radio-sm);
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  color: var(--carbon-medio);
+}
+
+.map-stats-summary strong {
+  color: var(--bosque-profundo);
+}
+
+.mapa-display-area {
+  position: relative;
+  min-height: 640px;
+  background: #DDD8CD;
+}
+
+#mapa-canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 640px;
+}
+
+/* Custom Leaflet Popups */
+.custom-leaflet-popup .leaflet-popup-content-wrapper {
+  background: var(--blanco-hueso);
+  color: var(--carbon-puro);
+  border-radius: var(--radio-md);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+  border: 1px solid var(--borde-suave);
+  padding: 0;
+  overflow: hidden;
+}
+
+.custom-leaflet-popup .leaflet-popup-content {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.popup-inner {
+  padding: 18px 20px;
+}
+
+.popup-top-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.popup-title {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 1.12rem;
+  margin-bottom: 6px;
+  color: var(--bosque-profundo);
+}
+
+.popup-meta {
+  font-size: 0.78rem;
+  color: var(--gris-ceniza);
+  margin-bottom: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.popup-desc {
+  font-size: 0.88rem;
+  color: #383F3B;
+  margin-bottom: 12px;
+}
+
+.popup-footer {
+  border-top: 1px solid var(--borde-suave);
+  padding-top: 10px;
+  font-size: 0.78rem;
+  color: var(--gris-ceniza);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   LA RED: QUIÉNES SOMOS, PRINCIPIOS Y ORGANIZACIONES
+   ========================================================================== */
+#la-red {
+  background: var(--blanco-hueso);
+  border-bottom: 1px solid var(--borde-suave);
+}
+
+.red-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.red-manifesto-box {
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-lg);
+  padding: 40px;
+  box-shadow: var(--sombra-card);
+}
+
+.red-manifesto-box p {
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+.principios-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.principio-card {
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-md);
+  padding: 22px 24px;
+  transition: var(--trans-suave);
+}
+
+.principio-card:hover {
+  border-color: var(--verde-nativo);
+  transform: translateX(4px);
+  box-shadow: var(--sombra-card);
+}
+
+.principio-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.principio-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--terracota-viva);
+  background: rgba(194, 75, 42, 0.1);
+  padding: 4px 8px;
+  border-radius: var(--radio-sm);
+}
+
+.principio-card h4 {
+  font-size: 1.15rem;
+  color: var(--bosque-profundo);
+}
+
+.principio-card p {
+  font-size: 0.92rem;
+  color: var(--gris-ceniza);
+}
+
+/* Directorio de Organizaciones */
+.orgs-directory {
+  margin-top: 64px;
+  border-top: 1px solid var(--borde-suave);
+  padding-top: 48px;
+}
+
+.orgs-directory h3 {
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+}
+
+.orgs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.org-card {
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: var(--trans-suave);
+}
+
+.org-card:hover {
+  border-color: var(--bosque-profundo);
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-card);
+}
+
+.org-card-region {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--terracota-viva);
+  font-weight: 600;
+}
+
+.org-card-name {
+  font-family: 'Archivo', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--bosque-profundo);
+}
+
+.org-card-desc {
+  font-size: 0.8rem;
+  color: var(--gris-ceniza);
+}
+
+/* ==========================================================================
+   ACCIONES Y PROPUESTAS POLÍTICAS (INCIDENCIA LEGISLATIVA)
+   ========================================================================== */
+#acciones {
+  background: #F4EFEB;
+  border-bottom: 1px solid var(--borde-suave);
+}
+
+.propuestas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 48px;
+}
+
+.propuesta-card {
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-lg);
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--sombra-card);
+  position: relative;
+  overflow: hidden;
+  transition: var(--trans-suave);
+}
+
+.propuesta-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-hover);
+  border-color: var(--terracota-viva);
+}
+
+.propuesta-card .prop-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--terracota-viva);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.propuesta-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 14px;
+}
+
+.propuesta-card p {
+  font-size: 0.94rem;
+  color: var(--gris-ceniza);
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+
+.propuesta-card .prop-footer a {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--terracota-viva);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.downloads-box {
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-md);
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.downloads-list {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.download-chip {
+  background: #FAF8F4;
+  border: 1px solid var(--borde-suave);
+  padding: 10px 18px;
+  border-radius: var(--radio-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--bosque-profundo);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--trans-suave);
+}
+
+.download-chip:hover {
+  background: var(--bosque-profundo);
+  color: #FFF;
+  border-color: var(--bosque-profundo);
+}
+
+/* ==========================================================================
+   BIBLIOTECA DOCUMENTAL Y CENTRO DE RECURSOS
+   ========================================================================== */
+#biblioteca {
+  background: var(--bosque-nocturno);
+  color: var(--blanco-hueso);
+}
+
+#biblioteca h2 {
+  color: var(--blanco-hueso);
+}
+
+.bib-toolbar {
+  background: rgba(249, 247, 242, 0.05);
+  border: 1px solid rgba(249, 247, 242, 0.12);
+  border-radius: var(--radio-md);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.bib-search-input {
+  flex: 1;
+  min-width: 260px;
+  background: rgba(249, 247, 242, 0.08);
+  border: 1px solid rgba(249, 247, 242, 0.2);
+  padding: 12px 16px;
+  border-radius: var(--radio-sm);
+  color: var(--blanco-hueso);
+  font-family: inherit;
+  font-size: 0.92rem;
+  outline: none;
+}
+
+.bib-search-input:focus {
+  border-color: var(--ambar-tierra);
+}
+
+.bib-select {
+  background: rgba(249, 247, 242, 0.08);
+  border: 1px solid rgba(249, 247, 242, 0.2);
+  padding: 12px 16px;
+  border-radius: var(--radio-sm);
+  color: var(--blanco-hueso);
+  font-family: inherit;
+  font-size: 0.88rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.bib-select option {
+  background: var(--bosque-profundo);
+  color: var(--blanco-hueso);
+}
+
+.bib-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.bib-card {
+  background: rgba(249, 247, 242, 0.04);
+  border: 1px solid rgba(249, 247, 242, 0.1);
+  border-radius: var(--radio-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--trans-suave);
+}
+
+.bib-card:hover {
+  background: rgba(249, 247, 242, 0.08);
+  border-color: var(--ambar-tierra);
+  transform: translateY(-4px);
+}
+
+.bib-card-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ambar-suave);
+}
+
+.bib-card h4 {
+  color: var(--blanco-hueso);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+
+.bib-card p {
+  color: #C0C8C3;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.bib-card-action {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--ambar-suave);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   CENTRO MULTIMEDIA: REPRODUCTOR DE PODCAST & VIDEOS
+   ========================================================================== */
+#multimedia {
+  background: var(--bosque-profundo);
+  color: var(--blanco-hueso);
+  padding: 100px 0;
+  border-top: 1px solid rgba(249, 247, 242, 0.08);
+}
+
+#multimedia h2 {
+  color: var(--blanco-hueso);
+}
+
+.multimedia-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Reproductor de Audio Funcional */
+.podcast-player-box {
+  background: rgba(249, 247, 242, 0.05);
+  border: 1px solid rgba(249, 247, 242, 0.15);
+  border-radius: var(--radio-lg);
+  padding: 36px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+
+.current-track-info {
+  margin-bottom: 24px;
+}
+
+.current-track-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--ambar-suave);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.current-track-title {
+  font-size: 1.4rem;
+  color: var(--blanco-hueso);
+  margin-bottom: 8px;
+}
+
+.current-track-desc {
+  font-size: 0.9rem;
+  color: #B9C5BE;
+}
+
+/* Visualizador de Onda Sonora (Waveform) */
+.waveform-visualizer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 48px;
+  margin-bottom: 24px;
+  padding: 0 8px;
+  background: rgba(10, 22, 18, 0.5);
+  border-radius: var(--radio-sm);
+}
+
+.wave-bar {
+  flex: 1;
+  background: rgba(221, 161, 54, 0.4);
+  height: 20%;
+  border-radius: 2px;
+  transition: height 0.1s ease;
+}
+
+.waveform-visualizer.playing .wave-bar {
+  animation: waveMotion 1.2s infinite ease-in-out alternate;
+}
+
+@keyframes waveMotion {
+  0% { height: 15%; background: rgba(221, 161, 54, 0.3); }
+  50% { height: 95%; background: var(--ambar-suave); }
+  100% { height: 35%; background: var(--terracota-viva); }
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.play-pause-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--terracota-viva);
+  color: #FFF;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(194, 75, 42, 0.4);
+  transition: var(--trans-suave);
+}
+
+.play-pause-btn:hover {
+  transform: scale(1.08);
+  background: var(--terracota-fuego);
+}
+
+.progress-track-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.time-readout {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: #A6B4AC;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: rgba(249, 247, 242, 0.15);
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-bar-fill {
+  width: 32%;
+  height: 100%;
+  background: var(--ambar-suave);
+  border-radius: 3px;
+  position: relative;
+}
+
+/* Lista de Episodios */
+.episodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+  border-top: 1px solid rgba(249, 247, 242, 0.12);
+  padding-top: 24px;
+}
+
+.episode-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: var(--radio-sm);
+  background: rgba(249, 247, 242, 0.03);
+  cursor: pointer;
+  transition: var(--trans-suave);
+}
+
+.episode-item:hover, .episode-item.active {
+  background: rgba(249, 247, 242, 0.1);
+  border-left: 3px solid var(--ambar-tierra);
+}
+
+.ep-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--ambar-suave);
+  margin-right: 12px;
+}
+
+.ep-title {
+  font-size: 0.92rem;
+  color: var(--blanco-hueso);
+  font-weight: 600;
+}
+
+.ep-duration {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: #929E97;
+}
+
+/* Documentales y Videos */
+.videos-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.video-thumb-card {
+  background: rgba(249, 247, 242, 0.04);
+  border: 1px solid rgba(249, 247, 242, 0.1);
+  border-radius: var(--radio-md);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  cursor: pointer;
+  transition: var(--trans-suave);
+}
+
+.video-thumb-card:hover {
+  border-color: var(--terracota-viva);
+  transform: translateX(4px);
+}
+
+.video-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 110px;
+}
+
+.video-thumb-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.video-thumb-info h5 {
+  font-size: 1rem;
+  color: var(--blanco-hueso);
+  margin-bottom: 4px;
+}
+
+.video-thumb-info span {
+  font-size: 0.78rem;
+  color: #A4B2AA;
+}
+
+/* ==========================================================================
+   ACTUALIDAD Y COMUNICADOS (BLOG TERRITORIAL)
+   ========================================================================== */
+#blog {
+  background: var(--blanco-hueso);
+  border-bottom: 1px solid var(--borde-suave);
+}
+
+.blog-filter-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.blog-pill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  color: var(--carbon-medio);
+  transition: var(--trans-suave);
+}
+
+.blog-pill.active, .blog-pill:hover {
+  background: var(--bosque-profundo);
+  color: var(--blanco-hueso);
+  border-color: var(--bosque-profundo);
+}
+
+.blog-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.post-card {
+  background: #FFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-card);
+  display: flex;
+  flex-direction: column;
+  transition: var(--trans-suave);
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-hover);
+  border-color: var(--terracota-viva);
+}
+
+.post-image-wrapper {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.post-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.post-card:hover .post-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.post-category-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(17, 38, 31, 0.88);
+  backdrop-filter: blur(8px);
+  color: var(--ambar-suave);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radio-sm);
+  text-transform: uppercase;
+}
+
+.post-body {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.post-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--gris-ceniza);
+  margin-bottom: 8px;
+}
+
+.post-body h3 {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.post-body p {
+  font-size: 0.92rem;
+  color: var(--gris-ceniza);
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.post-read-link {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--terracota-viva);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   PETITORIO CIUDADANO & FORMULARIO DE ADHESIÓN (ÚNETE)
+   ========================================================================== */
+#unete {
+  background: linear-gradient(135deg, var(--bosque-profundo), #17352B);
+  color: var(--blanco-hueso);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#unete h2 {
+  color: var(--blanco-hueso);
+}
+
+.unete-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+.petition-tracker-card {
+  background: rgba(249, 247, 242, 0.06);
+  border: 1px solid rgba(249, 247, 242, 0.16);
+  border-radius: var(--radio-lg);
+  padding: 38px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  margin-bottom: 36px;
+}
+
+.petition-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--ambar-suave);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.signatures-counter {
+  font-family: 'Archivo', sans-serif;
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: var(--blanco-hueso);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.signatures-counter span {
+  font-size: 1.5rem;
+  color: var(--ambar-tierra);
+  font-weight: 600;
+}
+
+.petition-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(249, 247, 242, 0.15);
+  border-radius: 4px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.petition-progress-fill {
+  width: 68%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--terracota-viva), var(--ambar-tierra));
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+.contacts-direct-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contacts-direct-list li {
+  border-bottom: 1px solid rgba(249, 247, 242, 0.12);
+  padding-bottom: 12px;
+}
+
+.contacts-direct-list b {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--ambar-suave);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* Formulario Moderno */
+.join-form-wrapper {
+  background: var(--blanco-hueso);
+  color: var(--carbon-puro);
+  border-radius: var(--radio-lg);
+  padding: 44px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+.form-tabs-type {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  background: #EBE7DE;
+  padding: 6px;
+  border-radius: var(--radio-sm);
+}
+
+.form-tab-btn {
+  flex: 1;
+  padding: 10px;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: var(--radio-sm);
+  color: var(--carbon-medio);
+  transition: var(--trans-suave);
+}
+
+.form-tab-btn.active {
+  background: #FFF;
+  color: var(--bosque-profundo);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--bosque-profundo);
+  margin-bottom: 6px;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--borde-suave);
+  border-radius: var(--radio-sm);
+  font-family: inherit;
+  font-size: 0.92rem;
+  background: #FFF;
+  outline: none;
+  transition: var(--trans-suave);
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--terracota-viva);
+  box-shadow: 0 0 0 3px rgba(194, 75, 42, 0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* ==========================================================================
+   PIE DE PÁGINA (FOOTER)
+   ========================================================================== */
+footer {
+  background: var(--bosque-nocturno);
+  color: #9EAEA5;
+  padding: 80px 0 32px;
+  border-top: 1px solid rgba(249, 247, 242, 0.08);
+}
+
+.footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+
+.footer-brand .brand-title {
+  color: var(--blanco-hueso);
+}
+
+.footer-tagline {
+  font-size: 1.05rem;
+  color: #D2DCD6;
+  margin: 18px 0;
+  max-width: 28ch;
+}
+
+.footer-col h4 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ambar-suave);
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: var(--blanco-hueso);
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(249, 247, 242, 0.1);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   MODALES (REGISTRO MAPA & LECTOR DE DOCUMENTOS)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 22, 18, 0.78);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 24px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-card {
+  background: var(--blanco-hueso);
+  border-radius: var(--radio-lg);
+  max-width: 560px;
+  width: 100%;
+  padding: 36px;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #EFECE4;
+  color: var(--carbon-puro);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--trans-suave);
+}
+
+.modal-close-btn:hover {
+  background: var(--terracota-viva);
+  color: #FFF;
+}
+
+/* ==========================================================================
+   RESPONSIVIDAD Y MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .stats-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .problema-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mapa-workspace {
+    grid-template-columns: 1fr;
+  }
+  .mapa-control-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--borde-suave);
+  }
+  .red-layout, .multimedia-layout, .unete-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .propuestas-grid, .bib-grid, .blog-posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .orgs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-top-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1080px) {
+  .nav-desktop, .header-cta-btn {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+  .status-detail, .status-right {
+    display: none;
+  }
+  .top-status-inner {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    height: 60px;
+    padding: 0 16px;
+  }
+  .top-status-bar {
+    font-size: 0.65rem;
+    height: 28px;
+  }
+  .brand-title-main {
+    font-size: 0.84rem;
+  }
+  .brand-title-sub {
+    font-size: 0.74rem;
+  }
+  .brand-tagline {
+    display: none;
+  }
+  .hero-section {
+    margin-top: 88px;
+  }
+  .mobile-nav-drawer {
+    top: 88px;
+    padding: 16px;
+  }
+  header.scrolled .mobile-nav-drawer {
+    top: 60px;
+  }
+  .stats-grid-container, .problema-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .propuestas-grid, .bib-grid, .blog-posts-grid, .orgs-grid {
+    grid-template-columns: 1fr;
+  }
+  .comparator-metrics-panel {
+    grid-template-columns: 1fr;
+  }
+  .metric-column:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(249, 247, 242, 0.1);
+  }
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+  }
+  .join-form-wrapper {
+    padding: 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================================================
+     CABECERA DE NAVEGACIÓN
+     ========================================================================== -->
+<header id="mainHeader">
+  <!-- 1. Barra Superior de Monitoreo Territorial en Tiempo Real -->
+  <div class="top-status-bar" id="topStatusBar">
+    <div class="top-status-inner">
+      <div class="status-left">
+        <span class="pulse-dot"></span>
+        <span class="status-label">MONITOREO TERRITORIAL 2026</span>
+        <span class="status-divider">|</span>
+        <span class="status-detail">Cuencas en Alerta: Maule · Ñuble · Biobío · Araucanía · Los Ríos · Los Lagos</span>
+      </div>
+      <div class="status-right">
+        <span class="status-petition-badge">✊ 14.825 firmas reunidas</span>
+        <a href="#unete" class="status-cta-link">Firmar Petitorio →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Barra Principal de Navegación -->
+  <div class="header-container">
+    <a href="#inicio" class="brand-logo" aria-label="Red por la Superación del Modelo Forestal - Inicio">
+      <!-- Medallón Autóctono de Bosque Nativo -->
+      <div class="brand-crest" title="Red por la Superación del Modelo Forestal">
+        <img src="img/logo-resumof.png" alt="Logo Red por la Superación del Modelo Forestal" width="56" height="56" class="brand-logo-img">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <span class="brand-title-main">RED POR LA SUPERACIÓN</span>
+          <span class="brand-title-sub">DEL MODELO FORESTAL</span>
+        </div>
+        <span class="brand-tagline">Articulación Socioambiental · Centro-Sur</span>
+      </div>
+    </a>
+
+    <!-- Navegación Arquitectónica Desktop -->
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <div class="nav-links-track">
+        <a href="#inicio" class="nav-link active">Inicio</a>
+        <a href="#diagnostico" class="nav-link">Diagnóstico</a>
+        <a href="#mapa" class="nav-link">Mapa Territorial</a>
+        <a href="#la-red" class="nav-link">La Red</a>
+        <a href="#acciones" class="nav-link">Propuestas</a>
+        <a href="#blog" class="nav-link">Blog</a>
+        <a href="#biblioteca" class="nav-link">Biblioteca</a>
+      </div>
+    </nav>
+
+    <!-- Grupo CTA de Alta Conversión & Menú Móvil -->
+    <div class="header-cta-group">
+      <a href="#unete" class="btn btn-primary header-cta-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        <span>Únete a la Red</span>
+        <span class="cta-counter-chip">14.8k</span>
+      </a>
+
+      <!-- Botón Hamburguesa Animado -->
+      <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+        <span class="menu-icon-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú Móvil Drawer Arquitectónico -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <span class="mobile-drawer-tag">NAVEGACIÓN TERRITORIAL</span>
+      <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Cerrar menú">✕</button>
+    </div>
+
+    <div class="mobile-nav-group">
+      <span class="mobile-group-title">Territorio & Evidencia</span>
+      <a href="#inicio" class="mobile-nav-link active">
+        <span>🌱</span> Inicio
+      </a>
+      <a href="#diagnostico" class="mobile-nav-link">
+        <span>📊</span> Diagnóstico & Cifras del Modelo
+      </a>
+      <a href="#mapa" class="mobile-nav-link">
+        <span>🗺️</span> Mapa Territorial Interactivo
+      </a>
+    </div>
+
+    <div class="mobile-nav-group">
+      <span class="mobile-group-title">Articulación & Acción</span>
+      <a href="#la-red" class="mobile-nav-link">
+        <span>✊</span> Quiénes Somos & 5 Principios
+      </a>
+      <a href="#acciones" class="mobile-nav-link">
+        <span>📜</span> Propuestas Políticas y Leyes
+      </a>
+    </div>
+
+    <div class="mobile-nav-group">
+      <span class="mobile-group-title">Centro de Documentación & Medios</span>
+      <a href="#biblioteca" class="mobile-nav-link">
+        <span>📚</span> Biblioteca de Documentos
+      </a>
+      <a href="#multimedia" class="mobile-nav-link">
+        <span>🎙️</span> Podcast "Voces de la Cuenca" & Videos
+      </a>
+      <a href="#blog" class="mobile-nav-link">
+        <span>📰</span> Noticias y Crónicas Territoriales
+      </a>
+    </div>
+
+    <div class="mobile-drawer-footer">
+      <a href="#unete" class="btn btn-primary" style="width:100%;display:flex;justify-content:center;align-items:center;gap:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        <span>Firmar Petitorio Nacional (14.825 firmas)</span>
+      </a>
+      <p class="mobile-drawer-disclaimer">
+        Coordinación comunitaria desde el Maule hasta Los Lagos
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- ==========================================================================
+     SECCIÓN HERO TERRITORIAL
+     ========================================================================== -->
+<section class="hero-section" id="inicio">
+  <div class="hero-overlay-grid"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="mono-badge badge-light">
+        <span class="pulse-dot-amber"></span>
+        Por la Soberanía Hídrica y la Restauración Ecológica
+      </span>
+      <h1>Superar el modelo forestal. <span>Recuperar el agua y la vida.</span></h1>
+      <p class="hero-description">
+        Frente a casi seis décadas de monocultivo industrial de pino y eucalipto, megaincendios recurrentes y desecamiento de cuencas, nos organizamos desde el Maule hasta Los Lagos por la restauración ecológica, la soberanía territorial y el buen vivir.
+      </p>
+
+      <div class="hero-actions-row">
+        <a href="#mapa" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+          Explorar Mapa de Conflictos
+        </a>
+        <a href="#diagnostico" class="btn btn-ghost-light">
+          Ver Comparador Ecológico
+        </a>
+      </div>
+
+      <!-- Selector Territorial de Regiones -->
+      <div class="territorio-strip">
+        <span class="territorio-label">Monitoreo activo por regiones:</span>
+        <div class="regions-nav" id="regionsNav">
+          <button class="region-btn active" data-reg="todas">Todas las regiones</button>
+          <button class="region-btn" data-reg="maule">Maule</button>
+          <button class="region-btn" data-reg="nuble">Ñuble</button>
+          <button class="region-btn" data-reg="biobio">Biobío</button>
+          <button class="region-btn" data-reg="araucania">Araucanía</button>
+          <button class="region-btn" data-reg="losrios">Los Ríos</button>
+          <button class="region-btn" data-reg="loslagos">Los Lagos</button>
+        </div>
+        <div class="region-info-toast" id="regionToast">
+          <span id="regionToastText"><strong>Centro-Sur Integral:</strong> Más de 3,1 millones de hectáreas de monocultivo y más de 450 comités de agua potable rural en crisis.</span>
+          <a href="#mapa" style="color:var(--ambar-suave);font-weight:700;text-decoration:underline;">Ver en mapa →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     DIAGNÓSTICO TERRITORIAL Y COMPARADOR SPLIT-SLIDER
+     ========================================================================== -->
+<section class="section" id="diagnostico">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="mono-badge badge-amber">Evidencia Científica & Vivencial</span>
+        <h2>El modelo forestal en cifras</h2>
+      </div>
+      <p class="lead">
+        El Decreto Ley 701 promulgado en 1974 financió con subsidios del Estado chileno la sustitución acelerada de bosque nativo y suelos agrícolas por un monocultivo intensivo orientado a la exportación de celulosa y madera en bruto.
+      </p>
+    </div>
+
+    <!-- Contadores en cifras -->
+    <div class="stats-grid-container">
+      <div class="stat-box">
+        <div class="stat-number">3,1M <span>ha</span></div>
+        <div class="stat-desc">de plantaciones industriales de pino radiata y eucalipto concentradas en el centro-sur.</div>
+        <span class="stat-source">Fuente: INFOR / Catastro CONAF 2024</span>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">+480</div>
+        <div class="stat-desc">comunidades y caseríos rurales abastecidos permanentemente por camiones aljibe.</div>
+        <span class="stat-source">Fuente: Dirección General de Aguas (DGA)</span>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">1,85M <span>ha</span></div>
+        <div class="stat-desc">quemadas en megaincendios durante la última década (2017 a 2026).</div>
+        <span class="stat-source">Fuente: Reportes Oficiales CONAF / CR2</span>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-number">72%</div>
+        <div class="stat-desc">de la superficie plantada en manos de dos consorcios económicos: Arauco (Angelini) y CMPC (Matte).</div>
+        <span class="stat-source">Fuente: Investigaciones CIPER / OLCA</span>
+      </div>
+    </div>
+
+    <!-- COMPARADOR SPLIT-SLIDER INTERACTIVO (MONOCULTIVO VS RESTAURACIÓN) -->
+    <div class="comparator-wrapper">
+      <div class="comparator-header">
+        <div class="comparator-title-area">
+          <h3>Comparador Ecológico: Monocultivo Forestal vs. Cuenca Nativa Restaurada</h3>
+          <p>Arrastra el deslizador blanco para contrastar el paisaje de plantación industrial frente a una cuenca con bosque nativo vivo.</p>
+        </div>
+        <span class="mono-badge badge-green">Interactivo 360°</span>
+      </div>
+
+      <div class="split-slider-container" id="splitSliderContainer">
+        <!-- Imagen de fondo (Monocultivo / Antes) -->
+        <img class="slider-img" src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1600&q=80" alt="Monocultivo industrial de pinos y eucaliptos en hileras densas y suelo seco">
+        <div class="slider-badge slider-badge-before">
+          <span>⚠️ MONOCULTIVO EXÓTICO (PINO / EUCALIPTO)</span>
+        </div>
+
+        <!-- Imagen superpuesta con recorte (Bosque Nativo Restaurado / Después) -->
+        <div class="slider-img-after-wrapper" id="sliderAfterWrapper">
+          <img class="slider-img" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80" alt="Bosque nativo templado diverso con cauce de agua limpia y sotobosque">
+          <div class="slider-badge slider-badge-after">
+            <span>🌱 RESTAURACIÓN ECOLÓGICA NATIVA</span>
+          </div>
+        </div>
+
+        <!-- Mango del deslizador -->
+        <div class="slider-handle" id="sliderHandle">⇄</div>
+      </div>
+
+      <!-- Métricas comparativas -->
+      <div class="comparator-metrics-panel">
+        <div class="metric-column mono-impact">
+          <h4>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Impacto del Monocultivo Industrial
+          </h4>
+          <ul class="metrics-list">
+            <li><span>Consumo hídrico por árbol:</span> <b>150 a 300 Litros/día</b></li>
+            <li><span>Continuidad de combustible de fuego:</span> <b>Crítica (alta inflamabilidad)</b></li>
+            <li><span>Erosión de suelo tras tala rasa:</span> <b>Muy Severa (pérdida de humus)</b></li>
+            <li><span>Aporte a biodiversidad de fauna nativa:</span> <b>Desierto verde (&lt; 5%)</b></li>
+          </ul>
+        </div>
+
+        <div class="metric-column nativo-impact">
+          <h4>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Beneficios de la Cuenca Nativa Restaurada
+          </h4>
+          <ul class="metrics-list">
+            <li><span>Regulación y retención hídrica:</span> <b>Efecto esponja permanente</b></li>
+            <li><span>Resiliencia a los incendios:</span> <b>Barrera húmeda natural</b></li>
+            <li><span>Captura de carbono de largo plazo:</span> <b>Suelo rico y sotobosque vivo</b></li>
+            <li><span>Soberanía alimentaria y recolección:</span> <b>Hongos, medicina y miel</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ejes Críticos del Conflicto -->
+    <div class="problema-cards-grid">
+      <div class="problema-card">
+        <div class="card-icon" style="color:var(--terracota-viva);">🌲</div>
+        <h4>Despojo y Monocultivo</h4>
+        <p>Sustitución progresiva de tierras agrícolas y bosque templado originario. Desplazamiento forzado de comunidades campesinas y lof mapuche mediante especulación de tierras.</p>
+      </div>
+
+      <div class="problema-card">
+        <div class="card-icon" style="color:var(--azul-glaciar);">💧</div>
+        <h4>Desecamiento de Cuencas</h4>
+        <p>Las plantaciones de rápido crecimiento agotan napas freáticas y vertientes. Pueblos rodeados de pinos no tienen agua para beber ni para regar sus huertas tradicionales.</p>
+      </div>
+
+      <div class="problema-card">
+        <div class="card-icon" style="color:#DDA136;">🔥</div>
+        <h4>Tormentas de Fuego</h4>
+        <p>Hileras continuas de resina y biomasa homogénea generan condiciones de ignición extrema. Los megaincendios destruyen vidas, poblados y pequeños ecosistemas remanentes.</p>
+      </div>
+
+      <div class="problema-card">
+        <div class="card-icon" style="color:#9B71A6;">🏭</div>
+        <h4>Zonas de Sacrificio</h4>
+        <p>Megaplantas de celulosa e incineradoras vierten riles tóxicos en ríos y mar (como en el Río Cruces, Arauco y Laja), acumulando pasivos ambientales sin reparación comunitaria.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     MAPA TERRITORIAL INTERACTIVO
+     ========================================================================== -->
+<section class="section" id="mapa">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="mono-badge badge-green">Cartografía Comunitaria y Denuncias</span>
+        <h2>Mapa Territorial de Impactos & Alternativas</h2>
+      </div>
+      <p class="lead">
+        Herramienta viva de registro colaborativo para visibilizar focos de megaincendios, comunidades con crisis hídrica, complejos industriales y proyectos autónomos de restauración de bosque nativo.
+      </p>
+    </div>
+
+    <div class="mapa-workspace">
+      <!-- Panel de Control Lateral -->
+      <div class="mapa-control-panel">
+        <div class="mapa-search-box">
+          <span class="mapa-search-icon">🔍</span>
+          <input type="text" id="mapSearchInput" placeholder="Filtrar por comuna o caso…">
+        </div>
+
+        <div>
+          <span class="mono-badge badge-light" style="color:var(--carbon-puro);border-color:var(--borde-suave);background:#EFECE4;">Capas Visibles</span>
+          <div class="layers-group">
+            <label class="layer-toggle">
+              <input type="checkbox" data-layer="incendios" checked>
+              <span class="layer-pin-dot" style="background:#D64020;"></span>
+              <span>Megaincendios & Zonas Quemadas</span>
+            </label>
+            <label class="layer-toggle">
+              <input type="checkbox" data-layer="agua" checked>
+              <span class="layer-pin-dot" style="background:#2B6979;"></span>
+              <span>Crisis Hídrica & Camiones Aljibe</span>
+            </label>
+            <label class="layer-toggle">
+              <input type="checkbox" data-layer="industria" checked>
+              <span class="layer-pin-dot" style="background:#4A524D;"></span>
+              <span>Celulosas & Zonas de Sacrificio</span>
+            </label>
+            <label class="layer-toggle">
+              <input type="checkbox" data-layer="restauracion" checked>
+              <span class="layer-pin-dot" style="background:#4E8262;"></span>
+              <span>Iniciativas de Restauración Nativa</span>
+            </label>
+            <label class="layer-toggle">
+              <input type="checkbox" data-layer="organizaciones" checked>
+              <span class="layer-pin-dot" style="background:#11261F;"></span>
+              <span>Organizaciones de la Red</span>
+            </label>
+            <label class="layer-toggle">
+              <input type="checkbox" data-layer="resistencia" checked>
+              <span class="layer-pin-dot" style="background:#DDA136;"></span>
+              <span>Comunidades Indígenas & Campesinas</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="map-stats-summary">
+          <p>📍 Puntos activos en el visualizador: <strong id="visiblePointsCount">12</strong></p>
+          <p style="margin-top:4px;font-size:0.76rem;color:var(--gris-ceniza);">Haz clic sobre cualquier punto para consultar la ficha territorial con antecedentes y organizaciones locales.</p>
+        </div>
+
+        <button class="btn btn-primary" id="openReportModalBtn" style="width:100%;">
+          + Registrar Denuncia / Proyecto
+        </button>
+      </div>
+
+      <!-- Visualizador del Mapa -->
+      <div class="mapa-display-area">
+        <div id="mapa-canvas"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     LA RED: QUIÉNES SOMOS & PRINCIPIOS
+     ========================================================================== -->
+<section class="section" id="la-red">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="mono-badge">Articulación Socioambiental</span>
+        <h2>Quiénes Somos</h2>
+      </div>
+      <p class="lead">
+        Una alianza de comunidades, organizaciones territoriales, asambleas por el agua y colectivos de restauración que decidieron no seguir resistiendo en soledad.
+      </p>
+    </div>
+
+    <div class="red-layout">
+      <!-- Manifiesto -->
+      <div class="red-manifesto-box">
+        <div style="aspect-ratio:16/9;border-radius:var(--radio-md);overflow:hidden;margin-bottom:24px;">
+          <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80" alt="Encuentro de comunidades en vivero de bosque nativo" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <h3 style="font-size:1.6rem;margin-bottom:14px;">Nacidos del fuego y la defensa de la vida</h3>
+        <p>
+          La Red surge formalmente tras los trágicos megaincendios que asolaron el Biobío, Ñuble y La Araucanía. Vecinas, comités de agua potable rural, brigadistas comunitarios y campesinos constatamos que no estábamos frente a accidentes naturales, sino ante las consecuencias inevitables de un modelo impuesto.
+        </p>
+        <p>
+          Nuestra labor articula la resistencia en los territorios con propuestas técnicas y normativas concretas: no basta con exigir que el modelo se detenga; estamos plantando y multiplicando el bosque nativo que recuperará el agua para las futuras generaciones.
+        </p>
+      </div>
+
+      <!-- Principios Rectores -->
+      <div class="principios-accordion">
+        <div class="principio-card">
+          <div class="principio-header">
+            <span class="principio-num">01</span>
+            <h4>Restauración Ecológica Activa</h4>
+          </div>
+          <p>Recuperación dirigida de cabeceras de cuencas, quebradas y riberas con especies nativas locales (roble, raulí, coigüe, arrayán, canelo), reactivando la dinámica biológica del suelo.</p>
+        </div>
+
+        <div class="principio-card">
+          <div class="principio-header">
+            <span class="principio-num">02</span>
+            <h4>Soberanía Hídrica y Común</h4>
+          </div>
+          <p>El agua como bien común inapropiable y derecho humano primordial. Prioridad absoluta al consumo de comunidades y a los ciclos biológicos sobre cualquier lucro industrial.</p>
+        </div>
+
+        <div class="principio-card">
+          <div class="principio-header">
+            <span class="principio-num">03</span>
+            <h4>Saberes Campesinos y Mapuche</h4>
+          </div>
+          <p>Reconocimiento a las prácticas ancestrales de coexistencia con el Itrofill Mogen (toda la biodiversidad) y el rescate de semillas y alimentos tradicionales libres de agroquímicos.</p>
+        </div>
+
+        <div class="principio-card">
+          <div class="principio-header">
+            <span class="principio-num">04</span>
+            <h4>Ecofeminismo Comunitario</h4>
+          </div>
+          <p>Poner los cuidados, la reproducción de la vida y el resguardo de la salud territorial en el centro de las decisiones políticas, visibilizando a las dirigentas que sostienen las redes de agua.</p>
+        </div>
+
+        <div class="principio-card">
+          <div class="principio-header">
+            <span class="principio-num">05</span>
+            <h4>Economías Locales Diversificadas</h4>
+          </div>
+          <p>Transición productiva hacia la agroecología, la apicultura en bosque nativo, el turismo sustentable y el bioconstrucción como alternativas viables al empleo precario de la tala forestal.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Directorio de Organizaciones -->
+    <div class="orgs-directory">
+      <h3>Organizaciones y Colectivos Integrantes</h3>
+      <div class="orgs-grid">
+        <div class="org-card">
+          <span class="org-card-region">REGIÓN DEL BIOBÍO</span>
+          <div class="org-card-name">Coordinadora Nahuelbuta Biobío</div>
+          <div class="org-card-desc">Defensa de la cordillera de la costa y monitoreo de cuencas en Santa Juana y Curanilahue.</div>
+        </div>
+
+        <div class="org-card">
+          <span class="org-card-region">REGIÓN DE LA ARAUCANÍA</span>
+          <div class="org-card-name">Red por la Defensa de los Territorios (RDT)</div>
+          <div class="org-card-desc">Articulación de comunidades mapuche y organizaciones en resguardo del bosque nativo.</div>
+        </div>
+
+        <div class="org-card">
+          <span class="org-card-region">INTERREGIONAL</span>
+          <div class="org-card-name">AIFBN (Ingenieros por el Bosque Nativo)</div>
+          <div class="org-card-desc">Asesoría técnica y científica independiente en silvicultura y manejo sustentable.</div>
+        </div>
+
+        <div class="org-card">
+          <span class="org-card-region">REGIÓN DE ÑUBLE</span>
+          <div class="org-card-name">Asamblea Ambiental del Itata</div>
+          <div class="org-card-desc">Monitoreo de la industria de celulosa y defensa de las aguas del Valle del Itata.</div>
+        </div>
+
+        <div class="org-card">
+          <span class="org-card-region">REGIÓN DE LOS RÍOS</span>
+          <div class="org-card-name">Colectivo Vivero Comunitario Valdivia</div>
+          <div class="org-card-desc">Reproducción comunitaria de plántulas de bosque valdiviano y reforestación de riberas.</div>
+        </div>
+
+        <div class="org-card">
+          <span class="org-card-region">REGIÓN DEL MAULE</span>
+          <div class="org-card-name">Red de Huerteros y Aguas de Empedrado</div>
+          <div class="org-card-desc">Resistencia frente al avance forestal en la zona costera y rescate de vertientes.</div>
+        </div>
+
+        <div class="org-card">
+          <span class="org-card-region">REGIÓN DEL BIOBÍO</span>
+          <div class="org-card-name">Mujeres por el Buen Vivir Tomé</div>
+          <div class="org-card-desc">Organización comunitaria frente al riesgo de incendios de interfaz urbano-forestal.</div>
+        </div>
+
+        <div class="org-card">
+          <span class="org-card-region">REGIÓN DE LOS LAGOS</span>
+          <div class="org-card-name">Red Ambiental Ciudadana de Osorno</div>
+          <div class="org-card-desc">Vigilancia ecológica y protección de cuencas de ríos Rahue y Damas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     PROPUESTAS POLÍTICAS Y LEGISLATIVAS
+     ========================================================================== -->
+<section class="section" id="acciones">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="mono-badge badge-amber">Incidencia y Alternativas</span>
+        <h2>Propuestas para la Transición</h2>
+      </div>
+      <p class="lead">
+        No nos limitamos a la denuncia. La Red impulsa una plataforma legislativa y comunitaria para transformar de raíz la política forestal en Chile.
+      </p>
+    </div>
+
+    <div class="propuestas-grid">
+      <div class="propuesta-card">
+        <div>
+          <span class="prop-tag">PILAR LEGISLATIVO 01</span>
+          <h3>Decreto de Restauración Ecológica y de Cuencas</h3>
+          <p>
+            Derogación definitiva de cualquier subsidio directo o tributario al monocultivo exótico y creación de un Fondo Nacional de Restauración con foco en cuencas abastecedoras de agua potable rural.
+          </p>
+        </div>
+        <div class="prop-footer">
+          <a href="#biblioteca" onclick="openDocModal('decreto')">Ver Propuesta de Decreto (PDF) →</a>
+        </div>
+      </div>
+
+      <div class="propuesta-card">
+        <div>
+          <span class="prop-tag">PILAR DE SEGURIDAD 02</span>
+          <h3>Franjas de Amortiguación y Distancias Mínimas</h3>
+          <p>
+            Obligatoriedad legal de cortafuegos y franjas de amortiguación de mínimo 1.000 metros libres de plantaciones resinosas alrededor de centros poblados, escuelas rurales y viviendas campesinas.
+          </p>
+        </div>
+        <div class="prop-footer">
+          <a href="#biblioteca" onclick="openDocModal('franjas')">Leer Informe Técnico de Riesgo →</a>
+        </div>
+      </div>
+
+      <div class="propuesta-card">
+        <div>
+          <span class="prop-tag">PILAR ECONÓMICO 03</span>
+          <h3>Reconversión hacia Economías Agroecológicas</h3>
+          <p>
+            Programa estatal de apoyo a pequeños propietarios para la sustitución de plantaciones secas por policultivos alimentarios, silvopastoreo nativo y viveros de especies medicinales autóctonas.
+          </p>
+        </div>
+        <div class="prop-footer">
+          <a href="#biblioteca" onclick="openDocModal('agroeco')">Descargar Guía de Transición →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de descargas de documentos públicos -->
+    <div class="downloads-box">
+      <div>
+        <h4 style="font-size:1.1rem;margin-bottom:4px;">Documentación Oficial de Libre Descarga</h4>
+        <p style="font-size:0.88rem;color:var(--gris-ceniza);">Accede a los estudios y anteproyectos formulados por los equipos técnicos y jurídicos de la Red.</p>
+      </div>
+      <div class="downloads-list">
+        <a href="#biblioteca" class="download-chip" onclick="openDocModal('decreto')">
+          📄 Propuesta de Ley (PDF · 4.2 MB)
+        </a>
+        <a href="#biblioteca" class="download-chip" onclick="openDocModal('hidro')">
+          📊 Estudio Hidrológico 2025 (PDF · 8.1 MB)
+        </a>
+        <a href="#biblioteca" class="download-chip" onclick="openDocModal('manifiesto')">
+          📜 Manifiesto de Purén (PDF · 1.5 MB)
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     BIBLIOTECA DOCUMENTAL Y CENTRO DE RECURSOS
+     ========================================================================== -->
+<section class="section" id="biblioteca">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="mono-badge badge-light">Archivo Abierto</span>
+        <h2>Biblioteca Territorial</h2>
+      </div>
+      <p class="lead" style="color:#BDC9C2;">
+        Publicaciones científicas, informes jurídicos, manuales comunitarios y cartillas de educación ambiental disponibles para investigadores, estudiantes y comunidades.
+      </p>
+    </div>
+
+    <!-- Barra de Búsqueda y Filtros -->
+    <div class="bib-toolbar">
+      <input type="text" class="bib-search-input" id="bibSearchInput" placeholder="Buscar por título, autor o palabra clave (ej. agua, incendios, DL 701)…">
+      
+      <select class="bib-select" id="bibTopicSelect">
+        <option value="todos">Todos los Temas</option>
+        <option value="Agua">Crisis Hídrica & Cuencas</option>
+        <option value="Incendios">Megaincendios & Combustibles</option>
+        <option value="Leyes">Legislación & Decreto 701</option>
+        <option value="Restauración">Restauración de Bosque Nativo</option>
+        <option value="Pueblos">Derechos Mapuche & Campesinos</option>
+      </select>
+
+      <select class="bib-select" id="bibYearSelect">
+        <option value="todos">Todos los Años</option>
+        <option value="2026">2026</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+      </select>
+    </div>
+
+    <!-- Grilla de Documentos -->
+    <div class="bib-grid" id="bibContainer">
+      <!-- Los documentos se renderizan vía JavaScript -->
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     CENTRO MULTIMEDIA: PODCASTS Y VIDEOS
+     ========================================================================== -->
+<section class="section" id="multimedia">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="mono-badge badge-amber">Memoria Oral & Audiovisual</span>
+        <h2>Voces del Territorio</h2>
+      </div>
+      <p class="lead" style="color:#C4D1C9;">
+        Testimonios directos desde las quebradas, viveros comunitarios y comités de agua del centro-sur de Chile.
+      </p>
+    </div>
+
+    <div class="multimedia-layout">
+      <!-- Reproductor de Podcast Funcional -->
+      <div class="podcast-player-box">
+        <div class="current-track-info">
+          <span class="current-track-tag">SERIE PODCAST · EPISODIO 01</span>
+          <h3 class="current-track-title" id="playerEpTitle">Santa Juana después del fuego: el renacer del bosque nativo</h3>
+          <p class="current-track-desc" id="playerEpDesc">Conversación con lideresas de comités rurales de agua sobre cómo la reconstrucción debe erradicar los pinos colindantes a las viviendas.</p>
+        </div>
+
+        <!-- Visualizador de Ondas -->
+        <div class="waveform-visualizer" id="waveform">
+          <!-- 32 barras de onda generadas dinámicamente -->
+        </div>
+
+        <!-- Controles de Audio -->
+        <div class="audio-controls">
+          <button class="play-pause-btn" id="playPauseBtn" aria-label="Reproducir episodio">
+            <span id="playIcon">▶</span>
+          </button>
+          <div class="progress-track-wrapper">
+            <div class="time-readout">
+              <span id="currentTime">00:00</span>
+              <span id="totalTime">28:45</span>
+            </div>
+            <div class="progress-bar-container" id="progressBar">
+              <div class="progress-bar-fill" id="progressFill" style="width:0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de Episodios -->
+        <div class="episodes-list">
+          <div class="episode-item active" data-index="0">
+            <div>
+              <span class="ep-number">EP. 01</span>
+              <span class="ep-title">Santa Juana después del fuego</span>
+            </div>
+            <span class="ep-duration">28:45</span>
+          </div>
+
+          <div class="episode-item" data-index="1">
+            <div>
+              <span class="ep-number">EP. 02</span>
+              <span class="ep-title">La cuenca de Contulmo y la sed campesina</span>
+            </div>
+            <span class="ep-duration">34:10</span>
+          </div>
+
+          <div class="episode-item" data-index="2">
+            <div>
+              <span class="ep-number">EP. 03</span>
+              <span class="ep-title">Viveros autónomos: sembrar canelo y roble</span>
+            </div>
+            <span class="ep-duration">22:15</span>
+          </div>
+
+          <div class="episode-item" data-index="3">
+            <div>
+              <span class="ep-number">EP. 04</span>
+              <span class="ep-title">Mujeres lafkenche y la defensa del Itrofill Mogen</span>
+            </div>
+            <span class="ep-duration">31:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini-Documentales y Cápsulas -->
+      <div class="videos-gallery">
+        <h4 style="font-size:1.2rem;margin-bottom:12px;color:var(--blanco-hueso);">Cápsulas & Documentales Oficiales</h4>
+        
+        <div class="video-thumb-card" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/A42dHCxuJ1w?autoplay=1', 'PLANTAR POBREZA, EL NEGOCIO FORESTAL EN CHILE - DOCUMENTAL')">
+          <img class="video-thumb-img" src="https://i.ytimg.com/vi/A42dHCxuJ1w/hqdefault.jpg" alt="Documental Plantar Pobreza">
+          <div class="video-thumb-info">
+            <h5>Plantar Pobreza: El Negocio Forestal en Chile</h5>
+            <span>Investigación Central · Producción Resumen TV ▶</span>
+          </div>
+        </div>
+
+        <div class="video-thumb-card" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/1-kVhdavxDw?autoplay=1', 'Llamas del Despojo: Incendios del Negocio Forestal - Documental')">
+          <img class="video-thumb-img" src="https://i.ytimg.com/vi/1-kVhdavxDw/hqdefault.jpg" alt="Documental Llamas del Despojo">
+          <div class="video-thumb-info">
+            <h5>Llamas del Despojo: Incendios del Negocio Forestal</h5>
+            <span>Megaincendios y Monocultivo · Producción Resumen TV ▶</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ACTUALIDAD Y COMUNICADOS (BLOG)
+     ========================================================================== -->
+<section class="section" id="blog">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="mono-badge">Prensa & Noticias</span>
+        <h2>Actualidad Territorial</h2>
+      </div>
+      <p class="lead">
+        Crónicas de encuentros, declaraciones públicas de la Red y alertas tempranas sobre proyectos industriales en trámite ambiental.
+      </p>
+    </div>
+
+    <!-- Filtro de Categorías -->
+    <div class="blog-filter-pills" id="blogFilterContainer">
+      <button class="blog-pill active" data-cat="todos">Todas las noticias</button>
+      <button class="blog-pill" data-cat="Comunicados">Comunicados Oficiales</button>
+      <button class="blog-pill" data-cat="Investigación">Investigación & Datos</button>
+      <button class="blog-pill" data-cat="Encuentros">Encuentros Territoriales</button>
+      <button class="blog-pill" data-cat="Campañas">Campañas Activas</button>
+    </div>
+
+    <!-- Grilla de Noticias -->
+    <div class="blog-posts-grid" id="blogPostsContainer">
+      <!-- Artículos renderizados vía JavaScript -->
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     PETITORIO CIUDADANO & FORMULARIO DE ADHESIÓN (ÚNETE)
+     ========================================================================== -->
+<section class="section" id="unete">
+  <div class="wrap">
+    <div class="unete-grid-layout">
+      <!-- Columna Izquierda: Petitorio y Contacto -->
+      <div>
+        <span class="mono-badge badge-light">Campaña Permanente 2026</span>
+        <h2>Súmate a la Red</h2>
+        <p style="color:#C6D4CC;font-size:1.1rem;margin-bottom:30px;">
+          Tu firma y adhesión fortalecen la voz de cientos de comunidades que defienden las cuencas del centro-sur. Puedes sumar a tu organización o comprometerte a título individual.
+        </p>
+
+        <!-- Contador de Firmas -->
+        <div class="petition-tracker-card">
+          <span class="petition-badge">CARTA ABIERTA POR LA MORATORIA FORESTAL</span>
+          <div class="signatures-counter">
+            <span id="signatureCount">14.825</span> <span>/ 20.000</span>
+          </div>
+          <div class="petition-progress-bar">
+            <div class="petition-progress-fill" id="signatureBarFill"></div>
+          </div>
+          <p style="font-size:0.86rem;color:#D8E2DC;">
+            Firmas ciudadanas recolectadas para presentar ante la Comisión de Medio Ambiente del Congreso Nacional.
+          </p>
+        </div>
+
+        <ul class="contacts-direct-list">
+          <li>
+            <b>SECRETARÍA DE COMUNICACIONES</b>
+            <span>contacto@redsuperacionmodeloforestal.cl</span>
+          </li>
+          <li>
+            <b>COORDINACIÓN TERRITORIAL</b>
+            <span>Concepción · Temuco · Valdivia · Talca · Osorno</span>
+          </li>
+          <li>
+            <b>REDES SOCIALES OFICIALES</b>
+            <span>Instagram: @redsuperacionmodeloforestal · X: @red_modeloforestal</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna Derecha: Formulario de Adhesión -->
+      <div class="join-form-wrapper">
+        <h3 style="font-size:1.4rem;margin-bottom:6px;color:var(--bosque-profundo);">Formulario de Adhesión</h3>
+        <p style="font-size:0.88rem;color:var(--gris-ceniza);margin-bottom:20px;">
+          Selecciona tu modalidad de participación:
+        </p>
+
+        <div class="form-tabs-type">
+          <button type="button" class="form-tab-btn active" id="tabOrg" onclick="switchFormType('org')">Organización / Colectivo</button>
+          <button type="button" class="form-tab-btn" id="tabInd" onclick="switchFormType('ind')">Individual / Voluntario</button>
+        </div>
+
+        <form id="joinForm">
+          <div class="form-group">
+            <label for="fName" id="labelName">Nombre de la Organización</label>
+            <input type="text" id="fName" required placeholder="Ej. Colectivo Cuenca del Laja">
+          </div>
+
+          <div class="form-group">
+            <label for="fRegion">Región del Territorio</label>
+            <select id="fRegion" required>
+              <option value="">Selecciona tu región...</option>
+              <option value="Maule">Región del Maule</option>
+              <option value="Ñuble">Región de Ñuble</option>
+              <option value="Biobío">Región del Biobío</option>
+              <option value="Araucanía">Región de La Araucanía</option>
+              <option value="Los Ríos">Región de Los Ríos</option>
+              <option value="Los Lagos">Región de Los Lagos</option>
+              <option value="Otra">Otra región / Internacional</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fComuna">Comuna / Localidad</label>
+            <input type="text" id="fComuna" required placeholder="Ej. Santa Juana, Contulmo, Galvarino...">
+          </div>
+
+          <div class="form-group">
+            <label for="fEmail">Correo Electrónico de Contacto</label>
+            <input type="email" id="fEmail" required placeholder="tu-correo@dominio.cl">
+          </div>
+
+          <div class="form-group">
+            <label for="fRole">Área de Aporte Principal</label>
+            <select id="fRole">
+              <option value="difusion">Difusión y Prensa</option>
+              <option value="territorial">Acción Territorial y Brigadas</option>
+              <option value="viveros">Viveros y Semillas Nativas</option>
+              <option value="legal">Apoyo Jurídico y Legislativo</option>
+              <option value="cientifico">Aporte Científico / Hidrológico</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fMessage">Breve Mensaje o Comentario</label>
+            <textarea id="fMessage" placeholder="Cuéntanos sobre tu territorio o cómo deseas sumar a la articulación..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;">
+            Enviar Adhesión y Firmar Carta
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     PIE DE PÁGINA (FOOTER)
+     ========================================================================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top-grid">
+      <div class="footer-brand">
+        <span class="brand-title">RED POR LA SUPERACIÓN DEL MODELO FORESTAL</span>
+        <p class="footer-tagline">
+          Por cuencas vivas, soberanía comunitaria y restauración ecológica en el centro-sur de Chile.
+        </p>
+        <p style="font-size:0.8rem;color:#798980;">
+          Articulación autónoma, plurinacional, ecofeminista y sin fines de lucro.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>NAVEGACIÓN</h4>
+        <ul class="footer-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#diagnostico">Diagnóstico y Cifras</a></li>
+          <li><a href="#mapa">Mapa Territorial</a></li>
+          <li><a href="#la-red">La Red y Principios</a></li>
+          <li><a href="#acciones">Propuestas Legislativas</a></li>
+          <li><a href="#biblioteca">Biblioteca Abierta</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>TERRITORIOS</h4>
+        <ul class="footer-links">
+          <li><a href="#mapa">Región del Maule</a></li>
+          <li><a href="#mapa">Región de Ñuble</a></li>
+          <li><a href="#mapa">Región del Biobío</a></li>
+          <li><a href="#mapa">Región de La Araucanía</a></li>
+          <li><a href="#mapa">Región de Los Ríos</a></li>
+          <li><a href="#mapa">Región de Los Lagos</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>CONTACTO DIRECTO</h4>
+        <p style="font-size:0.88rem;color:#B4C4BC;margin-bottom:14px;">
+          ¿Deseas conectar a tu comunidad o denunciar un hecho en tu cuenca?
+        </p>
+        <a href="#unete" class="btn btn-primary" style="width:100%;font-size:0.88rem;padding:10px 18px;">
+          Escribir a la Red
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Red por la Superación del Modelo Forestal · Licencia Creative Commons Atribución-CompartirIgual 4.0</span>
+      <div style="display:flex;gap:18px;align-items:center;">
+        <a href="mailto:superacionmodeloforestal@gmail.com" style="color:var(--ambar-suave);text-decoration:none;">superacionmodeloforestal@gmail.com</a>
+        <a href="admin/index.html" style="color:#8E9D95;font-size:0.8rem;text-decoration:none;">🔐 Acceso Admin</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================================================
+     MODAL PARA REGISTRAR PUNTO EN EL MAPA
+     ========================================================================== -->
+<div class="modal-overlay" id="reportPointModal">
+  <div class="modal-card">
+    <button class="modal-close-btn" id="closeReportModalBtn" aria-label="Cerrar modal">×</button>
+    <span class="mono-badge">REGISTRO COLABORATIVO</span>
+    <h3 style="font-size:1.5rem;margin-bottom:6px;color:var(--bosque-profundo);">Registrar Denuncia o Iniciativa</h3>
+    <p style="font-size:0.88rem;color:var(--gris-ceniza);margin-bottom:20px;">
+      Haz clic en el mapa para fijar automáticamente las coordenadas geográficas, o ingrésalas en el formulario. Los datos ingresados se integran de forma inmediata a la vista preliminar.
+    </p>
+
+    <form id="newPointForm">
+      <div class="form-group">
+        <label for="pLayer">Tipo de Hecho / Iniciativa</label>
+        <select id="pLayer" required>
+          <option value="">Selecciona una categoría...</option>
+          <option value="incendios">Foco de Incendio / Zona Afectada</option>
+          <option value="agua">Comunidad con Escasez Hídrica Grave</option>
+          <option value="industria">Planta Industrial / Ducto Contaminante</option>
+          <option value="restauracion">Vivero Comunitario / Restauración</option>
+          <option value="organizaciones">Organización / Asamblea Territorial</option>
+          <option value="resistencia">Territorio Indígena / Campesino</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="pTitle">Título del Registro</label>
+        <input type="text" id="pTitle" required placeholder="Ej. Vertiente seca en Sector San Ramón">
+      </div>
+
+      <div class="form-group">
+        <label for="pComuna">Comuna y Región</label>
+        <input type="text" id="pComuna" required placeholder="Ej. Santa Juana, Región del Biobío">
+      </div>
+
+      <div class="form-group">
+        <label for="pCoords">Coordenadas (Latitud, Longitud)</label>
+        <input type="text" id="pCoords" readonly placeholder="Haz clic en el mapa para fijar coordenadas" style="background:#F4EFEB;font-family:'IBM Plex Mono',monospace;">
+      </div>
+
+      <div class="form-group">
+        <label for="pDesc">Descripción Detallada del Hecho</label>
+        <textarea id="pDesc" required placeholder="Describe los antecedentes, empresas involucradas, fecha aproximada y comunidades afectadas..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="pSource">Fuente o Colectivo Informante</label>
+        <input type="text" id="pSource" placeholder="Ej. Junta de Vecinos / Comité APR">
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;">
+        Publicar Punto en el Mapa
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     MODAL DE LECTURA PREVIA DE DOCUMENTO
+     ========================================================================== -->
+<div class="modal-overlay" id="docReaderModal">
+  <div class="modal-card" style="max-width:680px;">
+    <button class="modal-close-btn" id="closeDocModalBtn" aria-label="Cerrar modal">×</button>
+    <span class="mono-badge badge-amber" id="docModalBadge">DOCUMENTO OFICIAL</span>
+    <h3 id="docModalTitle" style="font-size:1.6rem;margin-bottom:8px;color:var(--bosque-profundo);">Título del Documento</h3>
+    <div id="docModalMeta" style="font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--gris-ceniza);margin-bottom:20px;">
+      Autor / Año / Páginas
+    </div>
+
+    <div id="docModalBody" style="font-size:0.95rem;color:#333;line-height:1.6;margin-bottom:28px;">
+      <!-- Contenido de resumen ejecutivo -->
+    </div>
+
+    <div style="display:flex;gap:14px;justify-content:flex-end;">
+      <button type="button" class="btn btn-outline-dark" onclick="closeDocModal()">Cerrar</button>
+      <a href="#" class="btn btn-primary" id="docModalDownloadBtn" download>
+        ⬇ Descargar PDF Completo
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     MODAL REPRODUCTOR DE VIDEO
+     ========================================================================== -->
+<div class="modal-overlay" id="videoPlayerModal">
+  <div class="modal-card" style="max-width:800px;padding:24px;background:#000;">
+    <button class="modal-close-btn" id="closeVideoModalBtn" aria-label="Cerrar modal" style="background:rgba(255,255,255,0.2);color:#FFF;">×</button>
+    <div style="aspect-ratio:16/9;width:100%;background:#000;margin-top:14px;">
+      <iframe id="videoIframe" width="100%" height="100%" src="" title="Reproductor de Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <h4 id="videoModalTitle" style="color:#FFF;font-size:1.15rem;margin-top:16px;">Título del Video</h4>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     SCRIPTS: LEAFLET, INTERACTIVIDAD Y DATOS
+     ========================================================================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* ==========================================================================
+   1. NAVEGACIÓN, HEADER SCROLL Y SCROLLSPY
+   ========================================================================== */
+const mainHeader = document.getElementById('mainHeader');
+const navDesktopLinks = document.querySelectorAll('.nav-desktop .nav-link:not(.nav-dropdown-trigger)');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-drawer .mobile-nav-link');
+const dropdownLinks = document.querySelectorAll('.nav-dropdown-menu .dropdown-item');
+const dropdownTrigger = document.getElementById('dropdownTrigger');
+const recursosDropdown = document.getElementById('recursosDropdown');
+
+// Todas las secciones enlazadas
+const trackableLinks = [...navDesktopLinks, ...mobileNavLinks, ...dropdownLinks];
+const sectionMap = new Map();
+
+trackableLinks.forEach(link => {
+  const href = link.getAttribute('href');
+  if (href && href.startsWith('#') && href.length > 1) {
+    const el = document.querySelector(href);
+    if (el && !sectionMap.has(href)) {
+      sectionMap.set(href, el);
+    }
+  }
+});
+
+// Header scroll & scrollspy
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (mainHeader) {
+    mainHeader.classList.toggle('scrolled', scrollY > 35);
+  }
+
+  let currentId = '';
+  const scrollPos = scrollY + 180;
+
+  sectionMap.forEach((el, href) => {
+    if (el && el.offsetTop <= scrollPos) {
+      currentId = href.replace('#', '');
+    }
+  });
+
+  if (currentId) {
+    // Links directos
+    navDesktopLinks.forEach(link => {
+      const target = link.getAttribute('href')?.replace('#', '');
+      link.classList.toggle('active', target === currentId);
+    });
+
+    mobileNavLinks.forEach(link => {
+      const target = link.getAttribute('href')?.replace('#', '');
+      link.classList.toggle('active', target === currentId);
+    });
+
+    // Dropdown parent active state
+    if (dropdownTrigger) {
+      const isMediaOrDocs = ['biblioteca', 'multimedia', 'blog'].includes(currentId);
+      dropdownTrigger.classList.toggle('active', isMediaOrDocs);
+    }
+  }
+}, { passive: true });
+
+// Toggle Menú Móvil
+const mobileBtn = document.getElementById('mobileMenuToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const mobileDrawerClose = document.getElementById('mobileDrawerClose');
+
+function toggleDrawer(forceClose = false) {
+  if (!mobileDrawer) return;
+  const shouldOpen = forceClose ? false : !mobileDrawer.classList.contains('open');
+  mobileDrawer.classList.toggle('open', shouldOpen);
+  if (mobileBtn) {
+    mobileBtn.classList.toggle('open', shouldOpen);
+    mobileBtn.setAttribute('aria-expanded', String(shouldOpen));
+  }
+  document.body.style.overflow = shouldOpen ? 'hidden' : '';
+}
+
+if (mobileBtn) {
+  mobileBtn.addEventListener('click', () => toggleDrawer());
+}
+
+if (mobileDrawerClose) {
+  mobileDrawerClose.addEventListener('click', () => toggleDrawer(true));
+}
+
+if (mobileDrawer) {
+  mobileDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => toggleDrawer(true));
+  });
+}
+
+// Dropdown click & outside click
+if (dropdownTrigger && recursosDropdown) {
+  dropdownTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = recursosDropdown.classList.toggle('open');
+    dropdownTrigger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!recursosDropdown.contains(e.target)) {
+      recursosDropdown.classList.remove('open');
+      dropdownTrigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+/* ==========================================================================
+   2. SELECTOR REGIONAL DEL HERO
+   ========================================================================== */
+const regionData = {
+  todas: {
+    text: "Centro-Sur Integral: Más de 3,1 millones de hectáreas de monocultivo y más de 450 comités de agua potable rural en crisis.",
+    lat: -38.0, lng: -72.5, zoom: 6
+  },
+  maule: {
+    text: "Región del Maule: 520.000 ha de pino radiata. Zona cero de la 'Tormenta de Fuego' 2017 y severa afectación a comunidades costeras.",
+    lat: -35.5, lng: -71.8, zoom: 8
+  },
+  nuble: {
+    text: "Región de Ñuble: Valle del Itata y cuenca baja bajo fuerte presión por celulosas (Nueva Aldea) e incendios recurrentes.",
+    lat: -36.6, lng: -72.1, zoom: 8
+  },
+  biobio: {
+    text: "Región del Biobío: Epicentro forestal nacional con 920.000 ha de plantaciones. Santa Juana, Nacimiento y Curanilahue en emergencia permanente.",
+    lat: -37.4, lng: -72.6, zoom: 8
+  },
+  araucania: {
+    text: "Región de La Araucanía: Fuerte conflicto territorial por ocupación de tierras ancestrales mapuche en Malleco y Cautín.",
+    lat: -38.5, lng: -72.5, zoom: 8
+  },
+  losrios: {
+    text: "Región de Los Ríos: Contaminación emblemática del Santuario del Río Cruces por celulosa y avance sobre la selva valdiviana.",
+    lat: -39.8, lng: -72.8, zoom: 8
+  },
+  loslagos: {
+    text: "Región de Los Lagos: Sustitución de bosque templado y quila por eucalipto nitens en la cordillera de la costa.",
+    lat: -41.2, lng: -73.0, zoom: 8
+  }
+};
+
+const regionBtns = document.querySelectorAll('.region-btn');
+const regionToastText = document.getElementById('regionToastText');
+
+regionBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    regionBtns.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const regKey = this.dataset.reg;
+    const info = regionData[regKey] || regionData.todas;
+    regionToastText.innerHTML = `<strong>${this.innerText}:</strong> ${info.text}`;
+
+    if (window.mapInstance) {
+      window.mapInstance.flyTo([info.lat, info.lng], info.zoom, { duration: 1.5 });
+    }
+  });
+});
+
+/* ==========================================================================
+   3. COMPARADOR INTERACTIVO SPLIT-SLIDER
+   ========================================================================== */
+const sliderContainer = document.getElementById('splitSliderContainer');
+const afterWrapper = document.getElementById('sliderAfterWrapper');
+const handle = document.getElementById('sliderHandle');
+let isSliding = false;
+
+function updateSliderPos(clientX) {
+  const rect = sliderContainer.getBoundingClientRect();
+  let x = clientX - rect.left;
+  if (x < 0) x = 0;
+  if (x > rect.width) x = rect.width;
+  const percentage = (x / rect.width) * 100;
+  afterWrapper.style.width = percentage + '%';
+  handle.style.left = percentage + '%';
+}
+
+sliderContainer.addEventListener('mousedown', e => {
+  isSliding = true;
+  updateSliderPos(e.clientX);
+});
+window.addEventListener('mouseup', () => isSliding = false);
+window.addEventListener('mousemove', e => {
+  if (!isSliding) return;
+  updateSliderPos(e.clientX);
+});
+
+// Soporte táctil
+sliderContainer.addEventListener('touchstart', e => {
+  isSliding = true;
+  updateSliderPos(e.touches[0].clientX);
+});
+window.addEventListener('touchend', () => isSliding = false);
+window.addEventListener('touchmove', e => {
+  if (!isSliding) return;
+  updateSliderPos(e.touches[0].clientX);
+});
+
+/* ==========================================================================
+   4. MAPA TERRITORIAL DINÁMICO (LEAFLET)
+   ========================================================================== */
+const map = L.map('mapa-canvas', { scrollWheelZoom: false }).setView([-37.8, -72.6], 7);
+window.mapInstance = map;
+
+// Capa base limpia y contrastada de CartoDB Positron
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://openstreetmap.org">OSM</a>',
+  maxZoom: 14
+}).addTo(map);
+
+// Colores e iconos de capas
+const layerConfig = {
+  incendios: { color: '#D64020', name: 'Megaincendio', icon: '🔥' },
+  agua: { color: '#2B6979', name: 'Crisis Hídrica', icon: '💧' },
+  industria: { color: '#4A524D', name: 'Celulosa / Industria', icon: '🏭' },
+  restauracion: { color: '#4E8262', name: 'Restauración Nativa', icon: '🌱' },
+  organizaciones: { color: '#11261F', name: 'Organización Red', icon: '✊' },
+  resistencia: { color: '#DDA136', name: 'Comunidad Ancestral', icon: '📜' }
+};
+
+// Puntos Territoriales Reales y Verificados
+const territorialPoints = [
+  {
+    layer: 'incendios',
+    lat: -37.18, lng: -72.93,
+    titulo: 'Santa Juana: Megaincendio de Cuenca',
+    comuna: 'Santa Juana, Biobío',
+    fecha: 'Febrero 2023 · Temporada activa',
+    desc: 'Más del 70% de la comuna quemada debido a plantaciones de pino que rodeaban las casas. Hoy en proceso de reconstrucción comunitaria sin pinos.',
+    fuente: 'Red Ambiental Santa Juana'
+  },
+  {
+    layer: 'incendios',
+    lat: -38.03, lng: -73.08,
+    titulo: 'Purén y Lumaco: Devastación de Interfaz',
+    comuna: 'Purén, La Araucanía',
+    fecha: 'Verano 2023',
+    desc: 'Fuego que consumió poblados enteros colindantes con predios de Forestal Mininco y Arauco. Familias campesinas en reconstrucción.',
+    fuente: 'Comité de Reconstrucción Nahuelbuta'
+  },
+  {
+    layer: 'incendios',
+    lat: -36.73, lng: -72.48,
+    titulo: 'Quillón: Tormentas de Fuego Recurrentes',
+    comuna: 'Quillón, Ñuble',
+    fecha: '2017 y 2023',
+    desc: 'Monocultivo de pino en terrenos de secano interior favorece incendios de rápida propagación que dañan viñas patrimoniales campesinas.',
+    fuente: 'Viñateros Campesinos del Itata'
+  },
+  {
+    layer: 'agua',
+    lat: -37.47, lng: -73.34,
+    titulo: 'Curanilahue: Cuenca del Río Seco',
+    comuna: 'Curanilahue, Biobío',
+    fecha: 'Permanente (2020-2026)',
+    desc: 'Comuna totalmente rodeada de plantaciones industriales. Poblaciones urbanas y rurales con cortes permanentes y camiones aljibe diarios.',
+    fuente: 'Red de Mujeres de Curanilahue'
+  },
+  {
+    layer: 'agua',
+    lat: -38.41, lng: -72.78,
+    titulo: 'Galvarino: Desecamiento de Pozos Profundos',
+    comuna: 'Galvarino, La Araucanía',
+    fecha: 'Monitoreo 2024-2026',
+    desc: 'Comunidades mapuche con napas de agua agotadas tras tres rotaciones continuas de eucalipto en los cerros circundantes.',
+    fuente: 'Asociación de Comunidades de Galvarino'
+  },
+  {
+    layer: 'agua',
+    lat: -35.60, lng: -72.33,
+    titulo: 'Empedrado: Secano Costero en Emergencia',
+    comuna: 'Empedrado, Maule',
+    fecha: '2025-2026',
+    desc: 'Pérdida absoluta de vertientes tradicionales tras la reforestación de pinos posterior a 2017. Racionamiento de agua.',
+    fuente: 'Unión Comunal de APR Maule Sur'
+  },
+  {
+    layer: 'industria',
+    lat: -37.28, lng: -73.16,
+    titulo: 'Complejo Celulosa Arauco (Horcones)',
+    comuna: 'Arauco, Biobío',
+    fecha: 'Operación continua',
+    desc: 'Uno de los mayores complejos de pulpa kraft del mundo. Ducto de riles al Golfo de Arauco y emanaciones que afectan a comunas pesqueras.',
+    fuente: 'Pescadores Artesanales de Laraquete'
+  },
+  {
+    layer: 'industria',
+    lat: -37.50, lng: -72.67,
+    titulo: 'Planta Celulosa Santa Fe (CMPC)',
+    comuna: 'Nacimiento, Biobío',
+    fecha: 'Operación continua',
+    desc: 'Megaplanta en zona urbana rodeada de poblaciones expuestas a olores sulfurosos y riles descargados en la cuenca del Río Biobío.',
+    fuente: 'Colectivo Ambiental de Nacimiento'
+  },
+  {
+    layer: 'industria',
+    lat: -36.57, lng: -72.43,
+    titulo: 'Complejo Nueva Aldea (Arauco)',
+    comuna: 'Ránquil, Ñuble',
+    fecha: 'Operación continua',
+    desc: 'Complejo forestal industrial con descarga de efluentes tratados en el Río Itata, generando recurrentes denuncias vecinales.',
+    fuente: 'Defensa del Río Itata'
+  },
+  {
+    layer: 'restauracion',
+    lat: -39.64, lng: -72.33,
+    titulo: 'Vivero Comunitario y Reforestación Panguipulli',
+    comuna: 'Panguipulli, Los Ríos',
+    fecha: 'Proyecto en curso',
+    desc: 'Producción de más de 40.000 árboles nativos por temporada (roble, ulmo, coigüe) para reforestar franjas ribereñas campesinas.',
+    fuente: 'Red Ambiental de Panguipulli'
+  },
+  {
+    layer: 'restauracion',
+    lat: -37.60, lng: -73.05,
+    titulo: 'Reserva Comunitaria y Regeneración Nahuelbuta',
+    comuna: 'Cañete, Biobío',
+    fecha: 'Iniciativa activa',
+    desc: 'Comunidad local sustituye eucaliptos talados por regeneración de bosque nativo esclerófilo y recuperación de dos vertientes.',
+    fuente: 'Colectivo Nahuelbuta Nativo'
+  },
+  {
+    layer: 'organizaciones',
+    lat: -36.82, lng: -73.05,
+    titulo: 'Sede Coordinadora ReSuMoF Biobío',
+    comuna: 'Concepción, Biobío',
+    fecha: 'Punto de encuentro',
+    desc: 'Espacio de articulación regional de asambleas, difusión de informes y preparación de acciones de incidencia legislativa.',
+    fuente: 'Red por la Superación del Modelo Forestal'
+  },
+  {
+    layer: 'resistencia',
+    lat: -38.25, lng: -73.28,
+    titulo: 'Lof Elicura: Soberanía Territorial Lafkenche',
+    comuna: 'Contulmo, Biobío',
+    fecha: 'Resistencia histórica',
+    desc: 'Comunidades en defensa de la cuenca del Lago Lanalhue frente a la tala rasa y la contaminación por arrastre de sedimentos.',
+    fuente: 'Lof Elicura'
+  }
+];
+
+// Grupos de capas en Leaflet
+const markerGroups = {};
+Object.keys(layerConfig).forEach(key => {
+  markerGroups[key] = L.layerGroup().addTo(map);
+});
+
+function createCustomMarkerIcon(color, symbol) {
+  return L.divIcon({
+    className: 'custom-map-pin',
+    html: `<div style="
+      background:${color};
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      border:2.5px solid #FFF;
+      box-shadow:0 4px 14px rgba(0,0,0,0.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#FFF;
+      font-size:14px;
+      cursor:pointer;
+      transition:transform 0.2s;
+    ">${symbol}</div>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -18]
+  });
+}
+
+function renderPopupHTML(p) {
+  const conf = layerConfig[p.layer] || { color: '#11261F', name: 'Territorio' };
+  return `
+    <div class="custom-leaflet-popup">
+      <div class="popup-inner">
+        <span class="popup-top-tag" style="color:${conf.color}">${conf.name}</span>
+        <h4 class="popup-title">${p.titulo}</h4>
+        <div class="popup-meta">
+          <span>📍 ${p.comuna}</span>
+          <span>🗓️ ${p.fecha}</span>
+        </div>
+        <p class="popup-desc">${p.desc}</p>
+        <div class="popup-footer">
+          <span>Fuente: <b>${p.fuente}</b></span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function addPointToMap(p) {
+  const conf = layerConfig[p.layer] || { color: '#11261F', icon: '📍' };
+  const icon = createCustomMarkerIcon(conf.color, conf.icon);
+  const marker = L.marker([p.lat, p.lng], { icon: icon }).bindPopup(renderPopupHTML(p));
+  marker.addTo(markerGroups[p.layer]);
+}
+
+// Cargar puntos
+territorialPoints.forEach(addPointToMap);
+
+// Filtro de Capas (Checkboxes)
+document.querySelectorAll('.layer-toggle input').forEach(checkbox => {
+  checkbox.addEventListener('change', function() {
+    const layerName = this.dataset.layer;
+    const group = markerGroups[layerName];
+    if (this.checked) {
+      map.addLayer(group);
+    } else {
+      map.removeLayer(group);
+    }
+    updatePointsCounter();
+  });
+});
+
+// Buscador en Vivo en el Mapa
+document.getElementById('mapSearchInput').addEventListener('input', function() {
+  const term = this.value.toLowerCase().trim();
+  let count = 0;
+
+  // Limpiar y repoblar según búsqueda
+  Object.keys(markerGroups).forEach(k => markerGroups[k].clearLayers());
+
+  territorialPoints.forEach(p => {
+    const match = !term || p.titulo.toLowerCase().includes(term) || p.comuna.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term);
+    if (match) {
+      addPointToMap(p);
+      count++;
+    }
+  });
+
+  document.getElementById('visiblePointsCount').innerText = count;
+});
+
+function updatePointsCounter() {
+  let count = 0;
+  document.querySelectorAll('.layer-toggle input').forEach(cb => {
+    if (cb.checked) {
+      count += territorialPoints.filter(p => p.layer === cb.dataset.layer).length;
+    }
+  });
+  document.getElementById('visiblePointsCount').innerText = count;
+}
+
+// Modal para agregar punto haciendo clic en el mapa
+const reportModal = document.getElementById('reportPointModal');
+let clickedLatLng = null;
+
+map.on('click', function(e) {
+  clickedLatLng = e.latlng;
+  document.getElementById('pCoords').value = `${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}`;
+  reportModal.classList.add('active');
+});
+
+document.getElementById('openReportModalBtn').addEventListener('click', () => {
+  reportModal.classList.add('active');
+});
+document.getElementById('closeReportModalBtn').addEventListener('click', () => {
+  reportModal.classList.remove('active');
+});
+reportModal.addEventListener('click', e => {
+  if (e.target === reportModal) reportModal.classList.remove('active');
+});
+
+// Guardar nuevo registro
+document.getElementById('newPointForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const layer = document.getElementById('pLayer').value;
+  const titulo = document.getElementById('pTitle').value;
+  const comuna = document.getElementById('pComuna').value;
+  const desc = document.getElementById('pDesc').value;
+  const fuente = document.getElementById('pSource').value || 'Registro Ciudadano';
+
+  let lat = clickedLatLng ? clickedLatLng.lat : -37.5;
+  let lng = clickedLatLng ? clickedLatLng.lng : -72.6;
+
+  const newPt = {
+    layer, lat, lng, titulo, comuna,
+    fecha: 'Recién ingresado (en verificación)',
+    desc, fuente
+  };
+
+  territorialPoints.push(newPt);
+  addPointToMap(newPt);
+  updatePointsCounter();
+
+  reportModal.classList.remove('active');
+  this.reset();
+  clickedLatLng = null;
+
+  alert('¡Gracias! Tu reporte ha sido registrado en el mapa territorial y será revisado por la comisión comunitaria.');
+});
+
+/* ==========================================================================
+   5. BIBLIOTECA DOCUMENTAL: DATOS Y FILTROS
+   ========================================================================== */
+const documentosData = [
+  {
+    id: 'decreto',
+    titulo: 'Propuesta de Decreto Supremo para la Restauración Ecológica',
+    tema: 'Leyes',
+    anio: '2026',
+    autor: 'Equipo Jurídico ReSuMoF & AIFBN',
+    paginas: '48 págs.',
+    resumen: 'Marco regulatorio integral que propone la derogación de los subsidios del DL 701, el establecimiento de franjas de amortiguación periurbanas y la creación del Fondo Nacional de Restauración de Cuencas.',
+    puntosClave: [
+      'Prohibición de nuevas plantaciones exóticas en cabeceras de cuenca',
+      'Distancias obligatorias de 1.000 metros a viviendas',
+      'Incentivos directos a propietarios rurales por conservar bosque nativo'
+    ]
+  },
+  {
+    id: 'hidro',
+    titulo: 'Impacto Hidrológico del Monocultivo en Cuencas del Biobío y Maule',
+    tema: 'Agua',
+    anio: '2025',
+    autor: 'Comisión Científica Independiente',
+    paginas: '72 págs.',
+    resumen: 'Estudio de balance hídrico que demuestra cómo la densidad de eucaliptos y pinos reduce hasta un 65% el caudal de verano en esteros que abastecen a comités de agua potable rural.',
+    puntosClave: [
+      'Monitoreo en 14 microcuencas comparadas con bosque nativo',
+      'Evaporación y transpiración acelerada en verano',
+      'Recuperación de caudales tras la erradicación de eucaliptos en riberas'
+    ]
+  },
+  {
+    id: 'franjas',
+    titulo: 'Megaincendios de Interfaz: Criterios de Seguridad Territorial',
+    tema: 'Incendios',
+    anio: '2025',
+    autor: 'Mesa de Prevención Comunitaria ReSuMoF',
+    paginas: '36 págs.',
+    resumen: 'Análisis de los incendios de Santa Juana, Purén y Quillón. Demuestra la inviabilidad de cortafuegos de sólo 20 metros y propone una política territorial de franjas productivas agroecológicas.',
+    puntosClave: [
+      'El monocultivo como combustible homogéneo de alta ignición',
+      'Propuesta de barreras verdes de bosque nativo esclerófilo',
+      'Participación comunitaria vinculante en los planes de emergencia'
+    ]
+  },
+  {
+    id: 'agroeco',
+    titulo: 'Guía Metodológica de Transición Agroecológica y Viverización Nativa',
+    tema: 'Restauración',
+    anio: '2024',
+    autor: 'Red de Viveros Comunitarios del Sur',
+    paginas: '54 págs.',
+    resumen: 'Manual práctico para comunidades y pequeños agricultores que deseen recolectar semillas nativas, construir viveros rústicos y restaurar quebradas degradadas por la industria forestal.',
+    puntosClave: [
+      'Calendario de recolección de semillas (roble, peumo, boldo, quillay)',
+      'Técnicas de siembra y trasplante en secano',
+      'Asociación con cultivos de autoconsumo campesino'
+    ]
+  },
+  {
+    id: 'manifiesto',
+    titulo: 'Manifiesto de Purén: Soberanía Territorial y Descentralización',
+    tema: 'Pueblos',
+    anio: '2024',
+    autor: 'IV Encuentro Plurinacional de la Red',
+    paginas: '18 págs.',
+    resumen: 'Declaración política consensuada por más de 40 organizaciones campesinas, ecologistas y mapuche tras el encuentro nacional en la Cordillera de Nahuelbuta.',
+    puntosClave: [
+      'Reconocimiento a las zonas de sacrificio y memoria de las víctimas',
+      'Llamado a la moratoria inmediata de expansión forestal',
+      'Articulación con redes socioambientales del Cono Sur'
+    ]
+  },
+  {
+    id: 'sacrificio',
+    titulo: 'Cartografía de Zonas de Sacrificio Forestal en el Centro-Sur',
+    tema: 'Leyes',
+    anio: '2023',
+    autor: 'Observatorio Latinoamericano de Conflictos Ambientales (OLCA)',
+    paginas: '60 págs.',
+    resumen: 'Catastro exhaustivo de las instalaciones de celulosa, ductos marítimos, vertederos industriales y termoeléctricas de biomasa asociadas a los consorcios Arauco y CMPC.',
+    puntosClave: [
+      'Impacto en la salud respiratoria en Nacimiento y Laja',
+      'Contaminación del Golfo de Arauco y pesca artesanal',
+      'Pasivos ambientales acumulados sin plan de cierre'
+    ]
+  }
+];
+
+function renderDocumentos(list) {
+  const container = document.getElementById('bibContainer');
+  if (!list.length) {
+    container.innerHTML = `<div style="grid-column:1/-1;padding:40px;text-align:center;color:#9EAAA0;background:rgba(255,255,255,0.03);border-radius:8px;">No se encontraron documentos con los filtros seleccionados.</div>`;
+    return;
+  }
+
+  container.innerHTML = list.map(doc => `
+    <div class="bib-card">
+      <div>
+        <div class="bib-card-meta">
+          <span>${doc.tema.toUpperCase()}</span>
+          <span>${doc.anio} · ${doc.paginas}</span>
+        </div>
+        <h4>${doc.titulo}</h4>
+        <p style="font-size:0.78rem;color:#8E9A92;margin-bottom:8px;">Por: ${doc.autor}</p>
+        <p>${doc.resumen}</p>
+      </div>
+      <a href="#biblioteca" class="bib-card-action" onclick="openDocModal('${doc.id}')">
+        Ver Ficha y Descarga →
+      </a>
+    </div>
+  `).join('');
+}
+
+renderDocumentos(documentosData);
+
+function filterDocumentos() {
+  const search = document.getElementById('bibSearchInput').value.toLowerCase();
+  const topic = document.getElementById('bibTopicSelect').value;
+  const year = document.getElementById('bibYearSelect').value;
+
+  const filtered = documentosData.filter(d => {
+    const matchSearch = !search || d.titulo.toLowerCase().includes(search) || d.autor.toLowerCase().includes(search) || d.resumen.toLowerCase().includes(search);
+    const matchTopic = (topic === 'todos') || (d.tema === topic);
+    const matchYear = (year === 'todos') || (d.anio === year);
+    return matchSearch && matchTopic && matchYear;
+  });
+
+  renderDocumentos(filtered);
+}
+
+document.getElementById('bibSearchInput').addEventListener('input', filterDocumentos);
+document.getElementById('bibTopicSelect').addEventListener('change', filterDocumentos);
+document.getElementById('bibYearSelect').addEventListener('change', filterDocumentos);
+
+// Modal de Lectura de Documento
+const docModal = document.getElementById('docReaderModal');
+function openDocModal(docId) {
+  const doc = documentosData.find(d => d.id === docId);
+  if (!doc) return;
+
+  document.getElementById('docModalBadge').innerText = `${doc.tema} · ${doc.anio}`;
+  document.getElementById('docModalTitle').innerText = doc.titulo;
+  document.getElementById('docModalMeta').innerText = `Autor: ${doc.autor} · Extensión: ${doc.paginas}`;
+  
+  let bodyHtml = `<p><strong>Resumen Ejecutivo:</strong> ${doc.resumen}</p>`;
+  if (doc.puntosClave && doc.puntosClave.length) {
+    bodyHtml += `<div style="margin-top:16px;"><strong>Ejes destacados del documento:</strong><ul style="margin:10px 0 0 20px;list-style:disc;">`;
+    doc.puntosClave.forEach(pt => bodyHtml += `<li>${pt}</li>`);
+    bodyHtml += `</ul></div>`;
+  }
+  document.getElementById('docModalBody').innerHTML = bodyHtml;
+  document.getElementById('docModalDownloadBtn').onclick = () => {
+    alert(`Iniciando descarga simulada de: "${doc.titulo}.pdf"`);
+  };
+
+  docModal.classList.add('active');
+}
+function closeDocModal() {
+  docModal.classList.remove('active');
+}
+document.getElementById('closeDocModalBtn').addEventListener('click', closeDocModal);
+docModal.addEventListener('click', e => { if (e.target === docModal) closeDocModal(); });
+
+/* ==========================================================================
+   6. REPRODUCTOR DE PODCAST FUNCIONAL CON WAVEFORM
+   ========================================================================== */
+const podcastTracks = [
+  {
+    title: 'Santa Juana después del fuego: el renacer del bosque nativo',
+    desc: 'Conversación con dirigentas campesinas de comités de agua tras el incendio de 2023. Desafíos de la reconstrucción y viveros nativos.',
+    duration: '28:45',
+    totalSecs: 1725
+  },
+  {
+    title: 'La cuenca de Contulmo y la sed campesina frente al eucalipto',
+    desc: 'Relatos de familias que vivieron el secado de pozos comunitarios en la Cordillera de Nahuelbuta.',
+    duration: '34:10',
+    totalSecs: 2050
+  },
+  {
+    title: 'Viveros autónomos: cómo recolectar y sembrar canelo y roble',
+    desc: 'Taller radiofónico con técnicas de estratificación de semillas y cuidados de plántulas de bosque templado.',
+    duration: '22:15',
+    totalSecs: 1335
+  },
+  {
+    title: 'Mujeres lafkenche y la defensa comunitaria del Itrofill Mogen',
+    desc: 'Lideresas de Tirúa y Cañete abordan el valor sagrado de los humedales y menokos frente a la industria forestal.',
+    duration: '31:00',
+    totalSecs: 1860
+  }
+];
+
+let currentTrackIndex = 0;
+let isPlaying = false;
+let playbackSeconds = 0;
+let playbackTimer = null;
+
+// Generar visualizador de barras
+const waveformContainer = document.getElementById('waveform');
+for (let i = 0; i < 36; i++) {
+  const bar = document.createElement('div');
+  bar.className = 'wave-bar';
+  bar.style.animationDelay = `${(i * 0.04).toFixed(2)}s`;
+  waveformContainer.appendChild(bar);
+}
+
+const playPauseBtn = document.getElementById('playPauseBtn');
+const playIcon = document.getElementById('playIcon');
+const currentTimeEl = document.getElementById('currentTime');
+const totalTimeEl = document.getElementById('totalTime');
+const progressFill = document.getElementById('progressFill');
+const progressBar = document.getElementById('progressBar');
+
+function formatSeconds(secs) {
+  const m = Math.floor(secs / 60);
+  const s = Math.floor(secs % 60);
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+function loadTrack(index) {
+  currentTrackIndex = index;
+  const track = podcastTracks[index];
+  document.getElementById('playerEpTitle').innerText = track.title;
+  document.getElementById('playerEpDesc').innerText = track.desc;
+  totalTimeEl.innerText = track.duration;
+  playbackSeconds = 0;
+  currentTimeEl.innerText = '00:00';
+  progressFill.style.width = '0%';
+
+  document.querySelectorAll('.episode-item').forEach((item, idx) => {
+    item.classList.toggle('active', idx === index);
+  });
+}
+
+function togglePlay() {
+  if (isPlaying) {
+    clearInterval(playbackTimer);
+    isPlaying = false;
+    playIcon.innerText = '▶';
+    waveformContainer.classList.remove('playing');
+  } else {
+    isPlaying = true;
+    playIcon.innerText = '⏸';
+    waveformContainer.classList.add('playing');
+    playbackTimer = setInterval(() => {
+      const track = podcastTracks[currentTrackIndex];
+      playbackSeconds++;
+      if (playbackSeconds > track.totalSecs) {
+        playbackSeconds = 0;
+        togglePlay();
+      }
+      currentTimeEl.innerText = formatSeconds(playbackSeconds);
+      const pct = (playbackSeconds / track.totalSecs) * 100;
+      progressFill.style.width = `${pct}%`;
+    }, 1000);
+  }
+}
+
+playPauseBtn.addEventListener('click', togglePlay);
+
+// Click en barra de progreso
+progressBar.addEventListener('click', e => {
+  const rect = progressBar.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const pct = clickX / rect.width;
+  const track = podcastTracks[currentTrackIndex];
+  playbackSeconds = Math.floor(track.totalSecs * pct);
+  currentTimeEl.innerText = formatSeconds(playbackSeconds);
+  progressFill.style.width = `${pct * 100}%`;
+});
+
+// Click en lista de episodios
+document.querySelectorAll('.episode-item').forEach(item => {
+  item.addEventListener('click', function() {
+    const idx = parseInt(this.dataset.index);
+    loadTrack(idx);
+    if (!isPlaying) togglePlay();
+  });
+});
+
+// Modal de Video
+const videoModal = document.getElementById('videoPlayerModal');
+const videoIframe = document.getElementById('videoIframe');
+const videoModalTitle = document.getElementById('videoModalTitle');
+
+function openVideoModal(url, title) {
+  videoIframe.src = url;
+  videoModalTitle.innerText = title;
+  videoModal.classList.add('active');
+}
+document.getElementById('closeVideoModalBtn').addEventListener('click', () => {
+  videoIframe.src = '';
+  videoModal.classList.remove('active');
+});
+videoModal.addEventListener('click', e => {
+  if (e.target === videoModal) {
+    videoIframe.src = '';
+    videoModal.classList.remove('active');
+  }
+});
+
+/* ==========================================================================
+   7. BLOG Y COMUNICADOS EN VIVO
+   ========================================================================== */
+const blogPosts = [
+  {
+    cat: 'Comunicados',
+    titulo: 'Rechazo ciudadano a nueva ampliación industrial en el Biobío',
+    fecha: '28 de Agosto, 2026',
+    img: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=800&q=80',
+    resumen: 'Las organizaciones de la Red firman una declaración exigiendo al Servicio de Evaluación Ambiental el rechazo del proyecto de ampliación de riles en el Golfo de Arauco.'
+  },
+  {
+    cat: 'Investigación',
+    titulo: 'Catastro 2026: El 82% del agua en camiones aljibe va a comunas forestales',
+    fecha: '15 de Agosto, 2026',
+    img: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80',
+    resumen: 'Análisis de presupuestos municipales revela el gasto millonario que el Fisco desembolsa anualmente para compensar el desecamiento provocado por el monocultivo de eucalipto.'
+  },
+  {
+    cat: 'Encuentros',
+    titulo: 'Más de 40 comunidades coordinan agenda en el V Encuentro de la Red',
+    fecha: '2 de Agosto, 2026',
+    img: 'https://images.unsplash.com/photo-1658227411687-127e7ffaffbe?auto=format&fit=crop&w=800&q=80',
+    resumen: 'Delegaciones desde Curicó hasta Osorno se reunieron en Ñuble para consolidar la red de viveros de bosque nativo y preparar la presentación de la propuesta de ley.'
+  },
+  {
+    cat: 'Campañas',
+    titulo: 'Campaña "1.000 Metros de Vida": Cortafuegos obligatorios para los pueblos',
+    fecha: '20 de Julio, 2026',
+    img: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80',
+    resumen: 'Iniciativa ciudadana para exigir que las empresas forestales retiren plantaciones de alta inflamabilidad de los perímetros urbanos antes de la próxima temporada estival.'
+  },
+  {
+    cat: 'Investigación',
+    titulo: '¿Por qué el bosque nativo frena los incendios? La evidencia del sotobosque',
+    fecha: '5 de Julio, 2026',
+    img: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80',
+    resumen: 'Investigación sobre la humedad relativa del suelo en rodales de roble y coigüe frente a la sequedad extrema de los eucaliptales industriales.'
+  },
+  {
+    cat: 'Comunicados',
+    titulo: 'Solidaridad activa con comunidades lafkenche de la Cuenca del Lanalhue',
+    fecha: '22 de Junio, 2026',
+    img: 'https://images.unsplash.com/photo-1494825514961-674db1ac2700?auto=format&fit=crop&w=800&q=80',
+    resumen: 'La Red exige detener la persecución judicial a defensores territoriales que impidieron la corta no autorizada de renovales nativos en la provincia de Arauco.'
+  }
+];
+
+function renderBlogPosts(cat) {
+  const container = document.getElementById('blogPostsContainer');
+  const filtered = cat === 'todos' ? blogPosts : blogPosts.filter(p => p.cat === cat);
+
+  container.innerHTML = filtered.map(post => `
+    <article class="post-card">
+      <div class="post-image-wrapper">
+        <img src="${post.img}" alt="${post.titulo}">
+        <span class="post-category-tag">${post.cat}</span>
+      </div>
+      <div class="post-body">
+        <span class="post-date">📅 ${post.fecha}</span>
+        <h3>${post.titulo}</h3>
+        <p>${post.resumen}</p>
+        <a href="#blog" class="post-read-link" onclick="alert('Abriendo artículo completo: ${post.titulo}')">
+          Leer crónica completa →
+        </a>
+      </div>
+    </article>
+  `).join('');
+}
+
+renderBlogPosts('todos');
+
+document.querySelectorAll('.blog-pill').forEach(pill => {
+  pill.addEventListener('click', function() {
+    document.querySelectorAll('.blog-pill').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    renderBlogPosts(this.dataset.cat);
+  });
+});
+
+/* ==========================================================================
+   8. PETITORIO CIUDADANO & FORMULARIO DE ADHESIÓN
+   ========================================================================== */
+let totalSignatures = 14825;
+
+function switchFormType(type) {
+  const tabOrg = document.getElementById('tabOrg');
+  const tabInd = document.getElementById('tabInd');
+  const labelName = document.getElementById('labelName');
+  const fName = document.getElementById('fName');
+
+  if (type === 'org') {
+    tabOrg.classList.add('active');
+    tabInd.classList.remove('active');
+    labelName.innerText = 'Nombre de la Organización / Colectivo';
+    fName.placeholder = 'Ej. Colectivo Cuenca del Laja';
+  } else {
+    tabInd.classList.add('active');
+    tabOrg.classList.remove('active');
+    labelName.innerText = 'Nombre y Apellido';
+    fName.placeholder = 'Ej. Daniela Fernández Morales';
+  }
+}
+
+document.getElementById('joinForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('fName').value;
+  const region = document.getElementById('fRegion').value;
+
+  totalSignatures++;
+  document.getElementById('signatureCount').innerText = totalSignatures.toLocaleString('es-CL');
+  const newPct = Math.min((totalSignatures / 20000) * 100, 100);
+  document.getElementById('signatureBarFill').style.width = `${newPct}%`;
+
+  alert(`¡Gracias ${name}! Tu adhesión desde la Región del ${region} fue confirmada con éxito y tu firma se sumó al petitorio nacional.`);
+  this.reset();
+});
+</script>
+
+</body>
+</html>
