@@ -2450,14 +2450,20 @@ header.scrolled .mobile-nav-drawer {
 
 .post-image-wrapper {
   position: relative;
-  aspect-ratio: 16/10;
+  width: 100%;
+  height: 220px;
+  max-height: 220px;
   overflow: hidden;
+  background-color: var(--carbon-claro, #1b2e26);
 }
 
 .post-image-wrapper img {
   width: 100%;
   height: 100%;
+  max-height: 220px;
   object-fit: cover;
+  object-position: center;
+  display: block;
   transition: transform 0.4s ease;
 }
 
@@ -3218,83 +3224,101 @@ footer {
   color: #FFF;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.8rem;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--radio-sm);
   font-weight: 700;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 12px rgba(214, 64, 32, 0.3);
 }
 .fire-danger-card {
   background: linear-gradient(145deg, #1C0F0B 0%, #2A130C 100%);
-  border: 1px solid rgba(214, 64, 32, 0.35);
+  border: 1px solid rgba(214, 64, 32, 0.45);
   border-radius: var(--radio-lg);
-  padding: 28px;
+  padding: 32px;
   color: var(--blanco-hueso);
-  box-shadow: 0 16px 36px rgba(214, 64, 32, 0.15);
+  box-shadow: 0 16px 36px rgba(214, 64, 32, 0.2);
 }
 .fire-stats-strip {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
   margin: 32px 0;
 }
 .fire-stat-box {
   background: #FFF;
   border: 1px solid var(--borde-suave);
-  border-left: 4px solid var(--terracota-fuego);
+  border-top: 4px solid var(--terracota-fuego);
   border-radius: var(--radio-md);
-  padding: 20px;
+  padding: 24px 22px;
   box-shadow: var(--sombra-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.fire-stat-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-hover);
+  border-color: var(--terracota-fuego);
 }
 .fire-stat-box .num {
   font-family: 'Archivo', sans-serif;
-  font-size: 2.3rem;
+  font-size: 2.6rem;
   font-weight: 900;
   color: var(--terracota-fuego);
   line-height: 1;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 .fire-stat-box .desc {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--carbon-medio);
-  line-height: 1.4;
+  line-height: 1.5;
+  margin-top: auto;
 }
 .firebreak-infographic {
-  background: var(--bosque-profundo);
+  background: linear-gradient(145deg, var(--bosque-profundo) 0%, #0e221b 100%);
   color: var(--blanco-hueso);
   border-radius: var(--radio-lg);
-  padding: 36px;
-  margin: 40px 0;
+  padding: 40px;
+  margin: 36px 0;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(244, 211, 137, 0.2);
+  border: 1px solid rgba(244, 211, 137, 0.25);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2);
 }
 .firebreak-visual {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  gap: 16px;
-  margin-top: 24px;
+  grid-template-columns: 1fr 1.6fr 1fr;
+  gap: 18px;
+  margin-top: 28px;
   align-items: stretch;
 }
 .firebreak-zone {
   border-radius: var(--radio-md);
-  padding: 20px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
+  transition: transform 0.2s ease;
+}
+.firebreak-zone:hover {
+  transform: translateY(-2px);
 }
 .firebreak-zone.pueblo {
-  background: rgba(43, 105, 121, 0.3);
+  background: rgba(43, 105, 121, 0.35);
   border: 1px solid var(--azul-glaciar);
 }
 .firebreak-zone.buffer {
-  background: rgba(244, 211, 137, 0.15);
+  background: rgba(244, 211, 137, 0.18);
   border: 2px dashed var(--ambar-tierra);
+  box-shadow: 0 0 24px rgba(244, 211, 137, 0.08);
 }
 .firebreak-zone.pino {
-  background: rgba(214, 64, 32, 0.25);
+  background: rgba(214, 64, 32, 0.28);
   border: 1px solid var(--terracota-viva);
 }
 .fire-timeline {
@@ -3306,7 +3330,7 @@ footer {
   padding-left: 28px;
 }
 .fire-timeline::before {
-  content: ;
+  content: "";
   position: absolute;
   left: 8px;
   top: 8px;
@@ -3319,15 +3343,21 @@ footer {
   position: relative;
   background: #FFF;
   border: 1px solid var(--borde-suave);
+  border-left: 3px solid var(--terracota-fuego);
   border-radius: var(--radio-md);
-  padding: 20px;
+  padding: 24px 26px;
   box-shadow: var(--sombra-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fire-timeline-item:hover {
+  transform: translateX(4px);
+  box-shadow: var(--sombra-hover);
 }
 .fire-timeline-item::after {
-  content: ;
+  content: "";
   position: absolute;
-  left: -26px;
-  top: 24px;
+  left: -27px;
+  top: 28px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
