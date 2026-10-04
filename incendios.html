@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="img/favicon.png">
 
 <!-- Estilos Unificados -->
-<link rel="stylesheet" href="css/style.css?v=20261004b">
+<link rel="stylesheet" href="css/style.css?v=20261004c">
 </head>
 <body>
 
@@ -133,57 +133,83 @@
       </div>
 
       <!-- Sección 1: La Ciencia del Fuego y el Combustible Continuo -->
-      <div class="grid-2-responsive" style="margin-top:50px;">
+      <div class="section-head" style="margin-top:64px;margin-bottom:36px;">
         <div>
           <span class="mono-badge">Biomasa & Combustibilidad</span>
-          <h2>¿Por Qué las Plantaciones Generan Tormentas de Fuego?</h2>
-          <p style="margin:16px 0;font-size:1.02rem;">
-            A diferencia de los bosques nativos diversos y de varios estratos verticales, los monocultivos de <em>Pinus radiata</em> y <em>Eucalyptus globulus</em> son plantados en densidades extremas (1.100 a 1.600 árboles por hectárea) con copas continuas que forman un techo de fuego ininterrumpido.
-          </p>
-          <p style="margin-bottom:16px;font-size:1.02rem;">
-            Ambas especies exóticas poseen una altísima carga de aceites esenciales terpénicos y resinas que desprenden gases inflamables a temperaturas superiores a los 30 °C, provocando que el fuego salte de la superficie a las copas (fuego de copa) a velocidades que sobrepasan la capacidad de cualquier brigada terrestre.
-          </p>
-          <div style="background:var(--blanco-pergamino);padding:18px;border-radius:var(--radio-md);border-left:4px solid var(--terracota-fuego);">
-            <strong style="color:var(--terracota-oscura);">El Círculo Vicioso de la Sequedad:</strong>
-            <p style="font-size:0.9rem;margin-top:6px;">
-              El eucalipto extrae el agua de las napas y del primer metro de suelo, eliminando la humedad ambiental de la cuenca. Cuando llega el verano, el suelo se encuentra en punto de sequedad extrema, convirtiendo al sotobosque en yesca pura.
+          <h2>La Ciencia Tras las Tormentas de Fuego</h2>
+        </div>
+        <p class="lead">
+          ¿Por qué arden con tal violencia las plantaciones industriales? Análisis eco-fisiológico de la carga combustible y el comportamiento del fuego de copas en monocultivos.
+        </p>
+      </div>
+
+      <div class="grid-2-responsive" style="align-items:stretch;">
+        <!-- Columna Izquierda: Tarjeta Editorial Estructurada -->
+        <div class="fire-analysis-card">
+          <div>
+            <span class="fire-benefit-tag">EVIDENCIA TÉCNICA Y ECOLÓGICA</span>
+            <h3 style="font-size:1.45rem;color:var(--bosque-profundo);margin-bottom:18px;line-height:1.28;">Densidad Extrema y Techo de Combustible Continuo</h3>
+            <p class="card-lead-text">
+              A diferencia de los bosques nativos diversos y estratificados en múltiples pisos biológicos, los monocultivos de <em>Pinus radiata</em> y <em>Eucalyptus globulus</em> son plantados en densidades extremas —entre <strong>1.100 y 1.600 árboles por hectárea</strong>— formando un dosel continuo sin interrupción que actúa como acelerador del fuego.
+            </p>
+            <p class="card-secondary-text">
+              Ambas especies desprenden alta concentración de compuestos orgánicos volátiles, aceites terpénicos y resinas. A temperaturas superiores a los 30 °C, estos compuestos gasifican el follaje, provocando que el fuego salte de la superficie a las copas a velocidades supersónicas que neutralizan los cortafuegos convencionales y sobrepasan la capacidad de cualquier brigada terrestre.
+            </p>
+          </div>
+          
+          <div class="fire-callout-box">
+            <strong>El Círculo Vicioso de la Sequedad y la Desecación:</strong>
+            <p>
+              El eucalipto agota la reserva freática del primer metro de suelo, anulando la humedad ambiental de la cuenca. Al llegar la temporada estival, el suelo entra en sequedad extrema, convirtiendo al sotobosque en yesca pura y desatando el comportamiento de tormenta ígnea.
             </p>
           </div>
         </div>
 
-        <div class="fire-compare-card">
-          <h3>Comparativa de Comportamiento del Fuego</h3>
-          <table class="fire-compare-table">
-            <thead>
-              <tr>
-                <th style="color:#A4B8AD;">Factor</th>
-                <th style="color:#FFA8A8;">Monocultivo Pino / Eucalipto</th>
-                <th style="color:#89F4B3;">Bosque Nativo Templado</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Humedad de Hoja</strong></td>
-                <td style="color:#FFA8A8;">Baja (&lt; 65% en verano)</td>
-                <td style="color:#B2FFCD;">Alta (&gt; 110% en sotobosque)</td>
-              </tr>
-              <tr>
-                <td><strong>Estructura</strong></td>
-                <td style="color:#FFA8A8;">Dosel continuo monótono</td>
-                <td style="color:#B2FFCD;">Multi-estrato con claros húmedos</td>
-              </tr>
-              <tr>
-                <td><strong>Velocidad Avance</strong></td>
-                <td style="color:#FFA8A8;">Hasta 12 km/h con viento</td>
-                <td style="color:#B2FFCD;">0.5 a 1.5 km/h (efecto freno)</td>
-              </tr>
-              <tr>
-                <td><strong>Generación Pavesas</strong></td>
-                <td style="color:#FFA8A8;">Masiva (conos ardiendo)</td>
-                <td style="color:#B2FFCD;">Mínima o nula</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Columna Derecha: Tarjeta Comparativa Enmarcada -->
+        <div class="fire-compare-card" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:0.75rem;letter-spacing:0.08em;color:#F4D389;text-transform:uppercase;display:block;margin-bottom:8px;">MODELO PREDICTIVO COMPARATIVO</span>
+            <h3>Comportamiento del Fuego: Monocultivo vs. Bosque Nativo</h3>
+            <table class="fire-compare-table">
+              <thead>
+                <tr>
+                  <th style="color:#A4B8AD;">Factor</th>
+                  <th style="color:#FFA8A8;">Monocultivo Pino / Eucalipto</th>
+                  <th style="color:#89F4B3;">Bosque Nativo Templado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Humedad de Hoja</strong></td>
+                  <td style="color:#FFA8A8;">Baja (&lt; 65% en verano)</td>
+                  <td style="color:#B2FFCD;">Alta (&gt; 110% en sotobosque)</td>
+                </tr>
+                <tr>
+                  <td><strong>Estructura</strong></td>
+                  <td style="color:#FFA8A8;">Dosel continuo monótono</td>
+                  <td style="color:#B2FFCD;">Multi-estrato con claros húmedos</td>
+                </tr>
+                <tr>
+                  <td><strong>Velocidad Avance</strong></td>
+                  <td style="color:#FFA8A8;">Hasta 12 km/h con viento</td>
+                  <td style="color:#B2FFCD;">0.5 a 1.5 km/h (efecto freno)</td>
+                </tr>
+                <tr>
+                  <td><strong>Generación Pavesas</strong></td>
+                  <td style="color:#FFA8A8;">Masiva (conos ardiendo)</td>
+                  <td style="color:#B2FFCD;">Mínima o nula</td>
+                </tr>
+                <tr>
+                  <td><strong>Capacidad Autodefensa</strong></td>
+                  <td style="color:#FFA8A8;">Nula (combustible vivo)</td>
+                  <td style="color:#B2FFCD;">Alta (barrera térmica viva)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.1);font-size:0.8rem;color:#A4B8AD;font-family:'IBM Plex Mono',monospace;">
+            Fuente: Centro de Ciencia del Clima y la Resiliencia (CR2) & Red por la Superación del Modelo Forestal
+          </div>
         </div>
       </div>
     </div>
@@ -198,58 +224,71 @@
           <h2>Iniciativa "1.000 Metros de Vida"</h2>
         </div>
         <p class="lead">
-          Frente a la ineficacia de los cortafuegos de 15 a 30 metros que actualmente exige la normativa, exigimos un cinturón de seguridad real para salvaguardar la vida campesina y urbana.
+          Frente a la ineficacia comprobada de los cortafuegos de 15 a 30 metros que actualmente exige la normativa, exigimos por ley un cinturón de seguridad real para salvaguardar la vida campesina y urbana.
         </p>
       </div>
 
       <div class="firebreak-infographic">
         <h3 style="font-size:1.6rem;color:#F4D389;margin-bottom:12px;">Cinturón de Amortiguación Agroecológica Perimetral</h3>
-        <p style="color:#C6D4CC;max-width:75ch;font-size:0.98rem;">
-          La propuesta no busca dejar tierras estériles de tierra pelada, sino reconvertir el primer kilómetro perimetral en un mosaico productivo campesino resistente al fuego.
+        <p style="color:#C6D4CC;max-width:75ch;font-size:0.98rem;line-height:1.6;">
+          La propuesta no busca dejar franjas estériles de tierra pelada o erosionada, sino reconvertir el primer kilómetro perimetral en un mosaico vivo campesino, biodiverso y resistente al fuego.
         </p>
 
         <div class="firebreak-visual">
           <div class="firebreak-zone pueblo">
             <span style="font-size:2rem;margin-bottom:8px;">🏘️</span>
             <strong style="color:#F9F7F2;font-size:1.1rem;">Zona Urbana / Pueblo</strong>
-            <small style="color:#D2DDD7;margin-top:6px;">Viviendas, postas rurales, escuelas, comités APR.</small>
+            <small style="color:#D2DDD7;margin-top:6px;">Viviendas, postas rurales, escuelas, comités APR e infraestructura comunitaria.</small>
           </div>
 
           <div class="firebreak-zone buffer">
             <span style="font-size:2rem;margin-bottom:8px;">🌾 🍎 💧</span>
             <strong style="color:#F4D389;font-size:1.15rem;">FAJA PROTECTORA DE 1.000 METROS</strong>
-            <small style="color:#F9F7F2;margin-top:8px;line-height:1.4;">
-              • Agricultura campesina y chacras verdes<br>
-              • Viveros y bosque nativo higrófilo (canelos, arrayanes)<br>
-              • Huertos frutales y pastoreo limpio<br>
-              <strong>0% monocultivo de pino o eucalipto</strong>
+            <small style="color:#F9F7F2;margin-top:8px;line-height:1.45;">
+              • Agricultura campesina y chacras verdes de hortalizas<br>
+              • Viveros y bosque nativo higrófilo (canelos, arrayanes, pataguas)<br>
+              • Huertos frutales familiares y pastoreo limpio<br>
+              <strong style="color:#FFF;">0% monocultivo de pino o eucalipto</strong>
             </small>
           </div>
 
           <div class="firebreak-zone pino">
             <span style="font-size:2rem;margin-bottom:8px;">🌲 🏭</span>
             <strong style="color:#FFA8A8;font-size:1.1rem;">Zona Forestal Excluida</strong>
-            <small style="color:#E6DFD5;margin-top:6px;">Empresas obligadas a retirar plantaciones a más de 1 km.</small>
+            <small style="color:#E6DFD5;margin-top:6px;">Empresas y consorcios madereros obligados a retirar plantaciones a más de 1 km.</small>
           </div>
         </div>
       </div>
 
-      <!-- Beneficios del Bosque Nativo como Cortafuego -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:24px;margin-top:36px;">
-        <div class="diag-card" style="background:#FFF;">
-          <div class="diag-card-icon">🌱</div>
-          <h4>Humedad Permanente de Cuenca</h4>
-          <p>Las raíces profundas del bosque esclerófilo y templado esponjan el suelo, recargando los acuíferos subterráneos que mantienen el pasto y sotobosque verde durante todo el estío.</p>
-        </div>
-        <div class="diag-card" style="background:#FFF;">
-          <div class="diag-card-icon">🛡️</div>
-          <h4>Freno Mecánico al Avance Ígneo</h4>
-          <p>Hojas coriáceas de especies nativas (como boldo, peumo o litre) no poseen resinas explosivas y absorben calor antes de arder, disminuyendo la radiación térmica sobre las casas.</p>
-        </div>
-        <div class="diag-card" style="background:#FFF;">
-          <div class="diag-card-icon">🚜</div>
-          <h4>Recuperación de la Soberanía Alimentaria</h4>
-          <p>La franja de amortiguación devuelve las mejores tierras agrícolas a las comunidades para producción de hortalizas, legumbres de secano y viñas patrimoniales campesinas.</p>
+      <!-- Encabezado de Subsección: Beneficios del Bosque Nativo como Cortafuego -->
+      <div style="margin-top:56px;">
+        <span class="mono-badge">Barrera Ecológica Activa</span>
+        <h3 style="font-size:1.75rem;color:var(--bosque-profundo);margin-top:8px;margin-bottom:8px;">¿Por Qué el Bosque Nativo Detiene el Fuego?</h3>
+        <p style="color:var(--gris-ceniza);max-width:70ch;font-size:1rem;margin-bottom:28px;">
+          Tres mecanismos biofísicos comprobados que transforman la faja protectora de 1.000 metros en un escudo vital para las comunidades.
+        </p>
+
+        <div class="fire-benefits-grid">
+          <div class="fire-benefit-card">
+            <span class="fire-benefit-tag">EJE HIDROLÓGICO</span>
+            <span class="fire-benefit-icon">🌱</span>
+            <h4>Humedad Permanente de Cuenca</h4>
+            <p>Las raíces profundas del bosque esclerófilo y templado esponjan el suelo, recargando los acuíferos subterráneos que mantienen el pasto y sotobosque verde durante todo el estío, disipando el estrés hídrico.</p>
+          </div>
+          
+          <div class="fire-benefit-card">
+            <span class="fire-benefit-tag">EJE TÉRMICO</span>
+            <span class="fire-benefit-icon">🛡️</span>
+            <h4>Freno Mecánico al Avance Ígneo</h4>
+            <p>Hojas coriáceas de especies nativas (como boldo, peumo, maitén o litre) no poseen resinas explosivas y absorben calor antes de arder, reduciendo drásticamente la radiación térmica sobre las viviendas.</p>
+          </div>
+          
+          <div class="fire-benefit-card">
+            <span class="fire-benefit-tag">EJE AGROECOLÓGICO</span>
+            <span class="fire-benefit-icon">🚜</span>
+            <h4>Recuperación de Soberanía Alimentaria</h4>
+            <p>La franja de amortiguación devuelve las mejores tierras agrícolas a las comunidades para producción de hortalizas, legumbres de secano, apicultura y viñas patrimoniales campesinas sin agrotóxicos.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -264,7 +303,7 @@
           <h2>Cronología de las Tormentas de Fuego</h2>
         </div>
         <p class="lead">
-          La historia reciente demuestra que mientras no cambie el patrón de monocultivo contiguo, cada verano será una ruleta rusa para las poblaciones del sur.
+          La historia reciente demuestra que mientras no cambie el patrón de monocultivo contiguo, cada verano será una ruleta rusa para las poblaciones del centro-sur.
         </p>
       </div>
 
@@ -272,7 +311,7 @@
         <div class="fire-timeline-item">
           <span style="font-family:'IBM Plex Mono',monospace;color:var(--terracota-fuego);font-weight:700;font-size:0.85rem;">ENERO - FEBRERO 2017 · TORMENTA DE FUEGO DEL MAULE</span>
           <h3 style="margin:6px 0 10px;font-size:1.3rem;">Desastre de Las Máquinas y Destrucción Total de Santa Olga</h3>
-          <p style="font-size:0.95rem;color:#383F3B;line-height:1.55;">
+          <p style="font-size:0.95rem;color:#383F3B;line-height:1.65;margin:0;">
             Más de 570.000 hectáreas consumidas en pocos días. El pueblo maderero de Santa Olga fue completamente devorado por el fuego debido a que las plantaciones industriales colindaban directamente con las casas sin cortafuegos de seguridad.
           </p>
         </div>
@@ -280,7 +319,7 @@
         <div class="fire-timeline-item">
           <span style="font-family:'IBM Plex Mono',monospace;color:var(--terracota-fuego);font-weight:700;font-size:0.85rem;">FEBRERO 2023 · CRISIS BIRREGIONAL BIOBÍO & ARAUCANÍA</span>
           <h3 style="margin:6px 0 10px;font-size:1.3rem;">Tragedia en Santa Juana, Purén, Lumaco y Tomé</h3>
-          <p style="font-size:0.95rem;color:#383F3B;line-height:1.55;">
+          <p style="font-size:0.95rem;color:#383F3B;line-height:1.65;margin:0;">
             26 personas fallecidas y miles de familias damnificadas. En Santa Juana, los focos se propagaron velozmente por paños de eucalipto seco, rodeando el radio urbano e incomunicando los puentes sobre el río Biobío.
           </p>
         </div>
@@ -288,18 +327,19 @@
         <div class="fire-timeline-item">
           <span style="font-family:'IBM Plex Mono',monospace;color:var(--terracota-fuego);font-weight:700;font-size:0.85rem;">2024 - 2026 · VIGILANCIA PERMANENTE & RESISTENCIA</span>
           <h3 style="margin:6px 0 10px;font-size:1.3rem;">Articulación de Brigadas Comunitarias y Fiscalización de Predios</h3>
-          <p style="font-size:0.95rem;color:#383F3B;line-height:1.55;">
+          <p style="font-size:0.95rem;color:#383F3B;line-height:1.65;margin:0;">
             Las comunidades territoriales organizadas han tomado la iniciativa: catastran predios forestales sin fajas de seguridad, denuncian ante municipios y exigen la moratoria a la replantación de especies invasoras en zonas arrasadas.
           </p>
         </div>
       </div>
 
-      <div style="background:var(--blanco-pergamino);border-radius:var(--radio-md);padding:24px;margin-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
-        <div>
-          <h4 style="font-size:1.2rem;color:var(--bosque-profundo);margin-bottom:6px;">¿Conoces un predio forestal abandonado sin cortafuegos?</h4>
-          <p style="font-size:0.92rem;color:var(--gris-ceniza);margin:0;">Regístralo en el Mapa de Conflictos para visibilizar el riesgo y coordinar denuncias comunitarias.</p>
+      <!-- Banner de Acción Territorial -->
+      <div class="fire-action-banner">
+        <div class="fire-action-content">
+          <h4>¿Conoces un predio forestal abandonado sin cortafuegos?</h4>
+          <p>Regístralo en el Mapa de Conflictos para visibilizar el riesgo latente, respaldar fiscalizaciones municipales y articular denuncias con las organizaciones de la Red.</p>
         </div>
-        <a href="mapa-conflictos.html" class="btn btn-primary">
+        <a href="mapa-conflictos.html" class="btn btn-primary" style="white-space:nowrap;">
           Ir al Mapa & Denunciar Predio Riesgoso →
         </a>
       </div>

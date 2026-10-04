@@ -4356,5 +4356,147 @@ footer {
   }
 }
 
+/* ==========================================================================
+   ESTILOS EDITORIALES DE LA SECCIÓN INCENDIOS
+   ========================================================================== */
+.fire-analysis-card {
+  background: #FFFFFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-lg);
+  padding: 34px 32px;
+  box-shadow: var(--sombra-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 
+.fire-analysis-card .card-lead-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--carbon-medio);
+  margin-bottom: 20px;
+}
 
+.fire-analysis-card .card-secondary-text {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--carbon-suave);
+  margin-bottom: 24px;
+}
+
+.fire-callout-box {
+  background: var(--blanco-pergamino);
+  border-left: 4px solid var(--terracota-fuego);
+  border-radius: var(--radio-md);
+  padding: 20px 22px;
+  margin-top: auto;
+}
+
+.fire-callout-box strong {
+  display: block;
+  color: var(--terracota-oscura);
+  font-size: 0.96rem;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.fire-callout-box p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--carbon-medio);
+  margin: 0;
+}
+
+/* Tarjetas de Beneficio del Bosque Nativo */
+.fire-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.fire-benefit-card {
+  background: #FFFFFF;
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-md);
+  padding: 28px 26px;
+  box-shadow: var(--sombra-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.fire-benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-hover);
+  border-color: rgba(30, 77, 43, 0.3);
+}
+
+.fire-benefit-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--verde-nativo);
+  margin-bottom: 12px;
+}
+
+.fire-benefit-icon {
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+.fire-benefit-card h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--bosque-profundo);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.fire-benefit-card p {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--carbon-medio);
+  margin: 0;
+}
+
+/* Banner de Llamado a la Acción */
+.fire-action-banner {
+  background: linear-gradient(135deg, var(--bosque-profundo) 0%, #0d2218 100%);
+  color: var(--blanco-hueso);
+  border-radius: var(--radio-lg);
+  padding: 36px 40px;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  border: 1px solid rgba(244, 211, 137, 0.2);
+  box-shadow: var(--sombra-card);
+}
+
+.fire-action-content h4 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--blanco-hueso);
+  margin-bottom: 8px;
+}
+
+.fire-action-content p {
+  font-size: 0.96rem;
+  color: #C6D4CC;
+  max-width: 65ch;
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .fire-action-banner {
+    padding: 28px 24px;
+  }
+}
