@@ -48,29 +48,21 @@
     </nav>
 
     <div class="header-cta-group">
-      <!-- Sintonizador de Radio y Podcast en el Menú -->
-      <div class="header-audio-widget" id="headerAudioWidget" title="Sintonizador de Radio Comunitaria y Podcasts">
-        <div class="audio-widget-select-wrap">
-          <span class="audio-widget-icon">📻</span>
-          <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar radio o podcast">
-            <optgroup label="📻 Radios Comunitarias de Chile">
-              <option value="kurruf" data-type="radio" data-src="https://radio.latina.red/radiokurruf.mp3">Radio Kurruf (Biobío / 107.5 FM)</option>
-              <option value="jgm" data-type="radio" data-src="https://sonic-us.arkeo.cl/8186/stream">Radio JGM (Nacional Comunitaria)</option>
-              <option value="ritoque" data-type="radio" data-src="https://archi-us.digitalproserver.com/ritoquefm_aac">Radio Ritoque (Valparaíso)</option>
-            </optgroup>
-            <optgroup label="🎙️ Podcasts por los Bosques">
-              <option value="pod1" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/santa-juana-renacer-bosque.mp3">Ep. 01: Santa Juana tras el fuego</option>
-              <option value="pod2" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/plantaciones-no-son-bosque.mp3">Ep. 02: Las plantaciones no son bosque</option>
-              <option value="pod3" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/cuenca-contulmo-sequia.mp3">Ep. 03: Contulmo y la sed campesina</option>
-              <option value="pod4" data-type="podcast" data-src="https://ia801503.us.archive.org/15/items/audio-bosque-resumof/mujeres-lafkenche-itrofill.mp3">Ep. 04: Mujeres lafkenche & Itrofill Mogen</option>
-            </optgroup>
-          </select>
-        </div>
-        <button id="headerAudioPlayBtn" class="header-audio-btn" aria-label="Reproducir o pausar" title="Reproducir señal o podcast">
-          <span id="headerAudioPlayIcon">▶</span>
+      <!-- Sintonizador Directo de Radio Comunitaria & Podcasts -->
+      <div class="header-audio-widget" id="headerAudioWidget" title="Sintonizador de Radio y Podcasts">
+        <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar Señal de Audio">
+          <option value="jgm" data-src="https://sonic-us.arkeo.cl/8186/stream">📻 Radio JGM (Comunitaria)</option>
+          <option value="ritoque" data-src="https://archi-us.digitalproserver.com/ritoquefm_aac">📻 Radio Ritoque (Valparaíso)</option>
+          <option value="biobio" data-src="https://unlimited3-cl.dps.live/biobiosantiago/mp3/icecast.audio">📻 Radio Biobío (Centro-Sur)</option>
+          <option value="kambio" data-src="https://sonic.streamingchilenos.com/8048/stream">📻 Radio Kambio (Sur)</option>
+          <option value="podcast1" data-src="https://dn721906.ca.archive.org/0/items/AnaLeyAgroforestal/Ana%20ley%20agroforestal.mp3">🎙️ Podcast: Ley Agroforestal</option>
+          <option value="podcast2" data-src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Singing-in-the-Rain-Forest-How-a-Tropical-Bird-Song-Transfers-Information-pone.0001580.s001.ogg">🎙️ Podcast: Canto del Chucao</option>
+        </select>
+        <button id="headerAudioPlayBtn" class="header-audio-play-btn" title="Reproducir señal de audio" aria-label="Reproducir o pausar audio">
+          <span class="audio-play-icon" id="headerAudioPlayIcon">▶</span>
         </button>
-        <div class="audio-wave-bars" id="headerAudioBars">
-          <span></span><span></span><span></span><span></span>
+        <div class="audio-wave-anim" id="headerAudioWave" style="display:none;">
+          <span></span><span></span><span></span>
         </div>
       </div>
 

@@ -125,13 +125,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modal) modal.classList.remove('active');
   };
 
-  // 6. COMPARADOR SPLIT-SLIDER VISUAL
+  // 6. COMPARADOR SPLIT-SLIDER VISUAL (SIN DISTORSIÓN DE IMÁGENES)
   const sliderContainer = document.getElementById('splitSliderContainer');
   const afterWrapper = document.getElementById('sliderAfterWrapper');
   const handle = document.getElementById('sliderHandle');
 
   if (sliderContainer && afterWrapper && handle) {
     let isSliding = false;
+
+    function syncSliderImgWidth() {
+      const w = sliderContainer.offsetWidth;
+      sliderContainer.style.setProperty('--slider-container-w', w + 'px');
+      const afterImg = afterWrapper.querySelector('.slider-img');
+      if (afterImg) afterImg.style.width = w + 'px';
+    }
+    syncSliderImgWidth();
+    window.addEventListener('resize', syncSliderImgWidth);
 
     function updateSliderPos(clientX) {
       const rect = sliderContainer.getBoundingClientRect();
@@ -156,56 +165,55 @@ document.addEventListener('DOMContentLoaded', () => {
     sliderContainer.addEventListener('touchstart', e => {
       isSliding = true;
       updateSliderPos(e.touches[0].clientX);
-    });
+    }, { passive: true });
     window.addEventListener('touchend', () => { isSliding = false; });
     window.addEventListener('touchmove', e => {
       if (!isSliding) return;
       updateSliderPos(e.touches[0].clientX);
-    });
+    }, { passive: true });
   }
 
-  // 7. REPRODUCTOR DE RADIO COMUNITARIA EN INICIO (HOME)
-  const homeRadioBtn = document.getElementById('homeRadioPlayBtn');
-  const homeRadioAudio = document.getElementById('homeRadioAudio');
-  const homeRadioIcon = document.getElementById('homeRadioIcon');
-  const homeRadioText = document.getElementById('homeRadioText');
-  const homeRadioStatus = document.getElementById('homeRadioStatus');
+  // 7. SINTONIZADOR DE RADIO & PODCAST EN EL MENÚ GLOBAL (MOTOR DE AUDIO ROBUSTO)
+  const STREAMS_CATALOG = {
+    jgm: {
+      src: 'https://sonic-us.arkeo.cl/8186/stream',
+      name: 'Radio JGM (Comunitaria U. de Chile)',
+      type: 'radio'
+    },
+    ritoque: {
+      src: 'https://archi-us.digitalproserver.com/ritoquefm_aac',
+      name: 'Radio Ritoque FM (Valparaíso)',
+      type: 'radio'
+    },
+    biobio: {
+      src: 'https://unlimited3-cl.dps.live/biobiosantiago/mp3/icecast.audio',
+      name: 'Radio Biobío (Centro-Sur)',
+      type: 'radio'
+    },
+    kambio: {
+      src: 'https://sonic.streamingchilenos.com/8048/stream',
+      name: 'Radio Kambio (Señal Comunitaria)',
+      type: 'radio'
+    },
+    podcast1: {
+      src: 'https://dn721906.ca.archive.org/0/items/AnaLeyAgroforestal/Ana%20ley%20agroforestal.mp3',
+      name: 'Podcast: Ley Agroforestal & Cuencas',
+      type: 'podcast'
+    },
+    podcast2: {
+      src: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Singing-in-the-Rain-Forest-How-a-Tropical-Bird-Song-Transfers-Information-pone.0001580.s001.ogg',
+      name: 'Podcast: Biodiversidad & Canto del Chucao',
+      type: 'podcast'
+    }
+  };
 
-  if (homeRadioBtn && homeRadioAudio) {
-    let isHomePlaying = false;
-
-    homeRadioBtn.addEventListener('click', () => {
-      if (isHomePlaying) {
-        homeRadioAudio.pause();
-        isHomePlaying = false;
-        if (homeRadioIcon) homeRadioIcon.innerText = '▶';
-        if (homeRadioText) homeRadioText.innerText = 'Sintonizar Señal en Vivo';
-        if (homeRadioStatus) homeRadioStatus.innerText = '● Señal pausada. Haz clic para reanudar.';
-      } else {
-        if (homeRadioStatus) homeRadioStatus.innerText = '⏳ Conectando con Radio Kurruf (Biobío / Wallmapu)...';
-        if (homeRadioText) homeRadioText.innerText = 'Conectando...';
-
-        homeRadioAudio.play().then(() => {
-          isHomePlaying = true;
-          if (homeRadioIcon) homeRadioIcon.innerText = '⏸';
-          if (homeRadioText) homeRadioText.innerText = 'Pausar Transmisión';
-          if (homeRadioStatus) homeRadioStatus.innerText = '🔴 TRANSMITIENDO EN VIVO DESDE CHILE: Radio Kurruf 107.5 FM';
-        }).catch(err => {
-          console.warn('Error al reproducir stream en home:', err);
-          if (homeRadioStatus) homeRadioStatus.innerText = '⚠️ Transmisión comunitaria activa. Haz clic en "Cambiar de Radio" si tu navegador restringe audio.';
-          if (homeRadioText) homeRadioText.innerText = 'Reintentar Señal';
-        });
-      }
-    });
-  }
-
-  // 8. SINTONIZADOR DE RADIO & PODCAST EN EL MENÚ GLOBAL
   const headerWidget = document.getElementById('headerAudioWidget');
   const headerPlayBtn = document.getElementById('headerAudioPlayBtn');
   const headerPlayIcon = document.getElementById('headerAudioPlayIcon');
   const headerSelect = document.getElementById('headerAudioSelect');
-  let globalAudio = document.getElementById('globalHeaderAudio');
+  const headerWave = document.getElementById('headerAudioWave');
 
+  let globalAudio = document.getElementById('globalHeaderAudio');
   if (!globalAudio) {
     globalAudio = document.createElement('audio');
     globalAudio.id = 'globalHeaderAudio';
@@ -215,44 +223,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (headerPlayBtn && headerSelect) {
     let isHeaderPlaying = false;
+    let isBuffering = false;
 
     function getSelectedStream() {
+      const val = headerSelect.value;
       const opt = headerSelect.options[headerSelect.selectedIndex];
+      if (STREAMS_CATALOG[val]) {
+        return STREAMS_CATALOG[val];
+      }
       return {
-        src: opt.getAttribute('data-src') || 'https://radio.latina.red/radiokurruf.mp3',
-        type: opt.getAttribute('data-type') || 'radio',
-        name: opt.text
+        src: (opt && opt.getAttribute('data-src')) || 'https://sonic-us.arkeo.cl/8186/stream',
+        name: (opt && opt.text) || 'Radio Comunitaria',
+        type: 'radio'
       };
+    }
+
+    function setPlayingUI(playing, item) {
+      isHeaderPlaying = playing;
+      if (playing) {
+        if (headerPlayIcon) headerPlayIcon.innerText = '⏸';
+        headerPlayBtn.classList.add('playing');
+        if (headerWidget) headerWidget.classList.add('playing');
+        if (headerWave) headerWave.style.display = 'flex';
+        headerPlayBtn.title = `Pausar: ${item ? item.name : 'Audio'}`;
+      } else {
+        if (headerPlayIcon) headerPlayIcon.innerText = '▶';
+        headerPlayBtn.classList.remove('playing');
+        if (headerWidget) headerWidget.classList.remove('playing');
+        if (headerWave) headerWave.style.display = 'none';
+        headerPlayBtn.title = 'Reproducir señal seleccionada';
+      }
     }
 
     function startPlayback() {
       const item = getSelectedStream();
-      globalAudio.src = item.src;
-      headerPlayBtn.title = 'Conectando...';
+      if (!globalAudio.src || !globalAudio.src.includes(item.src)) {
+        globalAudio.src = item.src;
+      }
+      headerPlayBtn.title = 'Sintonizando transmisión...';
+      if (headerPlayIcon) headerPlayIcon.innerText = '⏳';
+      isBuffering = true;
 
-      globalAudio.play().then(() => {
-        isHeaderPlaying = true;
-        headerPlayIcon.innerText = '⏸';
-        headerPlayBtn.classList.add('playing');
-        if (headerWidget) headerWidget.classList.add('playing');
-        headerPlayBtn.title = `Pausar: ${item.name}`;
-      }).catch(err => {
-        console.warn('Error al reproducir audio del header:', err);
-        // Fallback sutil
-        isHeaderPlaying = false;
-        headerPlayIcon.innerText = '▶';
-        headerPlayBtn.classList.remove('playing');
-        if (headerWidget) headerWidget.classList.remove('playing');
-      });
+      const playPromise = globalAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isBuffering = false;
+          setPlayingUI(true, item);
+        }).catch(err => {
+          console.warn('Fallo al reproducir señal principal, probando alternativa:', err);
+          isBuffering = false;
+          if (item.src !== STREAMS_CATALOG.jgm.src) {
+            headerSelect.value = 'jgm';
+            globalAudio.src = STREAMS_CATALOG.jgm.src;
+            globalAudio.play().then(() => {
+              setPlayingUI(true, STREAMS_CATALOG.jgm);
+            }).catch(() => {
+              setPlayingUI(false);
+            });
+          } else {
+            setPlayingUI(false);
+          }
+        });
+      }
     }
 
     function pausePlayback() {
       globalAudio.pause();
-      isHeaderPlaying = false;
-      headerPlayIcon.innerText = '▶';
-      headerPlayBtn.classList.remove('playing');
-      if (headerWidget) headerWidget.classList.remove('playing');
-      headerPlayBtn.title = 'Reproducir';
+      setPlayingUI(false);
     }
 
     headerPlayBtn.addEventListener('click', (e) => {
@@ -265,14 +302,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     headerSelect.addEventListener('change', () => {
-      if (isHeaderPlaying) {
+      if (isHeaderPlaying || isBuffering) {
         startPlayback();
       }
     });
 
-    globalAudio.addEventListener('ended', () => {
-      pausePlayback();
+    globalAudio.addEventListener('waiting', () => {
+      if (headerPlayIcon) headerPlayIcon.innerText = '⏳';
     });
+
+    globalAudio.addEventListener('playing', () => {
+      setPlayingUI(true, getSelectedStream());
+    });
+
+    globalAudio.addEventListener('pause', () => {
+      setPlayingUI(false);
+    });
+
+    globalAudio.addEventListener('ended', () => {
+      setPlayingUI(false);
+    });
+
+    globalAudio.addEventListener('error', (e) => {
+      console.warn('Error en la señal de audio:', e);
+      setPlayingUI(false);
+    });
+
+    window.playRadioStream = function(key) {
+      if (STREAMS_CATALOG[key]) {
+        headerSelect.value = key;
+        startPlayback();
+      }
+    };
   }
 });
 

@@ -357,30 +357,32 @@ header.scrolled .top-status-bar {
 }
 
 /* 2. Barra Principal del Header */
-/* 2. Barra Principal del Header - Distribución Tripartita: Logo (Izq) | Menú (Centro) | Únete (Der) */
+/* 2. Barra Principal del Header - Distribución: Logo (Izq) | Menú (Centro) | Audio + Únete (Der) */
 .header-container,
 .header-inner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 28px;
-  min-height: 80px;
+  padding: 0 20px;
+  min-height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
+  box-sizing: border-box;
+  overflow: visible;
   transition: min-height 0.25s cubic-bezier(0.16, 1, 0.3, 1), padding 0.25s ease;
 }
 
 header.scrolled .header-container,
 header.scrolled .header-inner {
-  min-height: 68px;
+  min-height: 60px;
 }
 
-/* Identidad Gráfica: Logotipo Agrandado y Jerárquico */
+/* Identidad Gráfica: Logotipo Proporcional y Jerárquico */
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   text-decoration: none;
   flex: 0 0 auto;
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -391,8 +393,8 @@ header.scrolled .header-inner {
 }
 
 .brand-crest {
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -400,12 +402,12 @@ header.scrolled .header-inner {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .brand-logo:hover .brand-crest {
-  transform: scale(1.08) rotate(-2deg);
+  transform: scale(1.05) rotate(-2deg);
 }
 
 .brand-logo-img {
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
   display: block;
 }
@@ -425,7 +427,7 @@ header.scrolled .header-inner {
 .brand-title-main {
   font-family: 'Archivo', sans-serif;
   font-weight: 900;
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   letter-spacing: -0.02em;
   color: var(--bosque-profundo);
   white-space: nowrap;
@@ -434,7 +436,7 @@ header.scrolled .header-inner {
 .brand-title-sub {
   font-family: 'Archivo', sans-serif;
   font-weight: 700;
-  font-size: 0.86rem;
+  font-size: 0.76rem;
   letter-spacing: -0.01em;
   color: var(--verde-musgo);
   white-space: nowrap;
@@ -442,44 +444,44 @@ header.scrolled .header-inner {
 
 .brand-tagline {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 600;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
   color: var(--terracota-viva);
   text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 1px;
   white-space: nowrap;
 }
 
-/* 3. Navegación Desktop Arquitectónica: Alineada y Centrada */
+/* 3. Navegación Desktop Arquitectónica: Alineada y Compacta */
 .nav-desktop {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  margin: 0 auto;
+  margin: 0 6px;
 }
 
 .nav-links-track {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
   border-left: none;
   padding-left: 0;
 }
 
 .nav-link {
-  font-size: 0.86rem;
+  font-size: 0.80rem;
   font-weight: 600;
   color: var(--carbon-medio);
-  padding: 8px 12px;
+  padding: 6px 9px;
   border-radius: var(--radio-sm);
   transition: var(--trans-suave);
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   white-space: nowrap;
   background: transparent;
   border: none;
@@ -602,18 +604,18 @@ header.scrolled .header-inner {
 .header-cta-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
   margin-left: auto;
 }
 
 .header-cta-btn {
-  padding: 10px 20px;
-  font-size: 0.88rem;
+  padding: 7px 14px;
+  font-size: 0.82rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: var(--terracota-viva);
   color: var(--blanco-hueso);
   border-radius: var(--radio-sm);
@@ -625,15 +627,15 @@ header.scrolled .header-inner {
 .header-cta-btn:hover {
   background: var(--terracota-fuego);
   color: #FFF;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(194, 75, 42, 0.38);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(194, 75, 42, 0.38);
 }
 
 .cta-counter-chip {
   background: rgba(255, 255, 255, 0.22);
-  padding: 2px 7px;
-  border-radius: 10px;
-  font-size: 0.72rem;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 0.68rem;
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -1057,9 +1059,13 @@ header.scrolled .mobile-nav-drawer {
 }
 
 .slider-img-after-wrapper .slider-img {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--slider-container-w, 100%);
   height: 100%;
   max-width: none;
+  object-fit: cover;
 }
 
 .slider-badge {
@@ -2822,45 +2828,37 @@ footer {
   }
 }
 
-@media (max-width: 1380px) and (min-width: 1081px) {
-  .header-container,
-  .header-inner {
-    padding: 0 16px;
-    gap: 10px;
-  }
-  .brand-logo {
-    gap: 10px;
-  }
-  .brand-crest, .brand-logo-img {
-    width: 48px;
-    height: 48px;
-  }
-  .brand-title-main {
-    font-size: 0.94rem;
-  }
-  .brand-title-sub {
-    font-size: 0.8rem;
-  }
+/* Responsive Header: Breakpoint a 1180px para evitar colapso de menú y desborde */
+@media (max-width: 1340px) and (min-width: 1181px) {
   .brand-tagline {
     display: none;
   }
-  .nav-link {
-    padding: 6px 8px;
-    font-size: 0.79rem;
-  }
-  .header-cta-btn {
-    padding: 8px 14px;
-    font-size: 0.82rem;
+  .header-audio-select {
+    max-width: 110px;
   }
 }
 
-@media (max-width: 1080px) {
-  .nav-desktop, .header-cta-btn {
-    display: none;
+@media (max-width: 1180px) {
+  .nav-desktop {
+    display: none !important;
   }
   .mobile-menu-btn {
     display: flex;
+    margin-left: 0;
+  }
+  .header-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-left: auto;
+  }
+  .header-cta-btn {
+    display: inline-flex !important;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+  .brand-tagline {
+    display: none;
   }
   .status-detail, .status-right {
     display: none;
@@ -2873,25 +2871,40 @@ footer {
 @media (max-width: 768px) {
   .header-container,
   .header-inner {
-    min-height: 64px;
-    padding: 0 16px;
+    min-height: 60px;
+    padding: 0 12px;
+    gap: 8px;
   }
   .brand-crest, .brand-logo-img {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
   }
   .top-status-bar {
     font-size: 0.65rem;
     height: 28px;
   }
   .brand-title-main {
-    font-size: 0.86rem;
+    font-size: 0.84rem;
   }
   .brand-title-sub {
-    font-size: 0.75rem;
+    display: none;
   }
   .brand-tagline {
     display: none;
+  }
+  .header-audio-select {
+    display: none;
+  }
+  .header-audio-widget {
+    padding: 2px 6px;
+    gap: 4px;
+  }
+  .cta-counter-chip {
+    display: none;
+  }
+  .header-cta-btn {
+    padding: 6px 10px;
+    font-size: 0.76rem;
   }
   .hero-section {
     margin-top: 88px;
@@ -3736,11 +3749,11 @@ footer {
 .header-audio-widget {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: rgba(17, 38, 31, 0.06);
-  border: 1px solid rgba(17, 38, 31, 0.14);
+  border: 1px solid rgba(17, 38, 31, 0.16);
   border-radius: 999px;
-  padding: 4px 10px 4px 6px;
+  padding: 3px 8px 3px 4px;
   transition: all 0.2s ease;
   flex-shrink: 0;
 }
@@ -3750,9 +3763,11 @@ footer {
   border-color: rgba(17, 38, 31, 0.25);
 }
 
-.header-audio-btn {
-  width: 32px;
-  height: 32px;
+.header-audio-btn,
+.header-audio-play-btn {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
   border-radius: 50%;
   background: var(--bosque-profundo);
   color: var(--ambar-suave);
@@ -3761,45 +3776,40 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 2px 8px rgba(10, 22, 18, 0.2);
   flex-shrink: 0;
+  padding: 0;
 }
 
-.header-audio-btn:hover {
+.header-audio-btn:hover,
+.header-audio-play-btn:hover {
   transform: scale(1.08);
   background: var(--terracota-viva);
   color: #FFF;
 }
 
-.header-audio-btn.playing {
+.header-audio-btn.playing,
+.header-audio-play-btn.playing {
   background: var(--terracota-viva);
   color: #FFF;
-}
-
-.audio-widget-select-wrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.audio-widget-icon {
-  font-size: 0.95rem;
-  line-height: 1;
 }
 
 .header-audio-select {
   background: transparent;
   border: none;
   font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
   color: var(--carbon-medio);
   cursor: pointer;
-  max-width: 195px;
+  max-width: 130px;
   outline: none;
-  padding-right: 4px;
+  padding-right: 2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .header-audio-select option {
@@ -3808,45 +3818,59 @@ footer {
   font-size: 0.82rem;
 }
 
-.audio-wave-bars {
+.audio-wave-bars,
+.audio-wave-anim {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 2px;
-  height: 14px;
+  height: 12px;
   padding: 0 2px;
 }
 
-.audio-wave-bars span {
-  width: 2.5px;
+.audio-wave-bars span,
+.audio-wave-anim span {
+  width: 2px;
   height: 4px;
   background: var(--terracota-viva);
   border-radius: 2px;
   transition: height 0.2s ease;
 }
 
-.header-audio-widget.playing .audio-wave-bars span {
+.header-audio-widget.playing .audio-wave-bars span,
+.header-audio-widget.playing .audio-wave-anim span {
   animation: audioWave 0.8s ease-in-out infinite alternate;
 }
 
-.header-audio-widget.playing .audio-wave-bars span:nth-child(1) { animation-delay: 0.0s; }
-.header-audio-widget.playing .audio-wave-bars span:nth-child(2) { animation-delay: 0.2s; }
-.header-audio-widget.playing .audio-wave-bars span:nth-child(3) { animation-delay: 0.4s; }
-.header-audio-widget.playing .audio-wave-bars span:nth-child(4) { animation-delay: 0.1s; }
+.header-audio-widget.playing .audio-wave-bars span:nth-child(1),
+.header-audio-widget.playing .audio-wave-anim span:nth-child(1) { animation-delay: 0.0s; }
+.header-audio-widget.playing .audio-wave-bars span:nth-child(2),
+.header-audio-widget.playing .audio-wave-anim span:nth-child(2) { animation-delay: 0.2s; }
+.header-audio-widget.playing .audio-wave-bars span:nth-child(3),
+.header-audio-widget.playing .audio-wave-anim span:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes audioWave {
-  0% { height: 4px; }
-  100% { height: 14px; }
+  0% { height: 3px; }
+  100% { height: 12px; }
 }
 
-@media (max-width: 900px) {
-  .header-audio-select {
-    max-width: 130px;
+/* Grillas Responsivas y Correcciones de Colapso */
+.grid-2-responsive {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+@media (max-width: 880px) {
+  .grid-2-responsive {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
-@media (max-width: 600px) {
-  .header-audio-select {
-    display: none;
-  }
+
+.organizaciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 22px;
 }
 
 /* ==========================================================================

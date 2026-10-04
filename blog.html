@@ -48,16 +48,17 @@
     </nav>
 
     <div class="header-cta-group">
-      <!-- Selector y Reproductor Directo de Radio Comunitaria / Podcast -->
-      <div class="header-audio-widget" id="headerAudioWidget">
-        <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar Radio o Podcast">
-          <option value="kurruf">📻 Radio Kurruf (Wallmapu)</option>
-          <option value="jgm">📻 Radio JGM (Comunitaria)</option>
-          <option value="ritoque">📻 Radio Ritoque (Valparaíso)</option>
-          <option value="podcast1">🎙️ Podcast: Defensa Bosque Nativo</option>
-          <option value="podcast2">🎙️ Podcast: Megaincendios y Monocultivo</option>
+      <!-- Sintonizador Directo de Radio Comunitaria & Podcasts -->
+      <div class="header-audio-widget" id="headerAudioWidget" title="Sintonizador de Radio y Podcasts">
+        <select id="headerAudioSelect" class="header-audio-select" aria-label="Seleccionar Señal de Audio">
+          <option value="jgm" data-src="https://sonic-us.arkeo.cl/8186/stream">📻 Radio JGM (Comunitaria)</option>
+          <option value="ritoque" data-src="https://archi-us.digitalproserver.com/ritoquefm_aac">📻 Radio Ritoque (Valparaíso)</option>
+          <option value="biobio" data-src="https://unlimited3-cl.dps.live/biobiosantiago/mp3/icecast.audio">📻 Radio Biobío (Centro-Sur)</option>
+          <option value="kambio" data-src="https://sonic.streamingchilenos.com/8048/stream">📻 Radio Kambio (Sur)</option>
+          <option value="podcast1" data-src="https://dn721906.ca.archive.org/0/items/AnaLeyAgroforestal/Ana%20ley%20agroforestal.mp3">🎙️ Podcast: Ley Agroforestal</option>
+          <option value="podcast2" data-src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Singing-in-the-Rain-Forest-How-a-Tropical-Bird-Song-Transfers-Information-pone.0001580.s001.ogg">🎙️ Podcast: Canto del Chucao</option>
         </select>
-        <button id="headerAudioPlayBtn" class="header-audio-play-btn" title="Reproducir / Pausar" aria-label="Reproducir señal de audio">
+        <button id="headerAudioPlayBtn" class="header-audio-play-btn" title="Reproducir señal de audio" aria-label="Reproducir o pausar audio">
           <span class="audio-play-icon" id="headerAudioPlayIcon">▶</span>
         </button>
         <div class="audio-wave-anim" id="headerAudioWave" style="display:none;">
