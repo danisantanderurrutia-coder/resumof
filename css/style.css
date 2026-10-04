@@ -4360,6 +4360,95 @@ footer {
 }
 
 /* ==========================================================================
+   BARRA DE CIFRAS CLAVE DEL IMPACTO TERRITORIAL (KPI STRIP)
+   ========================================================================== */
+.kpi-strip {
+  background: var(--blanco-pergamino);
+  border-top: 1px solid var(--borde-suave);
+  border-bottom: 1px solid var(--borde-suave);
+  padding: 44px 0;
+  position: relative;
+  z-index: 5;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 992px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kpi-card {
+  background: #FFFFFF;
+  border: 1px solid var(--borde-suave);
+  border-top: 4px solid var(--terracota-fuego);
+  border-radius: var(--radio-md);
+  padding: 24px 22px;
+  box-shadow: var(--sombra-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-card:nth-child(2) {
+  border-top-color: var(--azul-cuenca);
+}
+
+.kpi-card:nth-child(3) {
+  border-top-color: var(--verde-nativo);
+}
+
+.kpi-card:nth-child(4) {
+  border-top-color: var(--ambar-tierra);
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-hover);
+}
+
+.kpi-card .kpi-number {
+  font-family: 'Archivo', sans-serif;
+  font-size: clamp(2.2rem, 3.2vw, 2.8rem);
+  font-weight: 900;
+  color: var(--terracota-fuego);
+  line-height: 1.05;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.kpi-card:nth-child(2) .kpi-number {
+  color: var(--azul-cuenca);
+}
+
+.kpi-card:nth-child(3) .kpi-number {
+  color: var(--verde-nativo);
+}
+
+.kpi-card:nth-child(4) .kpi-number {
+  color: var(--ambar-tierra);
+}
+
+.kpi-card .kpi-label {
+  font-size: 0.92rem;
+  color: var(--carbon-medio);
+  line-height: 1.45;
+  margin-top: auto;
+  font-weight: 500;
+}
+
+/* ==========================================================================
    ESTILOS EDITORIALES DE LA SECCIÓN INCENDIOS
    ========================================================================== */
 .fire-analysis-card {
